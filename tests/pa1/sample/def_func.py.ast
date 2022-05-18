@@ -1,0 +1,48 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 4, 6 ],
+  "declarations" : [ {
+    "kind" : "FuncDef",
+    "location" : [ 1, 1, 2, 13 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 1, 5, 1, 7 ],
+      "name" : "foo"
+    },
+    "params" : [ ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "location" : [ 1, 14, 1, 16 ],
+      "className" : "int"
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "location" : [ 2, 5, 2, 12 ],
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 2, 12, 2, 12 ],
+        "value" : 1
+      }
+    } ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 4, 1, 4, 5 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 4, 1, 4, 5 ],
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 4, 1, 4, 3 ],
+        "name" : "foo"
+      },
+      "args" : [ ]
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

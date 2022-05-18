@@ -1,0 +1,37 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 6, 1 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "IfStmt",
+    "location" : [ 1, 1, 6, 1 ],
+    "condition" : {
+      "kind" : "BooleanLiteral",
+      "location" : [ 1, 4, 1, 7 ],
+      "value" : true
+    },
+    "thenBody" : [ {
+      "kind" : "ExprStmt",
+      "location" : [ 2, 5, 2, 9 ],
+      "expr" : {
+        "kind" : "BooleanLiteral",
+        "location" : [ 2, 5, 2, 9 ],
+        "value" : false
+      }
+    } ],
+    "elseBody" : [ {
+      "kind" : "ExprStmt",
+      "location" : [ 4, 5, 4, 8 ],
+      "expr" : {
+        "kind" : "BooleanLiteral",
+        "location" : [ 4, 5, 4, 8 ],
+        "value" : true
+      }
+    } ]
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

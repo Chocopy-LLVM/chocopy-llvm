@@ -1,0 +1,62 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 1, 1, 1, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "int",
+        "location" : [ 1, 3, 1, 5 ]
+      },
+      "location" : [ 1, 1, 1, 5 ]
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 1,
+      "location" : [ 1, 9, 1, 9 ]
+    },
+    "location" : [ 1, 1, 1, 9 ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "BinaryExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "left" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "x",
+        "location" : [ 3, 1, 3, 1 ]
+      },
+      "operator" : "-",
+      "right" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 3, 5, 3, 5 ]
+      },
+      "location" : [ 3, 1, 3, 5 ]
+    },
+    "location" : [ 3, 1, 3, 5 ]
+  } ],
+  "location" : [ 1, 1, 3, 5 ]
+}

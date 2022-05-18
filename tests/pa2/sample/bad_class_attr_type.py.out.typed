@@ -1,0 +1,64 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "ClassDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "A",
+      "location" : [ 1, 7, 1, 7 ]
+    },
+    "superClass" : {
+      "kind" : "Identifier",
+      "name" : "object",
+      "location" : [ 1, 9, 1, 14 ]
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "typeError" : "Expected type `int`; got type `bool`",
+      "var" : {
+        "kind" : "TypedVar",
+        "identifier" : {
+          "kind" : "Identifier",
+          "name" : "x",
+          "location" : [ 2, 5, 2, 5 ]
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "className" : "int",
+          "location" : [ 2, 7, 2, 9 ]
+        },
+        "location" : [ 2, 5, 2, 9 ]
+      },
+      "value" : {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : true,
+        "location" : [ 2, 13, 2, 16 ]
+      },
+      "location" : [ 2, 5, 2, 16 ]
+    } ],
+    "location" : [ 1, 1, 2, 16 ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "A"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "A",
+        "location" : [ 4, 1, 4, 1 ]
+      },
+      "args" : [ ],
+      "location" : [ 4, 1, 4, 3 ]
+    },
+    "location" : [ 4, 1, 4, 3 ]
+  } ],
+  "location" : [ 1, 1, 4, 3 ]
+}

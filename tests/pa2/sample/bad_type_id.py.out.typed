@@ -1,0 +1,38 @@
+{
+  "kind" : "Program",
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "BinaryExpr",
+      "typeError" : "Cannot apply operator `-` on types `object` and `int`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "left" : {
+        "kind" : "Identifier",
+        "typeError" : "Not a variable: x",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "name" : "x",
+        "location" : [ 1, 1, 1, 1 ]
+      },
+      "operator" : "-",
+      "right" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 1, 5, 1, 5 ]
+      },
+      "location" : [ 1, 1, 1, 5 ]
+    },
+    "location" : [ 1, 1, 1, 5 ]
+  } ],
+  "location" : [ 1, 1, 1, 5 ]
+}

@@ -1,0 +1,244 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 1, 1, 1, 1 ]
+      },
+      "type" : {
+        "kind" : "ListType",
+        "elementType" : {
+          "kind" : "ClassType",
+          "className" : "int",
+          "location" : [ 1, 4, 1, 6 ]
+        },
+        "location" : [ 1, 3, 1, 7 ]
+      },
+      "location" : [ 1, 1, 1, 7 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 1, 11, 1, 14 ]
+    },
+    "location" : [ 1, 1, 1, 14 ]
+  } ],
+  "statements" : [ {
+    "kind" : "VarAssignStmt",
+    "var" : {
+      "kind" : "Identifier",
+      "name" : "x",
+      "location" : [ 3, 1, 3, 1 ]
+    },
+    "value" : {
+      "kind" : "ListExpr",
+      "inferredType" : {
+        "kind" : "ListValueType",
+        "elementType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        }
+      },
+      "elements" : [ {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 3, 6, 3, 6 ]
+      }, {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 2,
+        "location" : [ 3, 9, 3, 9 ]
+      }, {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 3,
+        "location" : [ 3, 12, 3, 12 ]
+      } ],
+      "location" : [ 3, 5, 3, 13 ]
+    },
+    "location" : [ 3, 1, 3, 13 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "IndexExpr",
+      "typeError" : "Index is of non-integer type `bool`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "list" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ListValueType",
+          "elementType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          }
+        },
+        "name" : "x",
+        "location" : [ 4, 1, 4, 1 ]
+      },
+      "index" : {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : true,
+        "location" : [ 4, 3, 4, 6 ]
+      },
+      "location" : [ 4, 1, 4, 7 ]
+    },
+    "location" : [ 4, 1, 4, 7 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "IndexExpr",
+      "typeError" : "Cannot index into type `bool`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "list" : {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : false,
+        "location" : [ 5, 1, 5, 5 ]
+      },
+      "index" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 0,
+        "location" : [ 5, 7, 5, 7 ]
+      },
+      "location" : [ 5, 1, 5, 8 ]
+    },
+    "location" : [ 5, 1, 5, 8 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "IndexExpr",
+      "typeError" : "Cannot index into type `object`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "list" : {
+        "kind" : "ListExpr",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "elements" : [ ],
+        "location" : [ 6, 1, 6, 2 ]
+      },
+      "index" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 0,
+        "location" : [ 6, 4, 6, 4 ]
+      },
+      "location" : [ 6, 1, 6, 5 ]
+    },
+    "location" : [ 6, 1, 6, 5 ]
+  }, {
+    "kind" : "IndexAssignStmt",
+    "typeError" : "Index is of non-integer type `bool`",
+    "listElement" : {
+      "kind" : "IndexExpr",
+      "list" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ListValueType",
+          "elementType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          }
+        },
+        "name" : "x",
+        "location" : [ 7, 1, 7, 1 ]
+      },
+      "index" : {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : true,
+        "location" : [ 7, 3, 7, 6 ]
+      },
+      "location" : [ 7, 1, 7, 7 ]
+    },
+    "value" : {
+      "kind" : "IndexAssignExpr",
+      "typeError" : "Index is of non-integer type `bool`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "listElement" : {
+        "kind" : "IndexExpr",
+        "list" : {
+          "kind" : "Identifier",
+          "inferredType" : {
+            "kind" : "ListValueType",
+            "elementType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            }
+          },
+          "name" : "x",
+          "location" : [ 7, 11, 7, 11 ]
+        },
+        "index" : {
+          "kind" : "BooleanLiteral",
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "value" : false,
+          "location" : [ 7, 13, 7, 17 ]
+        },
+        "location" : [ 7, 11, 7, 18 ]
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 7, 22, 7, 22 ]
+      },
+      "location" : [ 7, 11, 7, 22 ]
+    },
+    "location" : [ 7, 1, 7, 22 ]
+  } ],
+  "location" : [ 1, 1, 7, 22 ]
+}

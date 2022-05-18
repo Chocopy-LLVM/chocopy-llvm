@@ -1,0 +1,234 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 1, 1, 1, 1 ]
+      },
+      "type" : {
+        "kind" : "ListType",
+        "elementType" : {
+          "kind" : "ClassType",
+          "className" : "int",
+          "location" : [ 1, 4, 1, 6 ]
+        },
+        "location" : [ 1, 3, 1, 7 ]
+      },
+      "location" : [ 1, 1, 1, 7 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 1, 11, 1, 14 ]
+    },
+    "location" : [ 1, 1, 1, 14 ]
+  }, {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "y",
+        "location" : [ 2, 1, 2, 1 ]
+      },
+      "type" : {
+        "kind" : "ListType",
+        "elementType" : {
+          "kind" : "ClassType",
+          "className" : "object",
+          "location" : [ 2, 4, 2, 9 ]
+        },
+        "location" : [ 2, 3, 2, 10 ]
+      },
+      "location" : [ 2, 1, 2, 10 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 2, 14, 2, 17 ]
+    },
+    "location" : [ 2, 1, 2, 17 ]
+  } ],
+  "statements" : [ {
+    "kind" : "VarAssignStmt",
+    "var" : {
+      "kind" : "Identifier",
+      "name" : "x",
+      "location" : [ 4, 1, 4, 1 ]
+    },
+    "value" : {
+      "kind" : "ListExpr",
+      "inferredType" : {
+        "kind" : "ListValueType",
+        "elementType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        }
+      },
+      "elements" : [ {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 4, 6, 4, 6 ]
+      }, {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 2,
+        "location" : [ 4, 9, 4, 9 ]
+      } ],
+      "location" : [ 4, 5, 4, 10 ]
+    },
+    "location" : [ 4, 1, 4, 10 ]
+  }, {
+    "kind" : "VarAssignStmt",
+    "var" : {
+      "kind" : "Identifier",
+      "name" : "y",
+      "location" : [ 5, 1, 5, 1 ]
+    },
+    "value" : {
+      "kind" : "ListExpr",
+      "inferredType" : {
+        "kind" : "ListValueType",
+        "elementType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        }
+      },
+      "elements" : [ {
+        "kind" : "NoneLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "location" : [ 5, 6, 5, 9 ]
+      } ],
+      "location" : [ 5, 5, 5, 10 ]
+    },
+    "location" : [ 5, 1, 5, 10 ]
+  }, {
+    "kind" : "IndexAssignStmt",
+    "listElement" : {
+      "kind" : "IndexExpr",
+      "list" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ListValueType",
+          "elementType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          }
+        },
+        "name" : "x",
+        "location" : [ 6, 1, 6, 1 ]
+      },
+      "index" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 0,
+        "location" : [ 6, 3, 6, 3 ]
+      },
+      "location" : [ 6, 1, 6, 4 ]
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 3,
+      "location" : [ 6, 8, 6, 8 ]
+    },
+    "location" : [ 6, 1, 6, 8 ]
+  }, {
+    "kind" : "IndexAssignStmt",
+    "listElement" : {
+      "kind" : "IndexExpr",
+      "list" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ListValueType",
+          "elementType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          }
+        },
+        "name" : "x",
+        "location" : [ 7, 1, 7, 1 ]
+      },
+      "index" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 7, 3, 7, 3 ]
+      },
+      "location" : [ 7, 1, 7, 4 ]
+    },
+    "value" : {
+      "kind" : "IndexAssignExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "listElement" : {
+        "kind" : "IndexExpr",
+        "list" : {
+          "kind" : "Identifier",
+          "inferredType" : {
+            "kind" : "ListValueType",
+            "elementType" : {
+              "kind" : "ClassValueType",
+              "className" : "object"
+            }
+          },
+          "name" : "y",
+          "location" : [ 7, 8, 7, 8 ]
+        },
+        "index" : {
+          "kind" : "IntegerLiteral",
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 0,
+          "location" : [ 7, 10, 7, 10 ]
+        },
+        "location" : [ 7, 8, 7, 11 ]
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 4,
+        "location" : [ 7, 15, 7, 15 ]
+      },
+      "location" : [ 7, 8, 7, 15 ]
+    },
+    "location" : [ 7, 1, 7, 15 ]
+  } ],
+  "location" : [ 1, 1, 7, 15 ]
+}

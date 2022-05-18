@@ -1,0 +1,9 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Return statements should not appear in method: __init__",
+    "location" : [ 2, 9, 2, 16 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

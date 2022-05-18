@@ -1,0 +1,738 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 16, 24 ],
+  "declarations" : [ {
+    "kind" : "VarDef",
+    "location" : [ 1, 1, 1, 15 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 1, 1, 1, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 1, 1, 1, 1 ],
+        "name" : "a"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 1, 3, 1, 5 ],
+        "className" : "str"
+      }
+    },
+    "value" : {
+      "kind" : "StringLiteral",
+      "location" : [ 1, 9, 1, 15 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "str"
+      },
+      "value" : "Hello"
+    }
+  }, {
+    "kind" : "VarDef",
+    "location" : [ 2, 1, 2, 15 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 2, 1, 2, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 2, 1, 2, 1 ],
+        "name" : "b"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 2, 3, 2, 5 ],
+        "className" : "str"
+      }
+    },
+    "value" : {
+      "kind" : "StringLiteral",
+      "location" : [ 2, 9, 2, 15 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "str"
+      },
+      "value" : "World"
+    }
+  }, {
+    "kind" : "VarDef",
+    "location" : [ 3, 1, 3, 17 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 3, 1, 3, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 3, 1, 3, 1 ],
+        "name" : "c"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 3, 3, 3, 5 ],
+        "className" : "str"
+      }
+    },
+    "value" : {
+      "kind" : "StringLiteral",
+      "location" : [ 3, 9, 3, 17 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "str"
+      },
+      "value" : "ChocoPy"
+    }
+  }, {
+    "kind" : "FuncDef",
+    "location" : [ 5, 1, 6, 17 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 5, 5, 5, 8 ],
+      "name" : "cat2"
+    },
+    "params" : [ {
+      "kind" : "TypedVar",
+      "location" : [ 5, 10, 5, 14 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 5, 10, 5, 10 ],
+        "name" : "a"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 5, 12, 5, 14 ],
+        "className" : "str"
+      }
+    }, {
+      "kind" : "TypedVar",
+      "location" : [ 5, 17, 5, 21 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 5, 17, 5, 17 ],
+        "name" : "b"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 5, 19, 5, 21 ],
+        "className" : "str"
+      }
+    } ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "location" : [ 5, 27, 5, 29 ],
+      "className" : "str"
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "location" : [ 6, 5, 6, 16 ],
+      "value" : {
+        "kind" : "BinaryExpr",
+        "location" : [ 6, 12, 6, 16 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "left" : {
+          "kind" : "Identifier",
+          "location" : [ 6, 12, 6, 12 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "a"
+        },
+        "operator" : "+",
+        "right" : {
+          "kind" : "Identifier",
+          "location" : [ 6, 16, 6, 16 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "b"
+        }
+      }
+    } ]
+  }, {
+    "kind" : "FuncDef",
+    "location" : [ 8, 1, 9, 21 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 8, 5, 8, 8 ],
+      "name" : "cat3"
+    },
+    "params" : [ {
+      "kind" : "TypedVar",
+      "location" : [ 8, 10, 8, 14 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 8, 10, 8, 10 ],
+        "name" : "a"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 8, 12, 8, 14 ],
+        "className" : "str"
+      }
+    }, {
+      "kind" : "TypedVar",
+      "location" : [ 8, 17, 8, 21 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 8, 17, 8, 17 ],
+        "name" : "b"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 8, 19, 8, 21 ],
+        "className" : "str"
+      }
+    }, {
+      "kind" : "TypedVar",
+      "location" : [ 8, 24, 8, 28 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 8, 24, 8, 24 ],
+        "name" : "c"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 8, 26, 8, 28 ],
+        "className" : "str"
+      }
+    } ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "location" : [ 8, 34, 8, 36 ],
+      "className" : "str"
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "location" : [ 9, 5, 9, 20 ],
+      "value" : {
+        "kind" : "BinaryExpr",
+        "location" : [ 9, 12, 9, 20 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "left" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 9, 12, 9, 16 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "left" : {
+            "kind" : "Identifier",
+            "location" : [ 9, 12, 9, 12 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            },
+            "name" : "a"
+          },
+          "operator" : "+",
+          "right" : {
+            "kind" : "Identifier",
+            "location" : [ 9, 16, 9, 16 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            },
+            "name" : "b"
+          }
+        },
+        "operator" : "+",
+        "right" : {
+          "kind" : "Identifier",
+          "location" : [ 9, 20, 9, 20 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "c"
+        }
+      }
+    } ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 11, 1, 11, 17 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 11, 1, 11, 17 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 11, 1, 11, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "CallExpr",
+        "location" : [ 11, 7, 11, 16 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "location" : [ 11, 7, 11, 10 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            }, {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            }
+          },
+          "name" : "cat2"
+        },
+        "args" : [ {
+          "kind" : "Identifier",
+          "location" : [ 11, 12, 11, 12 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "a"
+        }, {
+          "kind" : "Identifier",
+          "location" : [ 11, 15, 11, 15 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "b"
+        } ]
+      } ]
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 12, 1, 12, 18 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 12, 1, 12, 18 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 12, 1, 12, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "CallExpr",
+        "location" : [ 12, 7, 12, 17 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "location" : [ 12, 7, 12, 10 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            }, {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            }
+          },
+          "name" : "cat2"
+        },
+        "args" : [ {
+          "kind" : "StringLiteral",
+          "location" : [ 12, 12, 12, 13 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "value" : ""
+        }, {
+          "kind" : "Identifier",
+          "location" : [ 12, 16, 12, 16 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "c"
+        } ]
+      } ]
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 13, 1, 13, 22 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 13, 1, 13, 22 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 13, 1, 13, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "CallExpr",
+        "location" : [ 13, 7, 13, 21 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "location" : [ 13, 7, 13, 10 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            }, {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            }, {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            }
+          },
+          "name" : "cat3"
+        },
+        "args" : [ {
+          "kind" : "Identifier",
+          "location" : [ 13, 12, 13, 12 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "a"
+        }, {
+          "kind" : "StringLiteral",
+          "location" : [ 13, 15, 13, 17 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "value" : " "
+        }, {
+          "kind" : "Identifier",
+          "location" : [ 13, 20, 13, 20 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "c"
+        } ]
+      } ]
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 14, 1, 14, 13 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 14, 1, 14, 13 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 14, 1, 14, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "CallExpr",
+        "location" : [ 14, 7, 14, 12 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "location" : [ 14, 7, 14, 9 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "object"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            }
+          },
+          "name" : "len"
+        },
+        "args" : [ {
+          "kind" : "Identifier",
+          "location" : [ 14, 11, 14, 11 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "name" : "a"
+        } ]
+      } ]
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 15, 1, 15, 21 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 15, 1, 15, 21 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 15, 1, 15, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "CallExpr",
+        "location" : [ 15, 7, 15, 20 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "location" : [ 15, 7, 15, 9 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "object"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            }
+          },
+          "name" : "len"
+        },
+        "args" : [ {
+          "kind" : "CallExpr",
+          "location" : [ 15, 11, 15, 19 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "function" : {
+            "kind" : "Identifier",
+            "location" : [ 15, 11, 15, 14 ],
+            "inferredType" : {
+              "kind" : "FuncType",
+              "parameters" : [ {
+                "kind" : "ClassValueType",
+                "className" : "str"
+              }, {
+                "kind" : "ClassValueType",
+                "className" : "str"
+              } ],
+              "returnType" : {
+                "kind" : "ClassValueType",
+                "className" : "str"
+              }
+            },
+            "name" : "cat2"
+          },
+          "args" : [ {
+            "kind" : "Identifier",
+            "location" : [ 15, 16, 15, 16 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            },
+            "name" : "a"
+          }, {
+            "kind" : "Identifier",
+            "location" : [ 15, 18, 15, 18 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            },
+            "name" : "a"
+          } ]
+        } ]
+      } ]
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 16, 1, 16, 23 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 16, 1, 16, 23 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 16, 1, 16, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "CallExpr",
+        "location" : [ 16, 7, 16, 22 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "location" : [ 16, 7, 16, 9 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "object"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            }
+          },
+          "name" : "len"
+        },
+        "args" : [ {
+          "kind" : "CallExpr",
+          "location" : [ 16, 11, 16, 21 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "str"
+          },
+          "function" : {
+            "kind" : "Identifier",
+            "location" : [ 16, 11, 16, 14 ],
+            "inferredType" : {
+              "kind" : "FuncType",
+              "parameters" : [ {
+                "kind" : "ClassValueType",
+                "className" : "str"
+              }, {
+                "kind" : "ClassValueType",
+                "className" : "str"
+              } ],
+              "returnType" : {
+                "kind" : "ClassValueType",
+                "className" : "str"
+              }
+            },
+            "name" : "cat2"
+          },
+          "args" : [ {
+            "kind" : "StringLiteral",
+            "location" : [ 16, 16, 16, 17 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            },
+            "value" : ""
+          }, {
+            "kind" : "StringLiteral",
+            "location" : [ 16, 19, 16, 20 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            },
+            "value" : ""
+          } ]
+        } ]
+      } ]
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 4, 12 ],
+  "declarations" : [ {
+    "kind" : "VarDef",
+    "location" : [ 1, 1, 1, 12 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 1, 1, 1, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 1, 1, 1, 1 ],
+        "name" : "x"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 1, 3, 1, 5 ],
+        "className" : "int"
+      }
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "location" : [ 1, 9, 1, 12 ]
+    }
+  } ],
+  "statements" : [ {
+    "kind" : "AssignStmt",
+    "location" : [ 3, 1, 3, 13 ],
+    "targets" : [ {
+      "kind" : "Identifier",
+      "location" : [ 3, 1, 3, 1 ],
+      "name" : "x"
+    } ],
+    "value" : {
+      "kind" : "ListExpr",
+      "location" : [ 3, 5, 3, 13 ],
+      "elements" : [ {
+        "kind" : "IntegerLiteral",
+        "location" : [ 3, 6, 3, 6 ],
+        "value" : 1
+      }, {
+        "kind" : "IntegerLiteral",
+        "location" : [ 3, 9, 3, 9 ],
+        "value" : 2
+      }, {
+        "kind" : "IntegerLiteral",
+        "location" : [ 3, 12, 3, 12 ],
+        "value" : 3
+      } ]
+    }
+  }, {
+    "kind" : "AssignStmt",
+    "location" : [ 4, 1, 4, 11 ],
+    "targets" : [ {
+      "kind" : "IndexExpr",
+      "location" : [ 4, 1, 4, 4 ],
+      "list" : {
+        "kind" : "Identifier",
+        "location" : [ 4, 1, 4, 1 ],
+        "name" : "x"
+      },
+      "index" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 4, 3, 4, 3 ],
+        "value" : 0
+      }
+    } ],
+    "value" : {
+      "kind" : "IndexExpr",
+      "location" : [ 4, 8, 4, 11 ],
+      "list" : {
+        "kind" : "Identifier",
+        "location" : [ 4, 8, 4, 8 ],
+        "name" : "x"
+      },
+      "index" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 4, 10, 4, 10 ],
+        "value" : 1
+      }
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

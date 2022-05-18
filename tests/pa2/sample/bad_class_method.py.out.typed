@@ -1,0 +1,13 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "First parameter of the following method must be of the enclosing class: bar",
+    "location" : [ 7, 9, 7, 11 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "First parameter of the following method must be of the enclosing class: baz",
+    "location" : [ 10, 9, 10, 11 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

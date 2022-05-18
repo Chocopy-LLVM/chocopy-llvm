@@ -1,0 +1,17 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Duplicate declaration of identifier in same scope: foo",
+    "location" : [ 7, 5, 7, 7 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Duplicate declaration of identifier in same scope: print",
+    "location" : [ 11, 5, 11, 9 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Duplicate declaration of identifier in same scope: x",
+    "location" : [ 15, 1, 15, 1 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

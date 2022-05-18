@@ -1,0 +1,9 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "All paths in this function/method must return a non-None value: foo",
+    "location" : [ 1, 5, 1, 7 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

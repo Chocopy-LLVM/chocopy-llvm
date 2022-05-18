@@ -1,0 +1,63 @@
+[{
+  "function": "main",
+  "live_in": {
+    "label_entry": ["%global"],
+    "label3": ["%global","%op2","%op17"],
+    "label8": ["%global","%op2","%op117"],
+    "label12": ["%global","%op2"],
+    "label14": ["%global","%op2","%op117"],
+    "label18": ["%global","%op2","%op43","%op124","%op123","%op122"],
+    "label23": ["%global","%op2","%op120","%op119","%op118"],
+    "label24": ["%global","%op121"],
+    "label25": ["%global","%op2","%op35","%op38","%op65","%op120","%op119","%op118"],
+    "label30": ["%global","%op2","%op124","%op120"],
+    "label41": ["%global","%op2","%op124","%op120","%op123","%op122"],
+    "label45": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label51": ["%global","%op2","%op35","%op38","%op47","%op124","%op120"],
+    "label57": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label60": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label63": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label67": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label76": ["%global","%op2","%op35","%op38","%op69","%op73","%op124","%op120"],
+    "label79": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label88": ["%global","%op2","%op35","%op38","%op81","%op85","%op124","%op120"],
+    "label90": ["%global","%op110","%op121","%op127"],
+    "label95": ["%global","%op125"],
+    "label97": ["%global","%op116","%op125"],
+    "label102": ["%global","%op127","%op125"],
+    "label108": ["%global","%op127","%op125"],
+    "label112": ["%global","%op106","%op127","%op125"]
+
+  },
+  "live_out": {
+    "label_entry": ["%global","%op2"],
+    "label3": ["%global","%op2","%op117"],
+    "label8": ["%global","%op2","%op117"],
+    "label12": ["%global","%op2"],
+    "label14": ["%global","%op2","%op17"],
+    "label18": ["%global","%op2","%op121","%op120","%op119","%op118"],
+    "label23": ["%global","%op2","%op120","%op119","%op118"],
+    "label24": ["%global","%op121"],
+    "label25": ["%global","%op2","%op124","%op120","%op123","%op122"],
+    "label30": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label41": ["%global","%op2","%op43","%op124","%op123","%op122"],
+    "label45": ["%global","%op2","%op35","%op38","%op47","%op124","%op120"],
+    "label51": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label57": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label60": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label63": ["%global","%op2","%op35","%op38","%op65","%op120"],
+    "label67": ["%global","%op2","%op35","%op38","%op69","%op73","%op124","%op120"],
+    "label76": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label79": ["%global","%op2","%op35","%op38","%op81","%op85","%op124","%op120"],
+    "label88": ["%global","%op2","%op35","%op38","%op124","%op120"],
+    "label90": ["%global","%op125"],
+    "label95": ["%global","%op125"],
+    "label97": ["%global","%op127","%op125"],
+    "label102": ["%global","%op106","%op127","%op125"],
+    "label108": ["%global","%op110","%op127"],
+    "label112": ["%global","%op116","%op125"]
+
+  }
+}
+
+]

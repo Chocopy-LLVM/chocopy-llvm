@@ -1,0 +1,232 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "ClassDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "A",
+      "location" : [ 1, 7, 1, 7 ]
+    },
+    "superClass" : {
+      "kind" : "Identifier",
+      "name" : "object",
+      "location" : [ 1, 9, 1, 14 ]
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "var" : {
+        "kind" : "TypedVar",
+        "identifier" : {
+          "kind" : "Identifier",
+          "name" : "x",
+          "location" : [ 2, 5, 2, 5 ]
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "className" : "int",
+          "location" : [ 2, 7, 2, 9 ]
+        },
+        "location" : [ 2, 5, 2, 9 ]
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 2, 13, 2, 13 ]
+      },
+      "location" : [ 2, 5, 2, 13 ]
+    } ],
+    "location" : [ 1, 1, 2, 13 ]
+  }, {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "y",
+        "location" : [ 4, 1, 4, 1 ]
+      },
+      "type" : {
+        "kind" : "ListType",
+        "elementType" : {
+          "kind" : "ClassType",
+          "className" : "bool",
+          "location" : [ 4, 4, 4, 7 ]
+        },
+        "location" : [ 4, 3, 4, 8 ]
+      },
+      "location" : [ 4, 1, 4, 8 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 4, 12, 4, 15 ]
+    },
+    "location" : [ 4, 1, 4, 15 ]
+  }, {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "z",
+        "location" : [ 5, 1, 5, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "str",
+        "location" : [ 5, 3, 5, 5 ]
+      },
+      "location" : [ 5, 1, 5, 5 ]
+    },
+    "value" : {
+      "kind" : "StringLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "str"
+      },
+      "value" : "",
+      "location" : [ 5, 9, 5, 10 ]
+    },
+    "location" : [ 5, 1, 5, 10 ]
+  }, {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "a",
+        "location" : [ 6, 1, 6, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "A",
+        "location" : [ 6, 3, 6, 3 ]
+      },
+      "location" : [ 6, 1, 6, 3 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 6, 7, 6, 10 ]
+    },
+    "location" : [ 6, 1, 6, 10 ]
+  } ],
+  "statements" : [ {
+    "kind" : "VarAssignStmt",
+    "var" : {
+      "kind" : "Identifier",
+      "name" : "a",
+      "location" : [ 8, 1, 8, 1 ]
+    },
+    "value" : {
+      "kind" : "CallExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "A"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "A",
+        "location" : [ 8, 5, 8, 5 ]
+      },
+      "args" : [ ],
+      "location" : [ 8, 5, 8, 7 ]
+    },
+    "location" : [ 8, 1, 8, 7 ]
+  }, {
+    "kind" : "VarAssignStmt",
+    "typeError" : "Expected type `str`; got `None`",
+    "var" : {
+      "kind" : "Identifier",
+      "name" : "z",
+      "location" : [ 11, 1, 11, 1 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 11, 5, 11, 8 ]
+    },
+    "location" : [ 11, 1, 11, 8 ]
+  }, {
+    "kind" : "MemberAssignStmt",
+    "typeError" : "Expected type `int`; got `None`",
+    "objectMember" : {
+      "kind" : "MemberExpr",
+      "object" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "A"
+        },
+        "name" : "a",
+        "location" : [ 12, 1, 12, 1 ]
+      },
+      "member" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 12, 3, 12, 3 ]
+      },
+      "location" : [ 12, 1, 12, 3 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 12, 7, 12, 10 ]
+    },
+    "location" : [ 12, 1, 12, 10 ]
+  }, {
+    "kind" : "IndexAssignStmt",
+    "typeError" : "Expected type `bool`; got `None`",
+    "listElement" : {
+      "kind" : "IndexExpr",
+      "list" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ListValueType",
+          "elementType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          }
+        },
+        "name" : "y",
+        "location" : [ 13, 1, 13, 1 ]
+      },
+      "index" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 0,
+        "location" : [ 13, 3, 13, 3 ]
+      },
+      "location" : [ 13, 1, 13, 4 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 13, 8, 13, 11 ]
+    },
+    "location" : [ 13, 1, 13, 11 ]
+  } ],
+  "location" : [ 1, 1, 13, 11 ]
+}

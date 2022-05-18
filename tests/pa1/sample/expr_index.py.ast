@@ -1,0 +1,47 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 1, 12 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 1, 1, 1, 11 ],
+    "expr" : {
+      "kind" : "BinaryExpr",
+      "location" : [ 1, 1, 1, 11 ],
+      "left" : {
+        "kind" : "Identifier",
+        "location" : [ 1, 1, 1, 1 ],
+        "name" : "a"
+      },
+      "operator" : "+",
+      "right" : {
+        "kind" : "IndexExpr",
+        "location" : [ 1, 5, 1, 11 ],
+        "list" : {
+          "kind" : "IndexExpr",
+          "location" : [ 1, 5, 1, 8 ],
+          "list" : {
+            "kind" : "Identifier",
+            "location" : [ 1, 5, 1, 5 ],
+            "name" : "b"
+          },
+          "index" : {
+            "kind" : "Identifier",
+            "location" : [ 1, 7, 1, 7 ],
+            "name" : "i"
+          }
+        },
+        "index" : {
+          "kind" : "Identifier",
+          "location" : [ 1, 10, 1, 10 ],
+          "name" : "j"
+        }
+      }
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

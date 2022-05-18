@@ -1,0 +1,91 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 5, 11 ],
+  "declarations" : [ {
+    "kind" : "ClassDef",
+    "location" : [ 1, 1, 2, 14 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 1, 7, 1, 9 ],
+      "name" : "Foo"
+    },
+    "superClass" : {
+      "kind" : "Identifier",
+      "location" : [ 1, 11, 1, 16 ],
+      "name" : "object"
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "location" : [ 2, 5, 2, 13 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 2, 5, 2, 9 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 2, 5, 2, 5 ],
+          "name" : "x"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 2, 7, 2, 9 ],
+          "className" : "int"
+        }
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 2, 13, 2, 13 ],
+        "value" : 1
+      }
+    } ]
+  } ],
+  "statements" : [ {
+    "kind" : "AssignStmt",
+    "location" : [ 4, 1, 4, 9 ],
+    "targets" : [ {
+      "kind" : "Identifier",
+      "location" : [ 4, 1, 4, 1 ],
+      "name" : "f"
+    } ],
+    "value" : {
+      "kind" : "CallExpr",
+      "location" : [ 4, 5, 4, 9 ],
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 4, 5, 4, 7 ],
+        "name" : "Foo"
+      },
+      "args" : [ ]
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 5, 1, 5, 10 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 5, 1, 5, 10 ],
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 5, 1, 5, 5 ],
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "MemberExpr",
+        "location" : [ 5, 7, 5, 9 ],
+        "object" : {
+          "kind" : "Identifier",
+          "location" : [ 5, 7, 5, 7 ],
+          "name" : "f"
+        },
+        "member" : {
+          "kind" : "Identifier",
+          "location" : [ 5, 9, 5, 9 ],
+          "name" : "x"
+        }
+      } ]
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

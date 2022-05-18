@@ -1,0 +1,17 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Super-class not defined: B",
+    "location" : [ 2, 9, 2, 9 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Super-class must be a class: z",
+    "location" : [ 8, 9, 8, 9 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Cannot extend special class: int",
+    "location" : [ 12, 9, 12, 11 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

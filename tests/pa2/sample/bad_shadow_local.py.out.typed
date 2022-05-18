@@ -1,0 +1,21 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Cannot shadow class name: bool",
+    "location" : [ 4, 16, 4, 19 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Cannot shadow class name: A",
+    "location" : [ 6, 5, 6, 5 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Cannot shadow class name: object",
+    "location" : [ 7, 5, 7, 10 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Cannot shadow class name: str",
+    "location" : [ 9, 9, 9, 11 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

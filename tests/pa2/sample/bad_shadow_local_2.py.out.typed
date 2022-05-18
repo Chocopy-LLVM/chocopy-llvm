@@ -1,0 +1,9 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Cannot shadow class name: A",
+    "location" : [ 2, 5, 2, 5 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

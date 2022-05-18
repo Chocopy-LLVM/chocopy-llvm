@@ -1,0 +1,13 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Cannot assign to variable that is not explicitly declared in this scope: y",
+    "location" : [ 10, 9, 10, 9 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Cannot assign to variable that is not explicitly declared in this scope: z",
+    "location" : [ 18, 5, 18, 5 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}
