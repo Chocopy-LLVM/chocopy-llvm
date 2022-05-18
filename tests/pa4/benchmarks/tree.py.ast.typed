@@ -1,0 +1,2301 @@
+{
+  "kind" : "Program",
+  "location" : [ 2, 1, 84, 2 ],
+  "declarations" : [ {
+    "kind" : "ClassDef",
+    "location" : [ 2, 1, 36, 0 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 2, 7, 2, 14 ],
+      "name" : "TreeNode"
+    },
+    "superClass" : {
+      "kind" : "Identifier",
+      "location" : [ 2, 16, 2, 21 ],
+      "name" : "object"
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "location" : [ 3, 2, 3, 14 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 3, 2, 3, 10 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 3, 2, 3, 6 ],
+          "name" : "value"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 3, 8, 3, 10 ],
+          "className" : "int"
+        }
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 3, 14, 3, 14 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 0
+      }
+    }, {
+      "kind" : "VarDef",
+      "location" : [ 4, 2, 4, 23 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 4, 2, 4, 16 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 4, 2, 4, 5 ],
+          "name" : "left"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 4, 7, 4, 16 ],
+          "className" : "TreeNode"
+        }
+      },
+      "value" : {
+        "kind" : "NoneLiteral",
+        "location" : [ 4, 20, 4, 23 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "<None>"
+        }
+      }
+    }, {
+      "kind" : "VarDef",
+      "location" : [ 5, 2, 5, 24 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 5, 2, 5, 17 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 5, 2, 5, 6 ],
+          "name" : "right"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 5, 8, 5, 17 ],
+          "className" : "TreeNode"
+        }
+      },
+      "value" : {
+        "kind" : "NoneLiteral",
+        "location" : [ 5, 21, 5, 24 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "<None>"
+        }
+      }
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 7, 2, 20, 15 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 7, 6, 7, 11 ],
+        "name" : "insert"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 7, 13, 7, 27 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 7, 13, 7, 16 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 7, 18, 7, 27 ],
+          "className" : "TreeNode"
+        }
+      }, {
+        "kind" : "TypedVar",
+        "location" : [ 7, 30, 7, 34 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 7, 30, 7, 30 ],
+          "name" : "x"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 7, 32, 7, 34 ],
+          "className" : "int"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 7, 40, 7, 43 ],
+        "className" : "bool"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "IfStmt",
+        "location" : [ 8, 3, 20, 2 ],
+        "condition" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 8, 6, 8, 19 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "left" : {
+            "kind" : "Identifier",
+            "location" : [ 8, 6, 8, 6 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "name" : "x"
+          },
+          "operator" : "<",
+          "right" : {
+            "kind" : "MemberExpr",
+            "location" : [ 8, 10, 8, 19 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 8, 10, 8, 13 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "TreeNode"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 8, 15, 8, 19 ],
+              "name" : "value"
+            }
+          }
+        },
+        "thenBody" : [ {
+          "kind" : "IfStmt",
+          "location" : [ 9, 4, 14, 2 ],
+          "condition" : {
+            "kind" : "BinaryExpr",
+            "location" : [ 9, 7, 9, 23 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "left" : {
+              "kind" : "MemberExpr",
+              "location" : [ 9, 7, 9, 15 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "TreeNode"
+              },
+              "object" : {
+                "kind" : "Identifier",
+                "location" : [ 9, 7, 9, 10 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "name" : "self"
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 9, 12, 9, 15 ],
+                "name" : "left"
+              }
+            },
+            "operator" : "is",
+            "right" : {
+              "kind" : "NoneLiteral",
+              "location" : [ 9, 20, 9, 23 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "<None>"
+              }
+            }
+          },
+          "thenBody" : [ {
+            "kind" : "AssignStmt",
+            "location" : [ 10, 5, 10, 27 ],
+            "targets" : [ {
+              "kind" : "MemberExpr",
+              "location" : [ 10, 5, 10, 13 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "TreeNode"
+              },
+              "object" : {
+                "kind" : "Identifier",
+                "location" : [ 10, 5, 10, 8 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "name" : "self"
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 10, 10, 10, 13 ],
+                "name" : "left"
+              }
+            } ],
+            "value" : {
+              "kind" : "CallExpr",
+              "location" : [ 10, 17, 10, 27 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "TreeNode"
+              },
+              "function" : {
+                "kind" : "Identifier",
+                "location" : [ 10, 17, 10, 24 ],
+                "inferredType" : {
+                  "kind" : "FuncType",
+                  "parameters" : [ {
+                    "kind" : "ClassValueType",
+                    "className" : "int"
+                  } ],
+                  "returnType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  }
+                },
+                "name" : "makeNode"
+              },
+              "args" : [ {
+                "kind" : "Identifier",
+                "location" : [ 10, 26, 10, 26 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                },
+                "name" : "x"
+              } ]
+            }
+          }, {
+            "kind" : "ReturnStmt",
+            "location" : [ 11, 5, 11, 15 ],
+            "value" : {
+              "kind" : "BooleanLiteral",
+              "location" : [ 11, 12, 11, 15 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "bool"
+              },
+              "value" : true
+            }
+          } ],
+          "elseBody" : [ {
+            "kind" : "ReturnStmt",
+            "location" : [ 13, 5, 13, 30 ],
+            "value" : {
+              "kind" : "MethodCallExpr",
+              "location" : [ 13, 12, 13, 30 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "bool"
+              },
+              "method" : {
+                "kind" : "MemberExpr",
+                "location" : [ 13, 12, 13, 27 ],
+                "inferredType" : {
+                  "kind" : "FuncType",
+                  "parameters" : [ {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  }, {
+                    "kind" : "ClassValueType",
+                    "className" : "int"
+                  } ],
+                  "returnType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "bool"
+                  }
+                },
+                "object" : {
+                  "kind" : "MemberExpr",
+                  "location" : [ 13, 12, 13, 20 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  },
+                  "object" : {
+                    "kind" : "Identifier",
+                    "location" : [ 13, 12, 13, 15 ],
+                    "inferredType" : {
+                      "kind" : "ClassValueType",
+                      "className" : "TreeNode"
+                    },
+                    "name" : "self"
+                  },
+                  "member" : {
+                    "kind" : "Identifier",
+                    "location" : [ 13, 17, 13, 20 ],
+                    "name" : "left"
+                  }
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 13, 22, 13, 27 ],
+                  "name" : "insert"
+                }
+              },
+              "args" : [ {
+                "kind" : "Identifier",
+                "location" : [ 13, 29, 13, 29 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                },
+                "name" : "x"
+              } ]
+            }
+          } ]
+        } ],
+        "elseBody" : [ {
+          "kind" : "IfStmt",
+          "location" : [ 14, 3, 20, 2 ],
+          "condition" : {
+            "kind" : "BinaryExpr",
+            "location" : [ 14, 8, 14, 21 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "left" : {
+              "kind" : "Identifier",
+              "location" : [ 14, 8, 14, 8 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "name" : "x"
+            },
+            "operator" : ">",
+            "right" : {
+              "kind" : "MemberExpr",
+              "location" : [ 14, 12, 14, 21 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "object" : {
+                "kind" : "Identifier",
+                "location" : [ 14, 12, 14, 15 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "name" : "self"
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 14, 17, 14, 21 ],
+                "name" : "value"
+              }
+            }
+          },
+          "thenBody" : [ {
+            "kind" : "IfStmt",
+            "location" : [ 15, 4, 20, 2 ],
+            "condition" : {
+              "kind" : "BinaryExpr",
+              "location" : [ 15, 7, 15, 24 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "bool"
+              },
+              "left" : {
+                "kind" : "MemberExpr",
+                "location" : [ 15, 7, 15, 16 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "object" : {
+                  "kind" : "Identifier",
+                  "location" : [ 15, 7, 15, 10 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  },
+                  "name" : "self"
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 15, 12, 15, 16 ],
+                  "name" : "right"
+                }
+              },
+              "operator" : "is",
+              "right" : {
+                "kind" : "NoneLiteral",
+                "location" : [ 15, 21, 15, 24 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "<None>"
+                }
+              }
+            },
+            "thenBody" : [ {
+              "kind" : "AssignStmt",
+              "location" : [ 16, 5, 16, 28 ],
+              "targets" : [ {
+                "kind" : "MemberExpr",
+                "location" : [ 16, 5, 16, 14 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "object" : {
+                  "kind" : "Identifier",
+                  "location" : [ 16, 5, 16, 8 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  },
+                  "name" : "self"
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 16, 10, 16, 14 ],
+                  "name" : "right"
+                }
+              } ],
+              "value" : {
+                "kind" : "CallExpr",
+                "location" : [ 16, 18, 16, 28 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "function" : {
+                  "kind" : "Identifier",
+                  "location" : [ 16, 18, 16, 25 ],
+                  "inferredType" : {
+                    "kind" : "FuncType",
+                    "parameters" : [ {
+                      "kind" : "ClassValueType",
+                      "className" : "int"
+                    } ],
+                    "returnType" : {
+                      "kind" : "ClassValueType",
+                      "className" : "TreeNode"
+                    }
+                  },
+                  "name" : "makeNode"
+                },
+                "args" : [ {
+                  "kind" : "Identifier",
+                  "location" : [ 16, 27, 16, 27 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "int"
+                  },
+                  "name" : "x"
+                } ]
+              }
+            }, {
+              "kind" : "ReturnStmt",
+              "location" : [ 17, 5, 17, 15 ],
+              "value" : {
+                "kind" : "BooleanLiteral",
+                "location" : [ 17, 12, 17, 15 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "bool"
+                },
+                "value" : true
+              }
+            } ],
+            "elseBody" : [ {
+              "kind" : "ReturnStmt",
+              "location" : [ 19, 5, 19, 31 ],
+              "value" : {
+                "kind" : "MethodCallExpr",
+                "location" : [ 19, 12, 19, 31 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "bool"
+                },
+                "method" : {
+                  "kind" : "MemberExpr",
+                  "location" : [ 19, 12, 19, 28 ],
+                  "inferredType" : {
+                    "kind" : "FuncType",
+                    "parameters" : [ {
+                      "kind" : "ClassValueType",
+                      "className" : "TreeNode"
+                    }, {
+                      "kind" : "ClassValueType",
+                      "className" : "int"
+                    } ],
+                    "returnType" : {
+                      "kind" : "ClassValueType",
+                      "className" : "bool"
+                    }
+                  },
+                  "object" : {
+                    "kind" : "MemberExpr",
+                    "location" : [ 19, 12, 19, 21 ],
+                    "inferredType" : {
+                      "kind" : "ClassValueType",
+                      "className" : "TreeNode"
+                    },
+                    "object" : {
+                      "kind" : "Identifier",
+                      "location" : [ 19, 12, 19, 15 ],
+                      "inferredType" : {
+                        "kind" : "ClassValueType",
+                        "className" : "TreeNode"
+                      },
+                      "name" : "self"
+                    },
+                    "member" : {
+                      "kind" : "Identifier",
+                      "location" : [ 19, 17, 19, 21 ],
+                      "name" : "right"
+                    }
+                  },
+                  "member" : {
+                    "kind" : "Identifier",
+                    "location" : [ 19, 23, 19, 28 ],
+                    "name" : "insert"
+                  }
+                },
+                "args" : [ {
+                  "kind" : "Identifier",
+                  "location" : [ 19, 30, 19, 30 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "int"
+                  },
+                  "name" : "x"
+                } ]
+              }
+            } ]
+          } ],
+          "elseBody" : [ ]
+        } ]
+      }, {
+        "kind" : "ReturnStmt",
+        "location" : [ 20, 3, 20, 14 ],
+        "value" : {
+          "kind" : "BooleanLiteral",
+          "location" : [ 20, 10, 20, 14 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "value" : false
+        }
+      } ]
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 22, 2, 36, 0 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 22, 6, 22, 13 ],
+        "name" : "contains"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 22, 15, 22, 29 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 22, 15, 22, 18 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 22, 20, 22, 29 ],
+          "className" : "TreeNode"
+        }
+      }, {
+        "kind" : "TypedVar",
+        "location" : [ 22, 32, 22, 36 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 22, 32, 22, 32 ],
+          "name" : "x"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 22, 34, 22, 36 ],
+          "className" : "int"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 22, 42, 22, 45 ],
+        "className" : "bool"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "IfStmt",
+        "location" : [ 23, 3, 36, 0 ],
+        "condition" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 23, 6, 23, 19 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "left" : {
+            "kind" : "Identifier",
+            "location" : [ 23, 6, 23, 6 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "name" : "x"
+          },
+          "operator" : "<",
+          "right" : {
+            "kind" : "MemberExpr",
+            "location" : [ 23, 10, 23, 19 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 23, 10, 23, 13 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "TreeNode"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 23, 15, 23, 19 ],
+              "name" : "value"
+            }
+          }
+        },
+        "thenBody" : [ {
+          "kind" : "IfStmt",
+          "location" : [ 24, 4, 28, 2 ],
+          "condition" : {
+            "kind" : "BinaryExpr",
+            "location" : [ 24, 7, 24, 23 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "left" : {
+              "kind" : "MemberExpr",
+              "location" : [ 24, 7, 24, 15 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "TreeNode"
+              },
+              "object" : {
+                "kind" : "Identifier",
+                "location" : [ 24, 7, 24, 10 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "name" : "self"
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 24, 12, 24, 15 ],
+                "name" : "left"
+              }
+            },
+            "operator" : "is",
+            "right" : {
+              "kind" : "NoneLiteral",
+              "location" : [ 24, 20, 24, 23 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "<None>"
+              }
+            }
+          },
+          "thenBody" : [ {
+            "kind" : "ReturnStmt",
+            "location" : [ 25, 5, 25, 16 ],
+            "value" : {
+              "kind" : "BooleanLiteral",
+              "location" : [ 25, 12, 25, 16 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "bool"
+              },
+              "value" : false
+            }
+          } ],
+          "elseBody" : [ {
+            "kind" : "ReturnStmt",
+            "location" : [ 27, 5, 27, 32 ],
+            "value" : {
+              "kind" : "MethodCallExpr",
+              "location" : [ 27, 12, 27, 32 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "bool"
+              },
+              "method" : {
+                "kind" : "MemberExpr",
+                "location" : [ 27, 12, 27, 29 ],
+                "inferredType" : {
+                  "kind" : "FuncType",
+                  "parameters" : [ {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  }, {
+                    "kind" : "ClassValueType",
+                    "className" : "int"
+                  } ],
+                  "returnType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "bool"
+                  }
+                },
+                "object" : {
+                  "kind" : "MemberExpr",
+                  "location" : [ 27, 12, 27, 20 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  },
+                  "object" : {
+                    "kind" : "Identifier",
+                    "location" : [ 27, 12, 27, 15 ],
+                    "inferredType" : {
+                      "kind" : "ClassValueType",
+                      "className" : "TreeNode"
+                    },
+                    "name" : "self"
+                  },
+                  "member" : {
+                    "kind" : "Identifier",
+                    "location" : [ 27, 17, 27, 20 ],
+                    "name" : "left"
+                  }
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 27, 22, 27, 29 ],
+                  "name" : "contains"
+                }
+              },
+              "args" : [ {
+                "kind" : "Identifier",
+                "location" : [ 27, 31, 27, 31 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                },
+                "name" : "x"
+              } ]
+            }
+          } ]
+        } ],
+        "elseBody" : [ {
+          "kind" : "IfStmt",
+          "location" : [ 28, 3, 36, 0 ],
+          "condition" : {
+            "kind" : "BinaryExpr",
+            "location" : [ 28, 8, 28, 21 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "left" : {
+              "kind" : "Identifier",
+              "location" : [ 28, 8, 28, 8 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "name" : "x"
+            },
+            "operator" : ">",
+            "right" : {
+              "kind" : "MemberExpr",
+              "location" : [ 28, 12, 28, 21 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "object" : {
+                "kind" : "Identifier",
+                "location" : [ 28, 12, 28, 15 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "name" : "self"
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 28, 17, 28, 21 ],
+                "name" : "value"
+              }
+            }
+          },
+          "thenBody" : [ {
+            "kind" : "IfStmt",
+            "location" : [ 29, 4, 33, 2 ],
+            "condition" : {
+              "kind" : "BinaryExpr",
+              "location" : [ 29, 7, 29, 24 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "bool"
+              },
+              "left" : {
+                "kind" : "MemberExpr",
+                "location" : [ 29, 7, 29, 16 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "object" : {
+                  "kind" : "Identifier",
+                  "location" : [ 29, 7, 29, 10 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "TreeNode"
+                  },
+                  "name" : "self"
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 29, 12, 29, 16 ],
+                  "name" : "right"
+                }
+              },
+              "operator" : "is",
+              "right" : {
+                "kind" : "NoneLiteral",
+                "location" : [ 29, 21, 29, 24 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "<None>"
+                }
+              }
+            },
+            "thenBody" : [ {
+              "kind" : "ReturnStmt",
+              "location" : [ 30, 5, 30, 16 ],
+              "value" : {
+                "kind" : "BooleanLiteral",
+                "location" : [ 30, 12, 30, 16 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "bool"
+                },
+                "value" : false
+              }
+            } ],
+            "elseBody" : [ {
+              "kind" : "ReturnStmt",
+              "location" : [ 32, 5, 32, 33 ],
+              "value" : {
+                "kind" : "MethodCallExpr",
+                "location" : [ 32, 12, 32, 33 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "bool"
+                },
+                "method" : {
+                  "kind" : "MemberExpr",
+                  "location" : [ 32, 12, 32, 30 ],
+                  "inferredType" : {
+                    "kind" : "FuncType",
+                    "parameters" : [ {
+                      "kind" : "ClassValueType",
+                      "className" : "TreeNode"
+                    }, {
+                      "kind" : "ClassValueType",
+                      "className" : "int"
+                    } ],
+                    "returnType" : {
+                      "kind" : "ClassValueType",
+                      "className" : "bool"
+                    }
+                  },
+                  "object" : {
+                    "kind" : "MemberExpr",
+                    "location" : [ 32, 12, 32, 21 ],
+                    "inferredType" : {
+                      "kind" : "ClassValueType",
+                      "className" : "TreeNode"
+                    },
+                    "object" : {
+                      "kind" : "Identifier",
+                      "location" : [ 32, 12, 32, 15 ],
+                      "inferredType" : {
+                        "kind" : "ClassValueType",
+                        "className" : "TreeNode"
+                      },
+                      "name" : "self"
+                    },
+                    "member" : {
+                      "kind" : "Identifier",
+                      "location" : [ 32, 17, 32, 21 ],
+                      "name" : "right"
+                    }
+                  },
+                  "member" : {
+                    "kind" : "Identifier",
+                    "location" : [ 32, 23, 32, 30 ],
+                    "name" : "contains"
+                  }
+                },
+                "args" : [ {
+                  "kind" : "Identifier",
+                  "location" : [ 32, 32, 32, 32 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "int"
+                  },
+                  "name" : "x"
+                } ]
+              }
+            } ]
+          } ],
+          "elseBody" : [ {
+            "kind" : "ReturnStmt",
+            "location" : [ 34, 4, 34, 14 ],
+            "value" : {
+              "kind" : "BooleanLiteral",
+              "location" : [ 34, 11, 34, 14 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "bool"
+              },
+              "value" : true
+            }
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "kind" : "ClassDef",
+    "location" : [ 36, 1, 54, 0 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 36, 7, 36, 10 ],
+      "name" : "Tree"
+    },
+    "superClass" : {
+      "kind" : "Identifier",
+      "location" : [ 36, 12, 36, 17 ],
+      "name" : "object"
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "location" : [ 37, 2, 37, 21 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 37, 2, 37, 14 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 37, 2, 37, 5 ],
+          "name" : "root"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 37, 7, 37, 14 ],
+          "className" : "TreeNode"
+        }
+      },
+      "value" : {
+        "kind" : "NoneLiteral",
+        "location" : [ 37, 18, 37, 21 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "<None>"
+        }
+      }
+    }, {
+      "kind" : "VarDef",
+      "location" : [ 38, 2, 38, 13 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 38, 2, 38, 9 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 38, 2, 38, 5 ],
+          "name" : "size"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 38, 7, 38, 9 ],
+          "className" : "int"
+        }
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 38, 13, 38, 13 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 0
+      }
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 40, 2, 48, 1 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 40, 6, 40, 11 ],
+        "name" : "insert"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 40, 13, 40, 23 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 40, 13, 40, 16 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 40, 18, 40, 23 ],
+          "className" : "Tree"
+        }
+      }, {
+        "kind" : "TypedVar",
+        "location" : [ 40, 26, 40, 30 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 40, 26, 40, 26 ],
+          "name" : "x"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 40, 28, 40, 30 ],
+          "className" : "int"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 40, 36, 40, 41 ],
+        "className" : "object"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "IfStmt",
+        "location" : [ 41, 3, 48, 1 ],
+        "condition" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 41, 6, 41, 22 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "left" : {
+            "kind" : "MemberExpr",
+            "location" : [ 41, 6, 41, 14 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "TreeNode"
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 41, 6, 41, 9 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "Tree"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 41, 11, 41, 14 ],
+              "name" : "root"
+            }
+          },
+          "operator" : "is",
+          "right" : {
+            "kind" : "NoneLiteral",
+            "location" : [ 41, 19, 41, 22 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "<None>"
+            }
+          }
+        },
+        "thenBody" : [ {
+          "kind" : "AssignStmt",
+          "location" : [ 42, 4, 42, 26 ],
+          "targets" : [ {
+            "kind" : "MemberExpr",
+            "location" : [ 42, 4, 42, 12 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "TreeNode"
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 42, 4, 42, 7 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "Tree"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 42, 9, 42, 12 ],
+              "name" : "root"
+            }
+          } ],
+          "value" : {
+            "kind" : "CallExpr",
+            "location" : [ 42, 16, 42, 26 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "TreeNode"
+            },
+            "function" : {
+              "kind" : "Identifier",
+              "location" : [ 42, 16, 42, 23 ],
+              "inferredType" : {
+                "kind" : "FuncType",
+                "parameters" : [ {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                } ],
+                "returnType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                }
+              },
+              "name" : "makeNode"
+            },
+            "args" : [ {
+              "kind" : "Identifier",
+              "location" : [ 42, 25, 42, 25 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "name" : "x"
+            } ]
+          }
+        }, {
+          "kind" : "AssignStmt",
+          "location" : [ 43, 4, 43, 16 ],
+          "targets" : [ {
+            "kind" : "MemberExpr",
+            "location" : [ 43, 4, 43, 12 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 43, 4, 43, 7 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "Tree"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 43, 9, 43, 12 ],
+              "name" : "size"
+            }
+          } ],
+          "value" : {
+            "kind" : "IntegerLiteral",
+            "location" : [ 43, 16, 43, 16 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "value" : 1
+          }
+        } ],
+        "elseBody" : [ {
+          "kind" : "IfStmt",
+          "location" : [ 45, 4, 48, 1 ],
+          "condition" : {
+            "kind" : "MethodCallExpr",
+            "location" : [ 45, 7, 45, 25 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "method" : {
+              "kind" : "MemberExpr",
+              "location" : [ 45, 7, 45, 22 ],
+              "inferredType" : {
+                "kind" : "FuncType",
+                "parameters" : [ {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                }, {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                } ],
+                "returnType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "bool"
+                }
+              },
+              "object" : {
+                "kind" : "MemberExpr",
+                "location" : [ 45, 7, 45, 15 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "object" : {
+                  "kind" : "Identifier",
+                  "location" : [ 45, 7, 45, 10 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "Tree"
+                  },
+                  "name" : "self"
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 45, 12, 45, 15 ],
+                  "name" : "root"
+                }
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 45, 17, 45, 22 ],
+                "name" : "insert"
+              }
+            },
+            "args" : [ {
+              "kind" : "Identifier",
+              "location" : [ 45, 24, 45, 24 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "name" : "x"
+            } ]
+          },
+          "thenBody" : [ {
+            "kind" : "AssignStmt",
+            "location" : [ 46, 5, 46, 29 ],
+            "targets" : [ {
+              "kind" : "MemberExpr",
+              "location" : [ 46, 5, 46, 13 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "object" : {
+                "kind" : "Identifier",
+                "location" : [ 46, 5, 46, 8 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "Tree"
+                },
+                "name" : "self"
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 46, 10, 46, 13 ],
+                "name" : "size"
+              }
+            } ],
+            "value" : {
+              "kind" : "BinaryExpr",
+              "location" : [ 46, 17, 46, 29 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "left" : {
+                "kind" : "MemberExpr",
+                "location" : [ 46, 17, 46, 25 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                },
+                "object" : {
+                  "kind" : "Identifier",
+                  "location" : [ 46, 17, 46, 20 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "Tree"
+                  },
+                  "name" : "self"
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 46, 22, 46, 25 ],
+                  "name" : "size"
+                }
+              },
+              "operator" : "+",
+              "right" : {
+                "kind" : "IntegerLiteral",
+                "location" : [ 46, 29, 46, 29 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                },
+                "value" : 1
+              }
+            }
+          } ],
+          "elseBody" : [ ]
+        } ]
+      } ]
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 48, 2, 54, 0 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 48, 6, 48, 13 ],
+        "name" : "contains"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 48, 15, 48, 25 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 48, 15, 48, 18 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 48, 20, 48, 25 ],
+          "className" : "Tree"
+        }
+      }, {
+        "kind" : "TypedVar",
+        "location" : [ 48, 28, 48, 32 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 48, 28, 48, 28 ],
+          "name" : "x"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 48, 30, 48, 32 ],
+          "className" : "int"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 48, 38, 48, 41 ],
+        "className" : "bool"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "IfStmt",
+        "location" : [ 49, 3, 54, 0 ],
+        "condition" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 49, 6, 49, 22 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "left" : {
+            "kind" : "MemberExpr",
+            "location" : [ 49, 6, 49, 14 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "TreeNode"
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 49, 6, 49, 9 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "Tree"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 49, 11, 49, 14 ],
+              "name" : "root"
+            }
+          },
+          "operator" : "is",
+          "right" : {
+            "kind" : "NoneLiteral",
+            "location" : [ 49, 19, 49, 22 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "<None>"
+            }
+          }
+        },
+        "thenBody" : [ {
+          "kind" : "ReturnStmt",
+          "location" : [ 50, 4, 50, 15 ],
+          "value" : {
+            "kind" : "BooleanLiteral",
+            "location" : [ 50, 11, 50, 15 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "value" : false
+          }
+        } ],
+        "elseBody" : [ {
+          "kind" : "ReturnStmt",
+          "location" : [ 52, 4, 52, 31 ],
+          "value" : {
+            "kind" : "MethodCallExpr",
+            "location" : [ 52, 11, 52, 31 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "method" : {
+              "kind" : "MemberExpr",
+              "location" : [ 52, 11, 52, 28 ],
+              "inferredType" : {
+                "kind" : "FuncType",
+                "parameters" : [ {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                }, {
+                  "kind" : "ClassValueType",
+                  "className" : "int"
+                } ],
+                "returnType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "bool"
+                }
+              },
+              "object" : {
+                "kind" : "MemberExpr",
+                "location" : [ 52, 11, 52, 19 ],
+                "inferredType" : {
+                  "kind" : "ClassValueType",
+                  "className" : "TreeNode"
+                },
+                "object" : {
+                  "kind" : "Identifier",
+                  "location" : [ 52, 11, 52, 14 ],
+                  "inferredType" : {
+                    "kind" : "ClassValueType",
+                    "className" : "Tree"
+                  },
+                  "name" : "self"
+                },
+                "member" : {
+                  "kind" : "Identifier",
+                  "location" : [ 52, 16, 52, 19 ],
+                  "name" : "root"
+                }
+              },
+              "member" : {
+                "kind" : "Identifier",
+                "location" : [ 52, 21, 52, 28 ],
+                "name" : "contains"
+              }
+            },
+            "args" : [ {
+              "kind" : "Identifier",
+              "location" : [ 52, 30, 52, 30 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              },
+              "name" : "x"
+            } ]
+          }
+        } ]
+      } ]
+    } ]
+  }, {
+    "kind" : "FuncDef",
+    "location" : [ 54, 1, 58, 10 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 54, 5, 54, 12 ],
+      "name" : "makeNode"
+    },
+    "params" : [ {
+      "kind" : "TypedVar",
+      "location" : [ 54, 14, 54, 19 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 54, 14, 54, 14 ],
+        "name" : "x"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 54, 17, 54, 19 ],
+        "className" : "int"
+      }
+    } ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "location" : [ 54, 25, 54, 32 ],
+      "className" : "TreeNode"
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "location" : [ 55, 2, 55, 18 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 55, 2, 55, 11 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 55, 2, 55, 2 ],
+          "name" : "b"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 55, 4, 55, 11 ],
+          "className" : "TreeNode"
+        }
+      },
+      "value" : {
+        "kind" : "NoneLiteral",
+        "location" : [ 55, 15, 55, 18 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "<None>"
+        }
+      }
+    } ],
+    "statements" : [ {
+      "kind" : "AssignStmt",
+      "location" : [ 56, 2, 56, 15 ],
+      "targets" : [ {
+        "kind" : "Identifier",
+        "location" : [ 56, 2, 56, 2 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "TreeNode"
+        },
+        "name" : "b"
+      } ],
+      "value" : {
+        "kind" : "CallExpr",
+        "location" : [ 56, 6, 56, 15 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "TreeNode"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "location" : [ 56, 6, 56, 13 ],
+          "name" : "TreeNode"
+        },
+        "args" : [ ]
+      }
+    }, {
+      "kind" : "AssignStmt",
+      "location" : [ 57, 2, 57, 12 ],
+      "targets" : [ {
+        "kind" : "MemberExpr",
+        "location" : [ 57, 2, 57, 8 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "object" : {
+          "kind" : "Identifier",
+          "location" : [ 57, 2, 57, 2 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "TreeNode"
+          },
+          "name" : "b"
+        },
+        "member" : {
+          "kind" : "Identifier",
+          "location" : [ 57, 4, 57, 8 ],
+          "name" : "value"
+        }
+      } ],
+      "value" : {
+        "kind" : "Identifier",
+        "location" : [ 57, 12, 57, 12 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "x"
+      }
+    }, {
+      "kind" : "ReturnStmt",
+      "location" : [ 58, 2, 58, 9 ],
+      "value" : {
+        "kind" : "Identifier",
+        "location" : [ 58, 9, 58, 9 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "TreeNode"
+        },
+        "name" : "b"
+      }
+    } ]
+  }, {
+    "kind" : "VarDef",
+    "location" : [ 62, 1, 62, 11 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 62, 1, 62, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 62, 1, 62, 1 ],
+        "name" : "n"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 62, 3, 62, 5 ],
+        "className" : "int"
+      }
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 62, 9, 62, 11 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 100
+    }
+  }, {
+    "kind" : "VarDef",
+    "location" : [ 63, 1, 63, 9 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 63, 1, 63, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 63, 1, 63, 1 ],
+        "name" : "c"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 63, 3, 63, 5 ],
+        "className" : "int"
+      }
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 63, 9, 63, 9 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 4
+    }
+  }, {
+    "kind" : "VarDef",
+    "location" : [ 66, 1, 66, 13 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 66, 1, 66, 6 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 66, 1, 66, 1 ],
+        "name" : "t"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 66, 3, 66, 6 ],
+        "className" : "Tree"
+      }
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "location" : [ 66, 10, 66, 13 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      }
+    }
+  }, {
+    "kind" : "VarDef",
+    "location" : [ 67, 1, 67, 9 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 67, 1, 67, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 67, 1, 67, 1 ],
+        "name" : "i"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 67, 3, 67, 5 ],
+        "className" : "int"
+      }
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 67, 9, 67, 9 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 0
+    }
+  }, {
+    "kind" : "VarDef",
+    "location" : [ 68, 1, 68, 13 ],
+    "var" : {
+      "kind" : "TypedVar",
+      "location" : [ 68, 1, 68, 5 ],
+      "identifier" : {
+        "kind" : "Identifier",
+        "location" : [ 68, 1, 68, 1 ],
+        "name" : "k"
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "location" : [ 68, 3, 68, 5 ],
+        "className" : "int"
+      }
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 68, 9, 68, 13 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 37813
+    }
+  } ],
+  "statements" : [ {
+    "kind" : "AssignStmt",
+    "location" : [ 71, 1, 71, 10 ],
+    "targets" : [ {
+      "kind" : "Identifier",
+      "location" : [ 71, 1, 71, 1 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "Tree"
+      },
+      "name" : "t"
+    } ],
+    "value" : {
+      "kind" : "CallExpr",
+      "location" : [ 71, 5, 71, 10 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "Tree"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 71, 5, 71, 8 ],
+        "name" : "Tree"
+      },
+      "args" : [ ]
+    }
+  }, {
+    "kind" : "WhileStmt",
+    "location" : [ 72, 1, 79, 0 ],
+    "condition" : {
+      "kind" : "BinaryExpr",
+      "location" : [ 72, 7, 72, 11 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "bool"
+      },
+      "left" : {
+        "kind" : "Identifier",
+        "location" : [ 72, 7, 72, 7 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "i"
+      },
+      "operator" : "<",
+      "right" : {
+        "kind" : "Identifier",
+        "location" : [ 72, 11, 72, 11 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "n"
+      }
+    },
+    "body" : [ {
+      "kind" : "ExprStmt",
+      "location" : [ 73, 2, 73, 12 ],
+      "expr" : {
+        "kind" : "MethodCallExpr",
+        "location" : [ 73, 2, 73, 12 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "method" : {
+          "kind" : "MemberExpr",
+          "location" : [ 73, 2, 73, 9 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "Tree"
+            }, {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "object"
+            }
+          },
+          "object" : {
+            "kind" : "Identifier",
+            "location" : [ 73, 2, 73, 2 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "Tree"
+            },
+            "name" : "t"
+          },
+          "member" : {
+            "kind" : "Identifier",
+            "location" : [ 73, 4, 73, 9 ],
+            "name" : "insert"
+          }
+        },
+        "args" : [ {
+          "kind" : "Identifier",
+          "location" : [ 73, 11, 73, 11 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "name" : "k"
+        } ]
+      }
+    }, {
+      "kind" : "AssignStmt",
+      "location" : [ 74, 2, 74, 24 ],
+      "targets" : [ {
+        "kind" : "Identifier",
+        "location" : [ 74, 2, 74, 2 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "k"
+      } ],
+      "value" : {
+        "kind" : "BinaryExpr",
+        "location" : [ 74, 6, 74, 24 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "left" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 74, 7, 74, 15 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "left" : {
+            "kind" : "Identifier",
+            "location" : [ 74, 7, 74, 7 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "name" : "k"
+          },
+          "operator" : "*",
+          "right" : {
+            "kind" : "IntegerLiteral",
+            "location" : [ 74, 11, 74, 15 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "value" : 37813
+          }
+        },
+        "operator" : "%",
+        "right" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 74, 20, 74, 24 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 37831
+        }
+      }
+    }, {
+      "kind" : "IfStmt",
+      "location" : [ 75, 2, 77, 1 ],
+      "condition" : {
+        "kind" : "BinaryExpr",
+        "location" : [ 75, 5, 75, 14 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "left" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 75, 5, 75, 9 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "left" : {
+            "kind" : "Identifier",
+            "location" : [ 75, 5, 75, 5 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "name" : "i"
+          },
+          "operator" : "%",
+          "right" : {
+            "kind" : "Identifier",
+            "location" : [ 75, 9, 75, 9 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "name" : "c"
+          }
+        },
+        "operator" : "!=",
+        "right" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 75, 14, 75, 14 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 0
+        }
+      },
+      "thenBody" : [ {
+        "kind" : "ExprStmt",
+        "location" : [ 76, 3, 76, 13 ],
+        "expr" : {
+          "kind" : "MethodCallExpr",
+          "location" : [ 76, 3, 76, 13 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          },
+          "method" : {
+            "kind" : "MemberExpr",
+            "location" : [ 76, 3, 76, 10 ],
+            "inferredType" : {
+              "kind" : "FuncType",
+              "parameters" : [ {
+                "kind" : "ClassValueType",
+                "className" : "Tree"
+              }, {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              } ],
+              "returnType" : {
+                "kind" : "ClassValueType",
+                "className" : "object"
+              }
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 76, 3, 76, 3 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "Tree"
+              },
+              "name" : "t"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 76, 5, 76, 10 ],
+              "name" : "insert"
+            }
+          },
+          "args" : [ {
+            "kind" : "Identifier",
+            "location" : [ 76, 12, 76, 12 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "name" : "i"
+          } ]
+        }
+      } ],
+      "elseBody" : [ ]
+    }, {
+      "kind" : "AssignStmt",
+      "location" : [ 77, 2, 77, 10 ],
+      "targets" : [ {
+        "kind" : "Identifier",
+        "location" : [ 77, 2, 77, 2 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "i"
+      } ],
+      "value" : {
+        "kind" : "BinaryExpr",
+        "location" : [ 77, 6, 77, 10 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "left" : {
+          "kind" : "Identifier",
+          "location" : [ 77, 6, 77, 6 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "name" : "i"
+        },
+        "operator" : "+",
+        "right" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 77, 10, 77, 10 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 1
+        }
+      }
+    } ]
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 79, 1, 79, 13 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 79, 1, 79, 13 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 79, 1, 79, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "MemberExpr",
+        "location" : [ 79, 7, 79, 12 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "object" : {
+          "kind" : "Identifier",
+          "location" : [ 79, 7, 79, 7 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "Tree"
+          },
+          "name" : "t"
+        },
+        "member" : {
+          "kind" : "Identifier",
+          "location" : [ 79, 9, 79, 12 ],
+          "name" : "size"
+        }
+      } ]
+    }
+  }, {
+    "kind" : "ForStmt",
+    "location" : [ 81, 1, 84, 2 ],
+    "identifier" : {
+      "kind" : "Identifier",
+      "location" : [ 81, 5, 81, 5 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "name" : "i"
+    },
+    "iterable" : {
+      "kind" : "ListExpr",
+      "location" : [ 81, 10, 81, 31 ],
+      "inferredType" : {
+        "kind" : "ListValueType",
+        "elementType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        }
+      },
+      "elements" : [ {
+        "kind" : "IntegerLiteral",
+        "location" : [ 81, 11, 81, 11 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 4
+      }, {
+        "kind" : "IntegerLiteral",
+        "location" : [ 81, 14, 81, 14 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 8
+      }, {
+        "kind" : "IntegerLiteral",
+        "location" : [ 81, 17, 81, 18 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 15
+      }, {
+        "kind" : "IntegerLiteral",
+        "location" : [ 81, 21, 81, 22 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 16
+      }, {
+        "kind" : "IntegerLiteral",
+        "location" : [ 81, 25, 81, 26 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 23
+      }, {
+        "kind" : "IntegerLiteral",
+        "location" : [ 81, 29, 81, 30 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 42
+      } ]
+    },
+    "body" : [ {
+      "kind" : "IfStmt",
+      "location" : [ 82, 2, 84, 1 ],
+      "condition" : {
+        "kind" : "MethodCallExpr",
+        "location" : [ 82, 5, 82, 17 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "method" : {
+          "kind" : "MemberExpr",
+          "location" : [ 82, 5, 82, 14 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "Tree"
+            }, {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            }
+          },
+          "object" : {
+            "kind" : "Identifier",
+            "location" : [ 82, 5, 82, 5 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "Tree"
+            },
+            "name" : "t"
+          },
+          "member" : {
+            "kind" : "Identifier",
+            "location" : [ 82, 7, 82, 14 ],
+            "name" : "contains"
+          }
+        },
+        "args" : [ {
+          "kind" : "Identifier",
+          "location" : [ 82, 16, 82, 16 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "name" : "i"
+        } ]
+      },
+      "thenBody" : [ {
+        "kind" : "ExprStmt",
+        "location" : [ 83, 3, 83, 10 ],
+        "expr" : {
+          "kind" : "CallExpr",
+          "location" : [ 83, 3, 83, 10 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          },
+          "function" : {
+            "kind" : "Identifier",
+            "location" : [ 83, 3, 83, 7 ],
+            "inferredType" : {
+              "kind" : "FuncType",
+              "parameters" : [ {
+                "kind" : "ClassValueType",
+                "className" : "object"
+              } ],
+              "returnType" : {
+                "kind" : "ClassValueType",
+                "className" : "<None>"
+              }
+            },
+            "name" : "print"
+          },
+          "args" : [ {
+            "kind" : "Identifier",
+            "location" : [ 83, 9, 83, 9 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "name" : "i"
+          } ]
+        }
+      } ],
+      "elseBody" : [ ]
+    } ]
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

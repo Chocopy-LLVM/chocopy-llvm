@@ -1,0 +1,17 @@
+[{
+  "function": "main",
+  "live_in": {
+    "label15": ["%op14"],
+    "label24": ["%op23"],
+    "label34": ["%op33"]
+
+  },
+  "live_out": {
+    "label12": ["%op14"],
+    "label21": ["%op23"],
+    "label30": ["%op33"]
+
+  }
+}
+
+]

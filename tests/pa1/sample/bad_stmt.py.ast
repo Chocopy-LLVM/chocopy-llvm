@@ -1,0 +1,65 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 4, 7 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 1, 1, 1, 5 ],
+    "expr" : {
+      "kind" : "BinaryExpr",
+      "location" : [ 1, 1, 1, 5 ],
+      "left" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 1, 1, 1, 1 ],
+        "value" : 1
+      },
+      "operator" : "+",
+      "right" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 1, 5, 1, 5 ],
+        "value" : 2
+      }
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 3, 1, 3, 5 ],
+    "expr" : {
+      "kind" : "BinaryExpr",
+      "location" : [ 3, 1, 3, 5 ],
+      "left" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 3, 1, 3, 1 ],
+        "value" : 5
+      },
+      "operator" : "+",
+      "right" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 3, 5, 3, 5 ],
+        "value" : 6
+      }
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 4, 6, 4, 6 ],
+    "expr" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 4, 6, 4, 6 ],
+      "value" : 8
+    }
+  } ],
+  "errors" : {
+    "errors" : [ {
+      "kind" : "CompilerError",
+      "location" : [ 2, 22, 2, 22 ],
+      "message" : "Parse error near token UNRECOGNIZED: &",
+      "syntax" : true
+    }, {
+      "kind" : "CompilerError",
+      "location" : [ 4, 4, 4, 4 ],
+      "message" : "Parse error near token LT: <",
+      "syntax" : true
+    } ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

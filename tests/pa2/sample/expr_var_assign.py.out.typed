@@ -1,0 +1,87 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 1, 1, 1, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "int",
+        "location" : [ 1, 3, 1, 5 ]
+      },
+      "location" : [ 1, 1, 1, 5 ]
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 1,
+      "location" : [ 1, 9, 1, 9 ]
+    },
+    "location" : [ 1, 1, 1, 9 ]
+  }, {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "o",
+        "location" : [ 2, 1, 2, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "object",
+        "location" : [ 2, 3, 2, 8 ]
+      },
+      "location" : [ 2, 1, 2, 8 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 2, 12, 2, 15 ]
+    },
+    "location" : [ 2, 1, 2, 15 ]
+  } ],
+  "statements" : [ {
+    "kind" : "VarAssignStmt",
+    "var" : {
+      "kind" : "Identifier",
+      "name" : "x",
+      "location" : [ 4, 1, 4, 1 ]
+    },
+    "value" : {
+      "kind" : "VarAssignExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "var" : {
+        "kind" : "Identifier",
+        "name" : "o",
+        "location" : [ 4, 5, 4, 5 ]
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 42,
+        "location" : [ 4, 9, 4, 10 ]
+      },
+      "location" : [ 4, 5, 4, 10 ]
+    },
+    "location" : [ 4, 1, 4, 10 ]
+  } ],
+  "location" : [ 1, 1, 4, 10 ]
+}

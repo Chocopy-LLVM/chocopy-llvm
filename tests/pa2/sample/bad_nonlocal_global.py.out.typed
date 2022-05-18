@@ -1,0 +1,29 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Not a nonlocal variable: y",
+    "location" : [ 7, 14, 7, 14 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Not a global variable: w",
+    "location" : [ 8, 12, 8, 12 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Not a global variable: int",
+    "location" : [ 9, 12, 9, 14 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Not a nonlocal variable: y",
+    "location" : [ 16, 18, 16, 18 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Not a global variable: foo",
+    "location" : [ 17, 16, 17, 18 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Not a nonlocal variable: bar",
+    "location" : [ 18, 18, 18, 20 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

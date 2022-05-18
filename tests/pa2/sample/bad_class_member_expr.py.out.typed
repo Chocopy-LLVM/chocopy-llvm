@@ -1,0 +1,140 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 1, 1, 1, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "int",
+        "location" : [ 1, 3, 1, 5 ]
+      },
+      "location" : [ 1, 1, 1, 5 ]
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 0,
+      "location" : [ 1, 9, 1, 9 ]
+    },
+    "location" : [ 1, 1, 1, 9 ]
+  }, {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "o",
+        "location" : [ 2, 1, 2, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "object",
+        "location" : [ 2, 3, 2, 8 ]
+      },
+      "location" : [ 2, 1, 2, 8 ]
+    },
+    "value" : {
+      "kind" : "NoneLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "location" : [ 2, 12, 2, 15 ]
+    },
+    "location" : [ 2, 1, 2, 15 ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "MemberExpr",
+      "typeError" : "There is no attribute named `foo` in class `int`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "object" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "x",
+        "location" : [ 4, 1, 4, 1 ]
+      },
+      "member" : {
+        "kind" : "Identifier",
+        "name" : "foo",
+        "location" : [ 4, 3, 4, 5 ]
+      },
+      "location" : [ 4, 1, 4, 5 ]
+    },
+    "location" : [ 4, 1, 4, 5 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "MemberExpr",
+      "typeError" : "There is no attribute named `bar` in class `object`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "object" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "name" : "o",
+        "location" : [ 5, 1, 5, 1 ]
+      },
+      "member" : {
+        "kind" : "Identifier",
+        "name" : "bar",
+        "location" : [ 5, 3, 5, 5 ]
+      },
+      "location" : [ 5, 1, 5, 5 ]
+    },
+    "location" : [ 5, 1, 5, 5 ]
+  }, {
+    "kind" : "MemberAssignStmt",
+    "typeError" : "There is no attribute named `baz` in class `object`",
+    "objectMember" : {
+      "kind" : "MemberExpr",
+      "object" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "name" : "o",
+        "location" : [ 6, 1, 6, 1 ]
+      },
+      "member" : {
+        "kind" : "Identifier",
+        "name" : "baz",
+        "location" : [ 6, 3, 6, 5 ]
+      },
+      "location" : [ 6, 1, 6, 5 ]
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 1,
+      "location" : [ 6, 9, 6, 9 ]
+    },
+    "location" : [ 6, 1, 6, 9 ]
+  } ],
+  "location" : [ 1, 1, 6, 9 ]
+}

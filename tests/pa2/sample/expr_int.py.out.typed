@@ -1,0 +1,36 @@
+{
+  "kind" : "Program",
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "BinaryExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "left" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 6,
+        "location" : [ 1, 1, 1, 1 ]
+      },
+      "operator" : "*",
+      "right" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 9,
+        "location" : [ 1, 5, 1, 5 ]
+      },
+      "location" : [ 1, 1, 1, 5 ]
+    },
+    "location" : [ 1, 1, 1, 5 ]
+  } ],
+  "location" : [ 1, 1, 1, 5 ]
+}

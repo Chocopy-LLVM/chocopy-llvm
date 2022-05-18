@@ -1,0 +1,135 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 2, 25 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 1, 1, 1, 23 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 1, 1, 1, 23 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 1, 1, 1, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "IfExpr",
+        "location" : [ 1, 7, 1, 22 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "condition" : {
+          "kind" : "BooleanLiteral",
+          "location" : [ 1, 12, 1, 15 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "value" : true
+        },
+        "thenExpr" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 1, 7, 1, 7 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 3
+        },
+        "elseExpr" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 1, 22, 1, 22 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 4
+        }
+      } ]
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 2, 1, 2, 24 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 2, 1, 2, 24 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 2, 1, 2, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "IfExpr",
+        "location" : [ 2, 7, 2, 23 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "condition" : {
+          "kind" : "BooleanLiteral",
+          "location" : [ 2, 12, 2, 16 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "value" : false
+        },
+        "thenExpr" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 2, 7, 2, 7 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 3
+        },
+        "elseExpr" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 2, 23, 2, 23 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 4
+        }
+      } ]
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

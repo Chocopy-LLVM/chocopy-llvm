@@ -1,0 +1,90 @@
+[{
+  "function": "minloc",
+  "live_in": {
+    "label_entry": ["%arg0","%arg1","%arg2"],
+    "label13": ["%arg0","%arg1","%arg2"],
+    "label19": ["%op55","%op54","%arg0","%arg1","%arg2","%op16","%op18","%op44"],
+    "label25": ["%op53","%op52","%op51","%arg0","%arg2"],
+    "label28": ["%op51"],
+    "label31": ["%op53","%op52","%op51","%arg0","%arg2"],
+    "label39": ["%op53","%arg0","%arg2"],
+    "label42": ["%op53","%op52","%op51","%arg0","%arg2","%op49"],
+    "label46": ["%op53","%arg0","%arg2"]
+
+  },
+  "live_out": {
+    "label_entry": ["%arg0","%arg1","%arg2"],
+    "label13": ["%arg0","%arg1","%arg2","%op16","%op18"],
+    "label19": ["%op53","%op52","%op51","%arg0","%arg2"],
+    "label25": ["%op53","%op52","%op51","%arg0","%arg2"],
+    "label31": ["%op53","%op52","%op51","%arg0","%arg2"],
+    "label39": ["%op53","%arg0","%arg2"],
+    "label42": ["%op55","%op54","%arg0","%arg2","%op44"],
+    "label46": ["%op53","%arg0","%arg2","%op49"]
+
+  }
+}
+
+,{
+  "function": "sort",
+  "live_in": {
+    "label_entry": ["%arg0","%arg1","%arg2"],
+    "label9": ["%arg0","%arg1","%arg2","%op21","%op29","%op51"],
+    "label16": ["%op54","%arg0","%arg2"],
+    "label26": ["%op54","%arg0","%arg2","%op21"],
+    "label33": ["%op54","%arg0","%arg2","%op21","%op29"],
+    "label40": ["%op54","%arg0","%arg2","%op21","%op29","%op36"],
+    "label47": ["%op54","%arg0","%arg2","%op21","%op29"]
+
+  },
+  "live_out": {
+    "label_entry": ["%arg0","%arg1","%arg2"],
+    "label9": ["%op54","%arg0","%arg2"],
+    "label16": ["%op54","%arg0","%arg2","%op21"],
+    "label26": ["%op54","%arg0","%arg2","%op21","%op29"],
+    "label33": ["%op54","%arg0","%arg2","%op21","%op29","%op36"],
+    "label40": ["%op54","%arg0","%arg2","%op21","%op29"],
+    "label47": ["%arg0","%arg2","%op21","%op29","%op51"]
+
+  }
+}
+
+,{
+  "function": "main",
+  "live_in": {
+    "label27": ["%x"],
+    "label31": ["%x"],
+    "label35": ["%x"],
+    "label39": ["%x"],
+    "label42": ["%op56","%x"],
+    "label47": ["%op57","%x"],
+    "label52": ["%op57","%x"],
+    "label_entry": ["%x"],
+    "label3": ["%x"],
+    "label7": ["%x"],
+    "label11": ["%x"],
+    "label15": ["%x"],
+    "label19": ["%x"],
+    "label23": ["%x"]
+
+  },
+  "live_out": {
+    "label27": ["%x"],
+    "label31": ["%x"],
+    "label35": ["%x"],
+    "label39": ["%x"],
+    "label42": ["%op57","%x"],
+    "label47": ["%op57","%x"],
+    "label52": ["%op56","%x"],
+    "label_entry": ["%x"],
+    "label3": ["%x"],
+    "label7": ["%x"],
+    "label11": ["%x"],
+    "label15": ["%x"],
+    "label19": ["%x"],
+    "label23": ["%x"]
+
+  }
+}
+
+]

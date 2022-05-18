@@ -1,0 +1,47 @@
+{
+  "kind" : "Program",
+  "location" : [ 2, 3, 3, 6 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "AssignStmt",
+    "location" : [ 2, 3, 2, 7 ],
+    "targets" : [ {
+      "kind" : "Identifier",
+      "location" : [ 2, 3, 2, 3 ],
+      "name" : "y"
+    } ],
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 2, 7, 2, 7 ],
+      "value" : 2
+    }
+  }, {
+    "kind" : "AssignStmt",
+    "location" : [ 3, 1, 3, 5 ],
+    "targets" : [ {
+      "kind" : "Identifier",
+      "location" : [ 3, 1, 3, 1 ],
+      "name" : "z"
+    } ],
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 3, 5, 3, 5 ],
+      "value" : 3
+    }
+  } ],
+  "errors" : {
+    "errors" : [ {
+      "kind" : "CompilerError",
+      "location" : [ 2, 1, 2, 2 ],
+      "message" : "Parse error near token INDENT:   ",
+      "syntax" : true
+    }, {
+      "kind" : "CompilerError",
+      "location" : [ 3, 1, 3, 0 ],
+      "message" : "Parse error near token DEDENT: ",
+      "syntax" : true
+    } ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

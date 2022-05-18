@@ -1,0 +1,143 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "FuncDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "foo",
+      "location" : [ 1, 5, 1, 7 ]
+    },
+    "params" : [ {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 1, 9, 1, 9 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "str",
+        "location" : [ 1, 11, 1, 13 ]
+      },
+      "location" : [ 1, 9, 1, 13 ]
+    }, {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "y",
+        "location" : [ 1, 16, 1, 16 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "bool",
+        "location" : [ 1, 18, 1, 21 ]
+      },
+      "location" : [ 1, 16, 1, 21 ]
+    } ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "className" : "int",
+      "location" : [ 1, 27, 1, 29 ]
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "typeError" : "Expected type `int`; got `None`",
+      "value" : {
+        "kind" : "NoneLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "location" : [ 2, 12, 2, 15 ]
+      },
+      "location" : [ 2, 5, 2, 15 ]
+    } ],
+    "location" : [ 1, 1, 2, 15 ]
+  }, {
+    "kind" : "FuncDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "bar",
+      "location" : [ 4, 5, 4, 7 ]
+    },
+    "params" : [ ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "className" : "bool",
+      "location" : [ 4, 14, 4, 17 ]
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "typeError" : "Expected type `bool`; got type `int`",
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 5, 12, 5, 12 ]
+      },
+      "location" : [ 5, 5, 5, 12 ]
+    } ],
+    "location" : [ 4, 1, 5, 12 ]
+  }, {
+    "kind" : "FuncDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "baz",
+      "location" : [ 7, 5, 7, 7 ]
+    },
+    "params" : [ ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "className" : "str",
+      "location" : [ 7, 14, 7, 16 ]
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "typeError" : "Expected type `str`; got `None`",
+      "value" : null,
+      "location" : [ 8, 5, 8, 10 ]
+    } ],
+    "location" : [ 7, 1, 8, 10 ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "foo",
+        "location" : [ 10, 1, 10, 3 ]
+      },
+      "args" : [ {
+        "kind" : "StringLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "value" : "Hello",
+        "location" : [ 10, 5, 10, 11 ]
+      }, {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : false,
+        "location" : [ 10, 14, 10, 18 ]
+      } ],
+      "location" : [ 10, 1, 10, 19 ]
+    },
+    "location" : [ 10, 1, 10, 19 ]
+  } ],
+  "location" : [ 1, 1, 10, 19 ]
+}

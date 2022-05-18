@@ -1,0 +1,64 @@
+{
+  "kind" : "Program",
+  "location" : [ 2, 13, 6, 8 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 2, 13, 2, 13 ],
+    "expr" : {
+      "kind" : "Identifier",
+      "location" : [ 2, 13, 2, 13 ],
+      "name" : "a"
+    }
+  }, {
+    "kind" : "ReturnStmt",
+    "location" : [ 3, 5, 3, 12 ],
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "location" : [ 3, 12, 3, 12 ],
+      "value" : 1
+    }
+  }, {
+    "kind" : "ExprStmt",
+    "location" : [ 5, 1, 5, 8 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 5, 1, 5, 8 ],
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 5, 1, 5, 5 ],
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "IntegerLiteral",
+        "location" : [ 5, 7, 5, 7 ],
+        "value" : 1
+      } ]
+    }
+  } ],
+  "errors" : {
+    "errors" : [ {
+      "kind" : "CompilerError",
+      "location" : [ 1, 10, 1, 10 ],
+      "message" : "Parse error near token COMMA: ,",
+      "syntax" : true
+    }, {
+      "kind" : "CompilerError",
+      "location" : [ 2, 13, 2, 13 ],
+      "message" : "Parse error near token IDENTIFIER: a",
+      "syntax" : true
+    }, {
+      "kind" : "CompilerError",
+      "location" : [ 5, 1, 5, 0 ],
+      "message" : "Parse error near token DEDENT: ",
+      "syntax" : true
+    }, {
+      "kind" : "CompilerError",
+      "location" : [ 6, 9, 6, 9 ],
+      "message" : "Parse error near token TIMES: *",
+      "syntax" : true
+    } ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

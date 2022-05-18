@@ -1,0 +1,25 @@
+[{
+  "function": "gcd",
+  "live_in": {
+    "label_entry": ["%arg0","%arg1"],
+    "label8": ["%arg0"],
+    "label10": ["%arg0","%arg1"]
+
+  },
+  "live_out": {
+    "label_entry": ["%arg0","%arg1"]
+
+  }
+}
+
+,{
+  "function": "main",
+  "live_in": {
+
+  },
+  "live_out": {
+
+  }
+}
+
+]

@@ -1,0 +1,83 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 1, 13 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 1, 1, 1, 12 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 1, 1, 1, 12 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 1, 1, 1, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "BinaryExpr",
+        "location" : [ 1, 7, 1, 11 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "left" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 1, 7, 1, 9 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "left" : {
+            "kind" : "IntegerLiteral",
+            "location" : [ 1, 7, 1, 7 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "value" : 6
+          },
+          "operator" : "*",
+          "right" : {
+            "kind" : "IntegerLiteral",
+            "location" : [ 1, 9, 1, 9 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "value" : 9
+          }
+        },
+        "operator" : "*",
+        "right" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 1, 11, 1, 11 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 2
+        }
+      } ]
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

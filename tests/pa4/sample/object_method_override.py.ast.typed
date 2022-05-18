@@ -1,0 +1,441 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 19, 17 ],
+  "declarations" : [ {
+    "kind" : "ClassDef",
+    "location" : [ 1, 1, 7, 0 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 1, 7, 1, 7 ],
+      "name" : "A"
+    },
+    "superClass" : {
+      "kind" : "Identifier",
+      "location" : [ 1, 9, 1, 14 ],
+      "name" : "object"
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "location" : [ 2, 5, 2, 14 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 2, 5, 2, 9 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 2, 5, 2, 5 ],
+          "name" : "a"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 2, 7, 2, 9 ],
+          "className" : "int"
+        }
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 2, 13, 2, 14 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 42
+      }
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 4, 5, 5, 22 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 4, 9, 4, 11 ],
+        "name" : "foo"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 4, 13, 4, 20 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 4, 13, 4, 16 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 4, 18, 4, 20 ],
+          "className" : "A"
+        }
+      }, {
+        "kind" : "TypedVar",
+        "location" : [ 4, 23, 4, 35 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 4, 23, 4, 28 ],
+          "name" : "ignore"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 4, 30, 4, 35 ],
+          "className" : "object"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 4, 41, 4, 43 ],
+        "className" : "int"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "ReturnStmt",
+        "location" : [ 5, 9, 5, 21 ],
+        "value" : {
+          "kind" : "MemberExpr",
+          "location" : [ 5, 16, 5, 21 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "object" : {
+            "kind" : "Identifier",
+            "location" : [ 5, 16, 5, 19 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "A"
+            },
+            "name" : "self"
+          },
+          "member" : {
+            "kind" : "Identifier",
+            "location" : [ 5, 21, 5, 21 ],
+            "name" : "a"
+          }
+        }
+      } ]
+    } ]
+  }, {
+    "kind" : "ClassDef",
+    "location" : [ 7, 1, 19, 0 ],
+    "name" : {
+      "kind" : "Identifier",
+      "location" : [ 7, 7, 7, 7 ],
+      "name" : "B"
+    },
+    "superClass" : {
+      "kind" : "Identifier",
+      "location" : [ 7, 9, 7, 9 ],
+      "name" : "A"
+    },
+    "declarations" : [ {
+      "kind" : "VarDef",
+      "location" : [ 8, 5, 8, 17 ],
+      "var" : {
+        "kind" : "TypedVar",
+        "location" : [ 8, 5, 8, 10 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 8, 5, 8, 5 ],
+          "name" : "b"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 8, 7, 8, 10 ],
+          "className" : "bool"
+        }
+      },
+      "value" : {
+        "kind" : "BooleanLiteral",
+        "location" : [ 8, 14, 8, 17 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : true
+      }
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 10, 5, 11, 19 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 10, 9, 10, 16 ],
+        "name" : "__init__"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 10, 18, 10, 25 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 10, 18, 10, 21 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 10, 23, 10, 25 ],
+          "className" : "B"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 10, 27, 10, 27 ],
+        "className" : "<None>"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "ExprStmt",
+        "location" : [ 11, 9, 11, 18 ],
+        "expr" : {
+          "kind" : "CallExpr",
+          "location" : [ 11, 9, 11, 18 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          },
+          "function" : {
+            "kind" : "Identifier",
+            "location" : [ 11, 9, 11, 13 ],
+            "inferredType" : {
+              "kind" : "FuncType",
+              "parameters" : [ {
+                "kind" : "ClassValueType",
+                "className" : "object"
+              } ],
+              "returnType" : {
+                "kind" : "ClassValueType",
+                "className" : "<None>"
+              }
+            },
+            "name" : "print"
+          },
+          "args" : [ {
+            "kind" : "StringLiteral",
+            "location" : [ 11, 15, 11, 17 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "str"
+            },
+            "value" : "B"
+          } ]
+        }
+      } ]
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 13, 5, 14, 32 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 13, 9, 13, 11 ],
+        "name" : "bar"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 13, 13, 13, 20 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 13, 13, 13, 16 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 13, 18, 13, 20 ],
+          "className" : "B"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 13, 26, 13, 28 ],
+        "className" : "int"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "ReturnStmt",
+        "location" : [ 14, 9, 14, 31 ],
+        "value" : {
+          "kind" : "MethodCallExpr",
+          "location" : [ 14, 16, 14, 31 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "method" : {
+            "kind" : "MemberExpr",
+            "location" : [ 14, 16, 14, 23 ],
+            "inferredType" : {
+              "kind" : "FuncType",
+              "parameters" : [ {
+                "kind" : "ClassValueType",
+                "className" : "B"
+              }, {
+                "kind" : "ClassValueType",
+                "className" : "object"
+              } ],
+              "returnType" : {
+                "kind" : "ClassValueType",
+                "className" : "int"
+              }
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 14, 16, 14, 19 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "B"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 14, 21, 14, 23 ],
+              "name" : "foo"
+            }
+          },
+          "args" : [ {
+            "kind" : "MemberExpr",
+            "location" : [ 14, 25, 14, 30 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "bool"
+            },
+            "object" : {
+              "kind" : "Identifier",
+              "location" : [ 14, 25, 14, 28 ],
+              "inferredType" : {
+                "kind" : "ClassValueType",
+                "className" : "B"
+              },
+              "name" : "self"
+            },
+            "member" : {
+              "kind" : "Identifier",
+              "location" : [ 14, 30, 14, 30 ],
+              "name" : "b"
+            }
+          } ]
+        }
+      } ]
+    }, {
+      "kind" : "FuncDef",
+      "location" : [ 16, 5, 17, 17 ],
+      "name" : {
+        "kind" : "Identifier",
+        "location" : [ 16, 9, 16, 11 ],
+        "name" : "foo"
+      },
+      "params" : [ {
+        "kind" : "TypedVar",
+        "location" : [ 16, 13, 16, 20 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 16, 13, 16, 16 ],
+          "name" : "self"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 16, 18, 16, 20 ],
+          "className" : "B"
+        }
+      }, {
+        "kind" : "TypedVar",
+        "location" : [ 16, 23, 16, 35 ],
+        "identifier" : {
+          "kind" : "Identifier",
+          "location" : [ 16, 23, 16, 28 ],
+          "name" : "ignore"
+        },
+        "type" : {
+          "kind" : "ClassType",
+          "location" : [ 16, 30, 16, 35 ],
+          "className" : "object"
+        }
+      } ],
+      "returnType" : {
+        "kind" : "ClassType",
+        "location" : [ 16, 41, 16, 43 ],
+        "className" : "int"
+      },
+      "declarations" : [ ],
+      "statements" : [ {
+        "kind" : "ReturnStmt",
+        "location" : [ 17, 9, 17, 16 ],
+        "value" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 17, 16, 17, 16 ],
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "int"
+          },
+          "value" : 1
+        }
+      } ]
+    } ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 19, 1, 19, 16 ],
+    "expr" : {
+      "kind" : "CallExpr",
+      "location" : [ 19, 1, 19, 16 ],
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "<None>"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "location" : [ 19, 1, 19, 5 ],
+        "inferredType" : {
+          "kind" : "FuncType",
+          "parameters" : [ {
+            "kind" : "ClassValueType",
+            "className" : "object"
+          } ],
+          "returnType" : {
+            "kind" : "ClassValueType",
+            "className" : "<None>"
+          }
+        },
+        "name" : "print"
+      },
+      "args" : [ {
+        "kind" : "MethodCallExpr",
+        "location" : [ 19, 7, 19, 15 ],
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "method" : {
+          "kind" : "MemberExpr",
+          "location" : [ 19, 7, 19, 13 ],
+          "inferredType" : {
+            "kind" : "FuncType",
+            "parameters" : [ {
+              "kind" : "ClassValueType",
+              "className" : "B"
+            } ],
+            "returnType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            }
+          },
+          "object" : {
+            "kind" : "CallExpr",
+            "location" : [ 19, 7, 19, 9 ],
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "B"
+            },
+            "function" : {
+              "kind" : "Identifier",
+              "location" : [ 19, 7, 19, 7 ],
+              "name" : "B"
+            },
+            "args" : [ ]
+          },
+          "member" : {
+            "kind" : "Identifier",
+            "location" : [ 19, 11, 19, 13 ],
+            "name" : "bar"
+          }
+        },
+        "args" : [ ]
+      } ]
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Cannot re-define attribute: x",
+    "location" : [ 8, 5, 8, 5 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Cannot re-define attribute: foo",
+    "location" : [ 9, 5, 9, 7 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

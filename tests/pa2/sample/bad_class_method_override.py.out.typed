@@ -1,0 +1,17 @@
+{
+  "errors" : [ {
+    "kind" : "SemanticError",
+    "message" : "Method overridden with different type signature: bar",
+    "location" : [ 21, 9, 21, 11 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Method overridden with different type signature: baz",
+    "location" : [ 25, 9, 25, 11 ]
+  }, {
+    "kind" : "SemanticError",
+    "message" : "Method overridden with different type signature: qux",
+    "location" : [ 29, 9, 29, 11 ]
+  } ],
+  "kind" : "Errors",
+  "location" : [ 0, 0, 0, 0 ]
+}

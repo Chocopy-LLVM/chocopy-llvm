@@ -1,0 +1,247 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "FuncDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "foo",
+      "location" : [ 1, 5, 1, 7 ]
+    },
+    "params" : [ {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 1, 9, 1, 9 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "str",
+        "location" : [ 1, 11, 1, 13 ]
+      },
+      "location" : [ 1, 9, 1, 13 ]
+    }, {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "y",
+        "location" : [ 1, 16, 1, 16 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "bool",
+        "location" : [ 1, 18, 1, 21 ]
+      },
+      "location" : [ 1, 16, 1, 21 ]
+    } ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "className" : "int",
+      "location" : [ 1, 27, 1, 29 ]
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "value" : {
+        "kind" : "CallExpr",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "function" : {
+          "kind" : "Identifier",
+          "name" : "bar",
+          "location" : [ 2, 12, 2, 14 ]
+        },
+        "args" : [ ],
+        "location" : [ 2, 12, 2, 16 ]
+      },
+      "location" : [ 2, 5, 2, 16 ]
+    } ],
+    "location" : [ 1, 1, 2, 16 ]
+  }, {
+    "kind" : "FuncDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "bar",
+      "location" : [ 4, 5, 4, 7 ]
+    },
+    "params" : [ ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "className" : "int",
+      "location" : [ 4, 14, 4, 16 ]
+    },
+    "declarations" : [ ],
+    "statements" : [ {
+      "kind" : "ReturnStmt",
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 5, 12, 5, 12 ]
+      },
+      "location" : [ 5, 5, 5, 12 ]
+    } ],
+    "location" : [ 4, 1, 5, 12 ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "typeError" : "Expected 2 arguments; got 1",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "foo",
+        "location" : [ 8, 1, 8, 3 ]
+      },
+      "args" : [ {
+        "kind" : "StringLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "value" : "Hello",
+        "location" : [ 8, 5, 8, 11 ]
+      } ],
+      "location" : [ 8, 1, 8, 12 ]
+    },
+    "location" : [ 8, 1, 8, 12 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "typeError" : "Expected 2 arguments; got 3",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "foo",
+        "location" : [ 9, 1, 9, 3 ]
+      },
+      "args" : [ {
+        "kind" : "StringLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "value" : "Hello",
+        "location" : [ 9, 5, 9, 11 ]
+      }, {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : false,
+        "location" : [ 9, 14, 9, 18 ]
+      }, {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 3,
+        "location" : [ 9, 21, 9, 21 ]
+      } ],
+      "location" : [ 9, 1, 9, 22 ]
+    },
+    "location" : [ 9, 1, 9, 22 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "typeError" : "Expected type `bool`; got type `int` in parameter 1",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "foo",
+        "location" : [ 10, 1, 10, 3 ]
+      },
+      "args" : [ {
+        "kind" : "StringLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "value" : "Hello",
+        "location" : [ 10, 5, 10, 11 ]
+      }, {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 3,
+        "location" : [ 10, 14, 10, 14 ]
+      } ],
+      "location" : [ 10, 1, 10, 15 ]
+    },
+    "location" : [ 10, 1, 10, 15 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "typeError" : "Expected type `str`; got type `int` in parameter 0",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "foo",
+        "location" : [ 11, 1, 11, 3 ]
+      },
+      "args" : [ {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 11, 5, 11, 5 ]
+      }, {
+        "kind" : "StringLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "value" : "Hello",
+        "location" : [ 11, 8, 11, 14 ]
+      } ],
+      "location" : [ 11, 1, 11, 15 ]
+    },
+    "location" : [ 11, 1, 11, 15 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "typeError" : "Not a function or class: baz",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "baz",
+        "location" : [ 12, 1, 12, 3 ]
+      },
+      "args" : [ ],
+      "location" : [ 12, 1, 12, 5 ]
+    },
+    "location" : [ 12, 1, 12, 5 ]
+  } ],
+  "location" : [ 1, 1, 12, 5 ]
+}

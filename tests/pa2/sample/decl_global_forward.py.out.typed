@@ -1,0 +1,127 @@
+{
+  "kind" : "Program",
+  "declarations" : [ {
+    "kind" : "FuncDef",
+    "name" : {
+      "kind" : "Identifier",
+      "name" : "set_x",
+      "location" : [ 1, 5, 1, 9 ]
+    },
+    "params" : [ ],
+    "returnType" : {
+      "kind" : "ClassType",
+      "className" : "int",
+      "location" : [ 1, 16, 1, 18 ]
+    },
+    "declarations" : [ {
+      "kind" : "GlobalDecl",
+      "variable" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 2, 12, 2, 12 ]
+      },
+      "location" : [ 2, 5, 2, 12 ]
+    } ],
+    "statements" : [ {
+      "kind" : "VarAssignStmt",
+      "var" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 3, 5, 3, 5 ]
+      },
+      "value" : {
+        "kind" : "IntegerLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "value" : 1,
+        "location" : [ 3, 9, 3, 9 ]
+      },
+      "location" : [ 3, 5, 3, 9 ]
+    }, {
+      "kind" : "ReturnStmt",
+      "value" : {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "x",
+        "location" : [ 4, 12, 4, 12 ]
+      },
+      "location" : [ 4, 5, 4, 12 ]
+    } ],
+    "location" : [ 1, 1, 4, 12 ]
+  }, {
+    "kind" : "VarDef",
+    "var" : {
+      "kind" : "TypedVar",
+      "identifier" : {
+        "kind" : "Identifier",
+        "name" : "x",
+        "location" : [ 6, 1, 6, 1 ]
+      },
+      "type" : {
+        "kind" : "ClassType",
+        "className" : "int",
+        "location" : [ 6, 3, 6, 5 ]
+      },
+      "location" : [ 6, 1, 6, 5 ]
+    },
+    "value" : {
+      "kind" : "IntegerLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "value" : 0,
+      "location" : [ 6, 9, 6, 9 ]
+    },
+    "location" : [ 6, 1, 6, 9 ]
+  } ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "set_x",
+        "location" : [ 8, 1, 8, 5 ]
+      },
+      "args" : [ ],
+      "location" : [ 8, 1, 8, 7 ]
+    },
+    "location" : [ 8, 1, 8, 7 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "CallExpr",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "object"
+      },
+      "function" : {
+        "kind" : "Identifier",
+        "name" : "print",
+        "location" : [ 9, 1, 9, 5 ]
+      },
+      "args" : [ {
+        "kind" : "Identifier",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "int"
+        },
+        "name" : "x",
+        "location" : [ 9, 7, 9, 7 ]
+      } ],
+      "location" : [ 9, 1, 9, 8 ]
+    },
+    "location" : [ 9, 1, 9, 8 ]
+  } ],
+  "location" : [ 1, 1, 9, 8 ]
+}

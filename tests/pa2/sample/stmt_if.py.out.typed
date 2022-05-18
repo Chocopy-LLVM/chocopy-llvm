@@ -1,0 +1,75 @@
+{
+  "kind" : "Program",
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "IfStmt",
+    "condition" : {
+      "kind" : "BooleanLiteral",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "bool"
+      },
+      "value" : false,
+      "location" : [ 1, 4, 1, 8 ]
+    },
+    "thenBody" : [ {
+      "kind" : "PassStmt",
+      "location" : [ 2, 5, 2, 8 ]
+    } ],
+    "elseBody" : [ {
+      "kind" : "IfStmt",
+      "condition" : {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : true,
+        "location" : [ 3, 6, 3, 9 ]
+      },
+      "thenBody" : [ {
+        "kind" : "IfStmt",
+        "condition" : {
+          "kind" : "BinaryExpr",
+          "inferredType" : {
+            "kind" : "ClassValueType",
+            "className" : "bool"
+          },
+          "left" : {
+            "kind" : "IntegerLiteral",
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "value" : 1,
+            "location" : [ 4, 8, 4, 8 ]
+          },
+          "operator" : "==",
+          "right" : {
+            "kind" : "IntegerLiteral",
+            "inferredType" : {
+              "kind" : "ClassValueType",
+              "className" : "int"
+            },
+            "value" : 1,
+            "location" : [ 4, 13, 4, 13 ]
+          },
+          "location" : [ 4, 8, 4, 13 ]
+        },
+        "thenBody" : [ {
+          "kind" : "PassStmt",
+          "location" : [ 5, 9, 5, 12 ]
+        } ],
+        "elseBody" : [ ],
+        "location" : [ 4, 5, 5, 12 ]
+      } ],
+      "elseBody" : [ {
+        "kind" : "PassStmt",
+        "location" : [ 7, 5, 7, 8 ]
+      } ],
+      "location" : [ 3, 1, 7, 8 ]
+    } ],
+    "location" : [ 1, 1, 7, 8 ]
+  } ],
+  "location" : [ 1, 1, 7, 8 ]
+}

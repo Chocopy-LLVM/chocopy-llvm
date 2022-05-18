@@ -1,0 +1,67 @@
+{
+  "kind" : "Program",
+  "location" : [ 1, 1, 1, 34 ],
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "location" : [ 1, 1, 1, 33 ],
+    "expr" : {
+      "kind" : "IfExpr",
+      "location" : [ 1, 1, 1, 33 ],
+      "condition" : {
+        "kind" : "BinaryExpr",
+        "location" : [ 1, 6, 1, 10 ],
+        "left" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 1, 6, 1, 6 ],
+          "value" : 1
+        },
+        "operator" : ">",
+        "right" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 1, 10, 1, 10 ],
+          "value" : 2
+        }
+      },
+      "thenExpr" : {
+        "kind" : "IntegerLiteral",
+        "location" : [ 1, 1, 1, 1 ],
+        "value" : 3
+      },
+      "elseExpr" : {
+        "kind" : "IfExpr",
+        "location" : [ 1, 17, 1, 33 ],
+        "condition" : {
+          "kind" : "BinaryExpr",
+          "location" : [ 1, 22, 1, 26 ],
+          "left" : {
+            "kind" : "IntegerLiteral",
+            "location" : [ 1, 22, 1, 22 ],
+            "value" : 1
+          },
+          "operator" : "<",
+          "right" : {
+            "kind" : "IntegerLiteral",
+            "location" : [ 1, 26, 1, 26 ],
+            "value" : 0
+          }
+        },
+        "thenExpr" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 1, 17, 1, 17 ],
+          "value" : 4
+        },
+        "elseExpr" : {
+          "kind" : "IntegerLiteral",
+          "location" : [ 1, 33, 1, 33 ],
+          "value" : 5
+        }
+      }
+    }
+  } ],
+  "errors" : {
+    "errors" : [ ],
+    "kind" : "Errors",
+    "location" : [ 0, 0, 0, 0 ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "kind" : "Program",
+  "declarations" : [ ],
+  "statements" : [ {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "UnaryExpr",
+      "typeError" : "Cannot apply operator `not` on type `str`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "bool"
+      },
+      "operator" : "not",
+      "operand" : {
+        "kind" : "StringLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "str"
+        },
+        "value" : "Bad",
+        "location" : [ 1, 5, 1, 9 ]
+      },
+      "location" : [ 1, 1, 1, 9 ]
+    },
+    "location" : [ 1, 1, 1, 9 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "UnaryExpr",
+      "typeError" : "Cannot apply operator `-` on type `bool`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "operator" : "-",
+      "operand" : {
+        "kind" : "BooleanLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "bool"
+        },
+        "value" : true,
+        "location" : [ 2, 2, 2, 5 ]
+      },
+      "location" : [ 2, 1, 2, 5 ]
+    },
+    "location" : [ 2, 1, 2, 5 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "UnaryExpr",
+      "typeError" : "Cannot apply operator `-` on type `object`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "int"
+      },
+      "operator" : "-",
+      "operand" : {
+        "kind" : "NoneLiteral",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "location" : [ 3, 2, 3, 5 ]
+      },
+      "location" : [ 3, 1, 3, 5 ]
+    },
+    "location" : [ 3, 1, 3, 5 ]
+  }, {
+    "kind" : "ExprStmt",
+    "expr" : {
+      "kind" : "UnaryExpr",
+      "typeError" : "Cannot apply operator `not` on type `object`",
+      "inferredType" : {
+        "kind" : "ClassValueType",
+        "className" : "bool"
+      },
+      "operator" : "not",
+      "operand" : {
+        "kind" : "ListExpr",
+        "inferredType" : {
+          "kind" : "ClassValueType",
+          "className" : "object"
+        },
+        "elements" : [ ],
+        "location" : [ 4, 5, 4, 6 ]
+      },
+      "location" : [ 4, 1, 4, 6 ]
+    },
+    "location" : [ 4, 1, 4, 6 ]
+  } ],
+  "location" : [ 1, 1, 4, 6 ]
+}
