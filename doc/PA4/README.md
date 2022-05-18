@@ -143,7 +143,7 @@ public:
 
 以下是玄铁C910给出的可用寄存器，大部分为状态寄存器。
 
-![image-20220518061747427](/Users/yiweiyang/Library/Application Support/typora-user-images/image-20220518061747427.png)
+![xuantie](./xuantie.png)
 
 对于CISC机器来说，寻址有以下。注意前四种为基础寻址，后四种为scale寻址
 
@@ -168,9 +168,7 @@ $$ \begin{array}{|l|l|l|l|}\hline 类型 & AT\&T 语法格式 & 操作数值 & �
 
 #### 0.3.3 寄存器分配
 
-Interface Graph图中的每个节点代表某个变量的活跃期或生存期（Live range）。活跃期定义是从变量第一次被定义（赋值）开始，到它下一次被赋值前的最后一次被使用为止。两个节点之间的边表示这两个变量活跃期因为生命期（lifetime）重叠导致互相冲突或干涉。一般说来，如果两个变量在函数的某一点是同时活跃（live）的，它们就相互冲突，不能占有同一个寄存器。本项目使用[图着色算法](https://web.eecs.umich.edu/~mahlke/courses/583f12/reading/chaitin82.pdf)，也可采用[线性扫描算法](https://www2.seas.gwu.edu/~hchoi/teaching/cs160d/linearscan.pdf)，以及偏向CISC指令集的[Second chance binpacking算法](https://www.zhihu.com/question/56005792/answer/147558407)。SSA形式带来的优点就是能有效的降低单个interval的长度，这在CISC指令集计算机中会非常有效。同时，充分利用SSA形式的IR的稀疏特性，避免迭代式的liveness analysis。有效的降低时间复杂度。
-
-http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.162.2590&rep=rep1&type=pdf
+Interface Graph图中的每个节点代表某个变量的活跃期或生存期（Live range）。活跃期定义是从变量第一次被定义（赋值）开始，到它下一次被赋值前的最后一次被使用为止。两个节点之间的边表示这两个变量活跃期因为生命期（lifetime）重叠导致互相冲突或干涉。一般说来，如果两个变量在函数的某一点是同时活跃（live）的，它们就相互冲突，不能占有同一个寄存器。本项目使用[图着色算法](https://web.eecs.umich.edu/~mahlke/courses/583f12/reading/chaitin82.pdf)，也可采用[线性扫描算法](https://www2.seas.gwu.edu/~hchoi/teaching/cs160d/linearscan.pdf)，以及偏向CISC指令集的[Second chance binpacking算法](https://www.zhihu.com/question/56005792/answer/147558407)。[SSA形式](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.162.2590&rep=rep1&type=pdf)带来的优点就是能有效的降低单个interval的长度，这在CISC指令集计算机中会非常有效。同时，充分利用SSA形式的IR的稀疏特性，避免迭代式的liveness analysis。有效的降低时间复杂度。
 
 #### 0.3.4 矢量拓展
 

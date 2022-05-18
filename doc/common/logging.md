@@ -55,5 +55,5 @@ user@user:${ProjectDir}/build$ LOGV=0 ./test_logging > log
 
 ## 已知Bug
 
-1. 在 M1 上用 gcc-11 编译的 fmt::format 库中使用双重指针会 Seg Fault。
+1. 在 M1 上用 gcc-11 编译的 fmt::format 库中使用双重指针会 Seg Fault。[solved by `-D_GLIBCXX_USE_CXX11_ABI=0`]
 2. 在 Windows Powershell 中可能无法现实颜色，可以去除颜色标识或尝试用 `$env:TERM=xterm`。
