@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChocoPy Web IDE</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/sakura.css" />
+    <script
+      src="js/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .example { 
+          border: 1px solid black;
+          width: 50em;
+          height: 20em;
+        }
+
+        .compile-error-marker {
+            position: absolute;
+            background-color: rgba(116, 0, 0, 0.3);
+        }
+
+        .compile-button {
+            float: right;
+            background-color: rgba(143, 7, 7, 0.89);
+        }
+    </style>
+  </head>
+  <body>
+
+<h1>CS131 PA: Test suite</h1>
+
+<select id="p1">
+    <option value="r" selected>Reference Parser</option>
+</select>
+
+<button id='parseButton' class='compile-button'>Parse Syntax</button>
+
+<br />
+
+<select id="p2">
+    <option value="r" selected>Reference Semantic Analysis</option>
+</select>
+
+<button id='staticCheckButton' class='compile-button'>Run Static Checks</button>
+
+<br />
+
+<select id="p3">
+    <option value="r" selected>Reference Code Generator</option>
+</select>
+
+<button id='compileButton' class='compile-button'>Compile to RISC-V</button>
+
+
+<pre class="example"></pre>
+
+<script>
+    var compileService = "/compile";
+    var Range = require('ace/range').Range;
+
+    function makeEditor(example) {
+        var parseButton = $("#parseButton");
+        var staticCheckButton = $("#staticCheckButton");
+        var compileButton = $("#compileButton");
+        var editor = ace.edit(example, {
+            theme: "ace/theme/ambiance",
+            mode: "ace/mode/python",
+              fontSize: "1em",
+              wrap: true
+              
+        });
+
+
+
+        var errorMarkers = []
+
+        function clearMarkers() {
+            editor.session.clearAnnotations();
+            for (var marker of errorMarkers) {
+                editor.session.removeMarker(marker);
+            }
+            errorMarkers.length = 0;
+        }
+
+
+        editor.on('change', () => {
+            clearMarkers();
+        });
+
+        $(".compile-button").click((e) => {
+            var button = e.target.id; 
+            console.assert(button == 'parseButton' || 
+                button == 'staticCheckButton' ||
+                button == 'compileButton');
+
+            var parse = true; // always run stage 1
+            var check = button != 'parseButton'; // run unless only stage 1 requested
+            var codegen = button == 'compileButton'; // run only when stage 3 requested
+
+            clearMarkers();
+            var code = editor.getValue();
+            var p1 = parse ? $("#p1").val() : "";
+            var p2 = check ? $("#p2").val() : "";
+            var p3 = codegen ? $("#p3").val() : "";
+            if (codegen) {
+                var resultWindow = window.open('venus.html?v=0.2.4' , '_blank');
+                if (resultWindow == null) {
+                    console.error("Could not open new window...");
+                    return; // Cannot show result
+                }
+                resultWindow.onload = () => resultWindow.codeMirror.setValue("# Compiling... Please be patient. This can take a few seconds.\n" +
+                    "# (The first compilation takes the longest)");
+            }
+            
+            $.ajax({
+                url: compileService, 
+                type: "POST",
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                data: JSON.stringify({input: code, passes:p1+p2+p3}), 
+                success: function(result) {
+                    if (result.asm) {
+                        var asm = result.asm;
+                        console.log(resultWindow.codeMirror);
+                            resultWindow.codeMirror.setValue("# Compiled ChocoPy Program to RISC-V assembly\n" +
+                            "# Execute (run or step-through) using the 'Simulator' tab above \n" +
+                            "# Output will appear on the bottom-left of the simulator\n" + asm);
+                    } else if (result.errors && result.errors.errors && result.errors.errors.length > 0) {
+                        if (codegen) { resultWindow.close(); }
+                        var annotations = []
+
+                        for (var error of result.errors.errors) { 
+                            var loc = error.location;
+                            var msg = error.message;
+                            var startLine = loc[0] - 1;
+                            var startCol = loc[1] - 1;
+                            var endLine = loc[2] - 1;
+                            var endCol = loc[3] - 1;
+                            var range = new Range(startLine, startCol, endLine, endCol+1);
+                            errorMarkers.push(editor.session.addMarker(range, "compile-error-marker", "text", true));
+
+                            annotations.push({
+                                row: Math.min(Math.max(0, startLine), editor.session.getLength()-1),
+                                text: msg,
+                                type: "error"
+                            });
+                        }
+
+                        var register = " <span style='color: red;'>"+result.errors.message+"</span> ";
+                        alert(JSON.stringify(result.errors))
+
+                        editor.session.setAnnotations(annotations);
+                    } else if (!codegen && result.kind && result.kind == "Program") {
+                        if (check) {
+                            // alert("This program is semantically valid!");
+                            alert(JSON.stringify(result));
+                        } else {
+                            // alert("This program parses!");
+                            alert(JSON.stringify(result));
+                            // console.log(result)
+                        }
+
+                    } else {
+                        alert("Unknown error: Should not reach here :-\\");
+                    }
+                }, 
+                error: (xhr) => {
+                    var w = window;
+                    if (resultWindow) { w = resultWindow; }
+                    w.alert("Request to compile service failed :-(\n\n" + 
+                        (xhr.responseText || "Unknown error"));
+                    if (resultWindow) { resultWindow.close(); }
+                }
+            });
+        });
+
+    }
+
+    $(".example").each((i, e) => makeEditor(e))
+</script>
+
+  </body>
+</html>

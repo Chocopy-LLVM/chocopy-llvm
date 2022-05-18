@@ -1,0 +1,257 @@
+echo ".option norelax" >chocopy_stdlib.S
+echo ".globl const_6" >>chocopy_stdlib.S
+echo "const_6:" >>chocopy_stdlib.S
+echo ".word 3                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo ".word 9                                  # Object size" >>chocopy_stdlib.S
+echo ".word \$str\$dispatchTable                 # Pointer to dispatch table" >>chocopy_stdlib.S
+echo ".word 17                                 # Constant value of attribute: __len__" >>chocopy_stdlib.S
+echo ".string \"Operation on None\"              # Constant value of attribute: __str__" >>chocopy_stdlib.S
+echo ".align 2" >>chocopy_stdlib.S
+echo ".globl const_0" >>chocopy_stdlib.S
+echo "const_0:" >>chocopy_stdlib.S
+echo "  .word 2                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 4                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$bool\$dispatchTable                # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 0                                  # Constant value of attribute: __bool__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+echo ".globl const_1" >>chocopy_stdlib.S
+echo "const_1:" >>chocopy_stdlib.S
+echo "  .word 2                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 4                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$bool\$dispatchTable                # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 1                                  # Constant value of attribute: __bool__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+echo ".globl const_7" >>chocopy_stdlib.S
+echo "const_7:" >>chocopy_stdlib.S
+echo "  .word 3                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 9                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$str\$dispatchTable                 # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 16                                 # Constant value of attribute: __len__" >>chocopy_stdlib.S
+echo "  .string \"Division by zero\"               # Constant value of attribute: __str__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+echo ".globl const_5" >>chocopy_stdlib.S
+echo "const_5:" >>chocopy_stdlib.S
+echo "  .word 3                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 8                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$str\$dispatchTable                 # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 13                                 # Constant value of attribute: __len__" >>chocopy_stdlib.S
+echo "  .string \"Out of memory\"                  # Constant value of attribute: __str__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+echo ".globl const_8" >>chocopy_stdlib.S
+echo "const_8:" >>chocopy_stdlib.S
+echo "  .word 3                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 9                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$str\$dispatchTable                 # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 19                                 # Constant value of attribute: __len__" >>chocopy_stdlib.S
+echo "  .string \"Index out of bounds\"            # Constant value of attribute: __str__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+echo ".globl const_2" >>chocopy_stdlib.S
+echo "const_2:" >>chocopy_stdlib.S
+echo "  .word 3                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 9                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$str\$dispatchTable                 # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 16                                 # Constant value of attribute: __len__" >>chocopy_stdlib.S
+echo "  .string \"Invalid argument\"               # Constant value of attribute: __str__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+echo ".globl const_4" >>chocopy_stdlib.S
+echo "const_4:" >>chocopy_stdlib.S
+echo "  .word 3                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 6                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$str\$dispatchTable                 # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 5                                  # Constant value of attribute: __len__" >>chocopy_stdlib.S
+echo "  .string \"False\"                          # Constant value of attribute: __str__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+echo ".globl const_3" >>chocopy_stdlib.S
+echo "const_3:" >>chocopy_stdlib.S
+echo "  .word 3                                  # Type tag for class: str" >>chocopy_stdlib.S
+echo "  .word 6                                  # Object size" >>chocopy_stdlib.S
+echo "  .word \$str\$dispatchTable                 # Pointer to dispatch table" >>chocopy_stdlib.S
+echo "  .word 4                                  # Constant value of attribute: __len__" >>chocopy_stdlib.S
+echo "  .string \"True\"                           # Constant value of attribute: __str__" >>chocopy_stdlib.S
+echo "  .align 2" >>chocopy_stdlib.S
+
+for file in $(ls . | grep '\.s'); do
+    if [[ $file == "heap.init.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "heap.init_linux.s" ]]; then
+        if [[ $1 = linux ]]; then
+            echo '.globl heap.init' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'heap.init:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "concat.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "concat_linux.s" ]]; then
+        if [[ $1 = linux ]]; then
+            echo '.globl concat' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'concat:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "print_7.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "print_7_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl print_7' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'print_7:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "alloc2.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "alloc2_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl alloc2' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'alloc2:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "strcat.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "strcat_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl strcat' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'strcat:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "streql.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "streql_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl streql' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'streql:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "strneql.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "strneql_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl strneql' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'strneql:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "print_11.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "print_11_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl print_11' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'print_11:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "abort.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "abort_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl abort' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'abort:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "\$input.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "\$input_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl $input' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo '$input:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "conslist.s" ]]; then
+        if [[ ! $1 = "linux" ]]; then
+            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    elif [[ $file == "conslist_linux.s" ]]; then
+        if [[ $1 = "linux" ]]; then
+            echo '.globl conslist' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            echo 'conslist:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+            cat $file | while read line; do
+                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+            done
+        fi
+    else
+        echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+        echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
+        cat $file | while read line; do
+            echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
+        done
+    fi
+done
