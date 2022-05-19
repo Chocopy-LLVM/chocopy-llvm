@@ -30,46 +30,46 @@ jobs:
     - name: Build-PA1
       if: always()
       # Build your program with the given configuration
-      run: make -C build cjson_formatter && make -C build parser
+      run: make -C ${{github.workspace}}/build cjson_formatter && make -C ${{github.workspace}}/build parser
 
     - name: Test-PA1
       if: always()
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 1'
+      run: bash -c 'cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 1'
 
     - name: Build-PA2
       if: always()
       # Build your program with the given configuration
-      run: make -C build cjson_formatter && make -C build semantic
+      run: make -C ${{github.workspace}}/build cjson_formatter && make -C ${{github.workspace}}/build semantic
       
     - name: Test-PA2
       if: always()
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 2'
+      run: bash -c 'cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 2'
 
     - name: Build-PA3
       if: always()
       # Build your program with the given configuration
-      run: make -C build ir-optimizer
+      run: make -C ${{github.workspace}}/build ir-optimizer
       
     - name: Test-PA3
       if: always()
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 3'
+      run: bash -c 'cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 3'
   
     - name: Build-PA4
       if: always()
       # Build your program with the given configuration
-      run: make -C build cgen
+      run: make -C ${{github.workspace}}/build cgen
       
     - name: Test-PA4
       if: always()
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 4'
+      run: bash -c 'cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 4'
     
     
     
