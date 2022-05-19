@@ -31,53 +31,53 @@ jobs:
       uses: docker://yangyw12345/cs131-grader
       # Build your program with the given configuration
       with:
-         args: cd ${{github.workspace}}/build && make cjson_formatter && make parser
+         args: make -C build cjson_formatter && make -C build parser
 
     - name: Test-PA1
       uses: docker://yangyw12345/cs131-grader
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       with:
-         args: cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 1
+         args: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 1'
 
     - name: Build-PA2
       uses: docker://yangyw12345/cs131-grader
       # Build your program with the given configuration
       with:
-         args: cd ${{github.workspace}}/build && make cjson_formatter && make semantic
+         args: make -C build cjson_formatter && make -C build semantic
       
     - name: Test-PA2
       uses: docker://yangyw12345/cs131-grader
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       with:
-         args: cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 2
+         args: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 2'
 
     - name: Build-PA3
       uses: docker://yangyw12345/cs131-grader
       # Build your program with the given configuration
       with:
-         args: cd ${{github.workspace}}/build && make ir-optimizer
+         args: make -C build ir-optimizer
       
     - name: Test-PA3
       uses: docker://yangyw12345/cs131-grader
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       with:
-         args: cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 3
+         args: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 3'
   
     - name: Build-PA4
       uses: docker://yangyw12345/cs131-grader
       # Build your program with the given configuration
       with:
-         args: cd ${{github.workspace}}/build && make cgen
+         args: make -C build cgen
       
     - name: Test-PA4
       uses: docker://yangyw12345/cs131-grader
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       with:
-         args: cd ${{github.workspace}}/build && python /root/chocopy_test/duipai.py --pa 4
+         args: bash -c 'cd build && python /root/chocopy_test/duipai.py --pa 4'
     
     
     
