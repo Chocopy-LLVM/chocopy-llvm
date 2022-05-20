@@ -64,9 +64,13 @@ Hilfinger也做出了很大贡献。你可以在 [这里](https://chocopy.org/ch
 
 5, String Literal
 
-$$\begin{array}{ll}\text { Literal } & \text { Value } \\ \text { "Hello" } & \text { Hello } \\ \text { "He}\backslash\text{"
-ll}\backslash\text{"o" } & \text { He"ll"o } \\ \text { "He}\backslash\backslash\text{"llo" } & \text { He}\backslash\text{"llo } \\ \text
-{ "Hell}{\backslash}\text{o" } & \text { (error: "\\o" not recognized) }\end{array}$$
+|Literal |Value |
+|-|-|
+| "Hello" |Hello |
+| "He\" ll\"o" |He"ll"o |
+| "He\\"llo" |He\"llo |
+| "Hell\o" |(error: "o" not recognized) |
+
 
 - 注：`[`,  `]` 是分开的token。`[1]`中间不得有空格。
     - `a[1]`应被识别为四个token: `a`, `[`, `1`, `]`

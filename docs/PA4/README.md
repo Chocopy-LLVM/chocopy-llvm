@@ -147,7 +147,21 @@ public:
 
 对于CISC机器来说，寻址有以下。注意前四种为基础寻址，后四种为scale寻址
 
-$$ \begin{array}{|l|l|l|l|}\hline 类型 & AT\&T 语法格式 & 操作数值 & 名称 \\\hline 立即数 & \$ \operatorname{Imm} & \operatorname{Imm} & 立即数寻址 \\\hline 寄存器 & E_{a} & R\left[E_{a}\right] & 寄存器寻址 \\\hline 存储器 & \operatorname{Imm} & M[\operatorname{Imm}] & 绝对寻址 \\\hline 存储器 & \left(E_{a}\right) & M\left[R\left[E_{a}\right]\right] & 间接寻址 \\\hline 存储器 & \operatorname{Imm}\left(E_{b}\right) & M\left[\operatorname{Imm}+R\left[E_{b}\right]\right] & (基址+偏移量) 寻址 \\\hline 存储器 & \left(E_{b}, E_{i}\right) & M\left[R\left[E_{b}\right]+R\left[E_{i}\right]\right] & 变址寻址 \\\hline 存储器 & \operatorname{Imm}\left(E_{b}, E_{i}\right) & M\left[\operatorname{Imm}+R\left[E_{b}\right]+R\left[E_{i}\right]\right] & 变址寻址 \\\hline 存储器 & \left(, E_{i}, s\right) & M\left[R\left[E_{i}\right] * s\right] & 比例变址寻址 \\\hline 存储器 & \operatorname{Imm}\left(, E_{i}, s\right) & M\left[\operatorname{Imm}+R\left[E_{i}\right] * s\right] & 比例变址寻址 \\\hline 存储器 & \left(E_{b}, E_{i}, s\right) & M\left[R\left[E_{b}\right]+R\left[E_{i}\right] * s\right] & 比例变址寻址 \\\hline 存储器 & \operatorname{Imm}\left(E_{b}, E_{i}, s\right) & M\left[\operatorname{Imm}+R\left[E_{b}\right]+R\left[E_{i}\right] * s\right] & 比例变址寻址 \\\hline\end{array}$$
+| 类型   | AT&T语法格式 | 操作数值 | 名称 |
+| ------ | ------------ | -------- | ---- |
+|  立即数| \$ $\operatorname{Imm}$ | $\operatorname{Imm}$ | 立即数寻址 |
+ |立即数 | \$ $\operatorname{Imm}$ | $\operatorname{Imm}$ | 立即数寻址 |
+ |寄存器 | $E_{a}$ | $R\left[E_{a}\right]$ | 寄存器寻址 |
+ |存储器 | $\operatorname{Imm}$ |$M[\operatorname{Imm}]$ | 绝对寻址 |
+ |存储器 | $\left(E_{a}\right)$ | $M\left[R\left[E_{a}\right]\right]$ | 间接寻址 |
+ |存储器 |$\operatorname{Imm}\left(E_{b}\right)$ | $M\left[\operatorname{Imm}+R\left[E_{b}\right]\right]$ | (基址+偏移量) 寻址 |
+ |存储器 | $\left(E_{b}, E_{i}\right)$ | $M\left[R\left[E_{b}\right]+R\left[E_{i}\right]\right]$ | 变址寻址 |
+ |存储器 | $\operatorname{Imm}\left(E_{b}, E_{i}\right)$ | $M\left[\operatorname{Imm}+R\left[E_{b}\right]+R\left[E_{i}\right]\right]$ | 变址寻址 |
+ |存储器 | $\left(, E_{i}, s\right)$ | $M\left[R\left[E_{i}\right] * s\right]$ | 比例变址寻址 |
+ |存储器 | $\operatorname{Imm}\left(, E_{i}, s\right)$ | $M\left[\operatorname{Imm}+R\left[E_{i}\right] * s\right]$ | 比例变址寻址 |
+ |存储器 | $\left(E_{b}, E_{i}, s\right)$ | $M\left[R\left[E_{b}\right]+R\left[E_{i}\right] * s\right]$ | 比例变址寻址 |
+ |存储器 | $\operatorname{Imm}\left(E_{b}, E_{i}, s\right)$ | $M\left[\operatorname{Imm}+R\left[E_{b}\right]+R\left[E_{i}\right] * s\right]$ | 比例变址寻址 |
+
 
 对于riscv来说只有前四种寻址。分别对应addi a0, a0, imm/add a0,a0,a1/j a0/[jal && auipc+jalr](https://stackoverflow.com/questions/59150608/offset-address-for-jal-and-jalr-instrctions-in-risc-v)
 
