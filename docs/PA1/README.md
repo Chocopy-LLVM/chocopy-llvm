@@ -64,12 +64,12 @@ to find the definition of this language. Berkeley provides documentation in java
 
 5, String Literal
 
-|Literal |Value |
-|-|-|
-| "Hello" |Hello |
-| "He\" ll\"o" |He"ll"o |
-| "He\\"llo" |He\"llo |
-| "Hell\o" |(error: "o" not recognized) |
+| Literal      | Value                       |
+| ------------ | --------------------------- |
+| "Hello"      | Hello                       |
+| "He\" ll\"o" | He"ll"o                     |
+| "He\\"llo"   | He\"llo                     |
+| "Hell\o"     | (error: "o" not recognized) |
 
 - Note: `[`, `]` are separate tokens. `[1]` must not have spaces in between.
     - `a[1]` should be recognized as four tokens: `a`, `[`, `1`, `]`

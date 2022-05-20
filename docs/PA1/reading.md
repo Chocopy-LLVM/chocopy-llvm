@@ -1,141 +1,141 @@
-# 拓展阅读
+# Extended Readings
 
-这部分内容是与实验 2 有关的拓展阅读，供学有余力的同学扩展视野，不作为实验或课程要求。
+This section is an extended reading related to Experiment 2 for those who have the ability to expand their horizons and is not required as a lab or course requirement.
 
-## 不同的生成器
+## Different generators
 
-Bison 并非唯一的解析器生成器，甚至不是最好用的。我们推荐同学们进一步了解其他生成器，以备不时之需。
+Bison is not the only parser generator, and it is not even the best one to use. We recommend that students learn more about other generators, just in case.
 
-可以从以下几个角度来研究：
+There are several perspectives that can be examined.
 
-1. 支持怎样的文法？
-2. 目标语言是什么？
-3. 是如何实现的？
-4. 支持怎样的 lexer？
-5. 效率如何？
+1. what kind of grammar is supported?
+2. what is the target language?
+3. how is it implemented?
+4. what kind of lexer is supported?
+5. what is the efficiency?
 
-等等。其实 Wikipedia 上就有一个[对比页面](https://en.wikipedia.org/wiki/Comparison_of_parser_generators)。
+And so on. In fact, there is a [comparison page](https://en.wikipedia.org/wiki/Comparison_of_parser_generators) on Wikipedia.
 
-## 手写解析器
+## Handwritten parsers
 
-尽管解析器生成器非常好用：只要把文法倒进去，它就可以自动生成大量代码。但是有以下几个弊端：
+Although the parser generator works very well: just pour in the grammar and it will automatically generate a lot of code. But there are several drawbacks.
 
-1. 生成的是解析树而不是抽象语法树。这需要之后较多的人工工作来进行转换。
-2. 报错和错误恢复可能比较复杂。
-3. 如果生成器缺乏必需功能或者 bug，会造成很大的困扰。
+1. a parse tree is generated instead of an abstract syntax tree. This requires more manual work for conversion afterwards. 2.
+2. error reporting and error recovery can be complicated. 3.
+3. if the generator lacks essential features or bugs, it can cause a lot of trouble.
 
-在真实世界中，人们常常为了避免上述弊端而手写解析器。实践中，为了便于报错等，常常选择**自顶向下** (top-down) 解析器，或者是**递归下降** (recursive descent)，或者是 LL。
+In the real world, people often write parsers by hand to avoid these drawbacks. In practice, a **top-down** parser, or a **recursive descent**, or an LL is often chosen for ease of error reporting, etc.
 
-过去人们常常认为 top-down 解析无法处理左递归。实际上，存在一种名为 Pratt parser
-的技术可以解决这个问题。它是递归下降的一个简单变体，很容易理解，但又相当强大，非常适合处理表达式（递归、运算符有结合性）。这里给两个参考文章，供有兴趣的同学阅读。
+In the past, it was often thought that top-down parsing could not handle left recursion. In fact, there is a technique called Pratt parser
+technique that solves this problem. It is a simple variant of recursive descent that is easy to understand, yet quite powerful and well suited to handle expressions (recursive, operators with union). Two reference articles are given here for interested students to read.
 
 1. [Simple Top-Down Parsing in Python](http://effbot.org/zone/simple-top-down-parsing.htm) (Python)
 2. [Simple but Powerful Pratt Parsing](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html) (
    Rust)
-3. [Pratt Parsing Index](https://www.oilshell.org/blog/2017/03/31.html) (一篇调查文章)
+3. [Pratt Parsing Index](https://www.oilshell.org/blog/2017/03/31.html) (a survey article)
 
-总之，top-down 解析器是实践中最常用的，毕竟非常好写。为此，我们推荐同学们做以下练习：
+In short, top-down parsers are the most commonly used in practice and are very well written after all. For this purpose, we recommend that students do the following exercises.
 
-1. 在自己喜欢的语言中，用递归下降的方法编写 JSON 解析器。JSON 是目前最常用的互联网数据交换格式，它的文法可在其官网 [json.org](http://json.org) 上查阅。
-2. 在自己喜欢的语言中，用 Pratt 解析的方法编写一个四则运算计算器，尝试提供用户友好的错误报告。
+1. write a JSON parser in your preferred language using the recursive descent method. JSON is the most commonly used Internet data interchange format, and its grammar is available on its website [json.org](http://json.org).
+2. Write a quadratic calculator in your favorite language using the Pratt parser method and try to provide user-friendly error reporting.
 
-## 解析器组合子
+## Parser combinators
 
-解析器组合子 (parser combinator) 是一种高阶函数，它可以把多个解析器组合成单个解析器。这是什么意思呢？又有什么应用价值呢？
+A parser combinator is a higher-order function that can combine multiple parsers into a single parser. What does this mean? What are the applications?
 
-首先需要定义这里所说的“解析器”是什么。在这里，解析器接受一段字符串，并返回解析的输出 **和** 剩下的字符串。所以，这里说的解析器实际上是一个函数。
+First, you need to define what a "parser" is here. In this case, the parser takes a string and returns the parsed output ** and ** the rest of the string. So, the parser in this case is actually a function.
 
-举一个例子，假设存在词法分析器（它实际上也是一种解析器，但接受的文法是正则文法） `number` 和 `identifier`。
+As an example, suppose there is a lexical parser (which is actually a parser, but accepts a regular grammar) `number` and `identifier`.
 
 ```
-number("123abc") ==> (Some(123), "abc")  注意这里返回的是整数 123 而不是字符串
-number("abc123") ==> (None, "abc123")    识别失败，因此 number 对应的输出是 None
-identifier("abc123") ==> (Some("abc123"), "")  这里返回的是字符串 "abc123"
+number("123abc") ==> (Some(123), "abc") Note that the integer 123 is returned here instead of the string
+number("abc123") ==> (None, "abc123") fails to identify, so the output for number is None
+identifier("abc123") ==> (Some("abc123"), "") Here the string "abc123" is returned
 ```
 
-（`Some(x)` 表示解析成功，输出为 `x`；`None` 表示该解析器解析失败。）
+(`Some(x)` means the parsing was successful and the output is `x`; `None` means the parser failed.)
 
-假设这个语言是计算器的语言，支持用 `2x` 表示 `2*x`。所以 `factor` 可以是数字后接标识符。假如有一种方法，把 `number` 和 `identifier` 组合起来，岂不是很好？我们引入如下组合子：
+Assuming that this language is a calculator language, it supports `2*x` in terms of `2x`. So `factor` can be a numeric followed by an identifier. Wouldn't it be nice if there was a way to combine `number` and `identifier`? We introduce the following combinators.
 
-1. `seq(p,q)`: 表示将输入按顺序经过 p 和 q，并输出两者的结果；如果其中某一步失败，则整个 `seq(p,q)` 也失败。
-2. `or(p,q)`: 表示首先尝试 p，如果成功则返回结果，否则接着尝试 q，否则失败。
+1. `seq(p,q)`: indicates that the input is passed through p and q in order and the result of both is output; if one of the steps fails, the whole `seq(p,q)` also fails.
+2. `or(p,q)`: means try p first, and return the result if it succeeds, otherwise try q next, or fail.
 
-那么就可以定义
+Then it is possible to define
 
 ```
 factor = or( 
-  seq(number,identifier).map { Expr.Mul(Expr.Const(#1), Expr.Val(#2)) },
+  seq(number,identifier).map { Expr.Mul(Expr.Const(#1), Expr.Val(#2)) }
   number.map(Expr.Const)
 )
 ```
 
-（上面的 `.map(...)` 用于将字符串或数字等数值转换成抽象语法树节点。可以与文法文件中的 action code 类比。）
+(the above `.map(...) ` is used to convert numeric values such as strings or numbers into abstract syntax tree nodes. (It can be analogous to the action code in the grammar file.)
 
-根据上面说的，我们可以推测它的行为是：
+Based on what was said above, we can surmise that it behaves as
 
 ```
 factor("123") = (Some(Expr.Const(123)), "")
 factor("2x") = (Some(Expr.Mul(Expr.Const(2), Expr.Val("x"))), "")
 ```
 
-不难看出函数组合成大函数的过程，就是我们把小解析器组合成大解析器的过程，并且可以很自然地把自己想要的逻辑嵌入进去。更有趣的是，编译器是完全知道每个函数的类型的。
+It's easy to see that the process of combining functions into large functions is the process of combining small parsers into large parsers, and it's natural to embed the logic you want into them. What is more interesting is that the compiler is fully aware of the type of each function.
 
-由此可见，解析器组合子是一种编程技巧而不是一种解析技术（解析技术是隐含在组合子的实现里的），使用这种技巧可以让代码模块化程度更高，并且在类型较强的语言中可以在编译时就捕获错误。此外，尽管代码是完全手写的，但代码却可以和使用解析器生成器一样干净整洁。感兴趣的同学请务必在自己喜欢的高级语言中尝试一番，或者亲自动手写一套组合子。
+It follows that parser combinators are a programming technique rather than a parsing technique (which is implicit in the implementation of combinators), and using this technique allows for greater modularity in the code and catches errors at compile time in more strongly typed languages. In addition, the code can be just as clean and tidy as using the parser generator, even though the code is completely handwritten. If you are interested, be sure to try it out in your favorite high-level language, or write a set of combinators by hand.
 
-## 更多的解析技术
+## More Parsing Techniques
 
-课本上介绍的解析技术非常实用，但并不是解析的全部。例如：
+The parsing techniques described in the textbook are very useful, but they are not the whole story of parsing. For example.
 
-1. 可以处理二义文法和左递归的 [Earley parser](https://en.wikipedia.org/wiki/Earley_parser)。
-2. 线性时间的 [Packrat parser](https://en.wikipedia.org/wiki/Parsing_expression_grammar)。
-3. 使用动态规划思想设计的 O(n³|G|) 时间的 [CYK 算法](https://en.wikipedia.org/wiki/CYK_algorithm)。
-4. 哪怕是在解析已经被视为 solved problem 的 2020 年，还有诸如 [Pika parser](https://arxiv.org/abs/2005.06444) 之类的算法在不断被提出。
+1. the [Earley parser](https://en.wikipedia.org/wiki/Earley_parser) which can handle dichotomous grammars and left recursion.
+2. the [Packrat parser](https://en.wikipedia.org/wiki/Parsing_expression_grammar) for linear time.
+3. the O(n³|G|) time [CYK algorithm](https://en.wikipedia.org/wiki/CYK_algorithm) designed using dynamic programming ideas.
+4. Even in 2020, when parsing is already considered a solved problem, algorithms such as [Pika parser](https://arxiv.org/abs/2005.06444) are being proposed.
 
-当然，这些算法知道名字就行了，实践中大概率是用不到的。
+Of course, it is enough to know the names of these algorithms, but they are probably not used in practice.
 
-## 有没有一劳永逸的办法？
+## Is there a one-and-done solution?
 
-聪明的同学可能会提出这样的问题：我们随便写文法，然后让机器自动检查这个文法是否是二义的，并转换成一种非常高效的文法表示，最后自动生成代码，这是可以办到的吗？
+A smart student might ask the question: Is it possible to write a random grammar, have the machine automatically check whether the grammar is binary, convert it into a very efficient grammar representation, and finally generate the code automatically?
 
-很遗憾，答案是否定的。要理解背后的原理，需要进一步学习相关理论才可以（而且证明也有点繁杂）。在这里，我们（用非常不严谨的语言）列出与上下文无关文法相关的一些结论。注：“不可判定” 的意思是
-“不可能写出来这样一个程序”，是不是听起来非常中二 :-p
+Unfortunately, the answer is no. To understand the principle behind it, further study of the theory is required (and the proof is a bit tedious). Here, we list (in very loose language) some conclusions related to context-independent grammar. Note: "undecidable" means
+"It is impossible to write such a program", doesn't it sound very middle-class :-p
 
-1. 上下文无关文法的二义性是不可判定的。
-2. 检查文法是否接受任何字符串是不可判定的。
-3. 检查两个文法是否接受相同的语言是不可判定的。
-4. 无法判定两个 CFG 接受的语言交集是否是空的。
+1. the duality of context-independent grammars is undecidable.
+2. Checking whether a grammar accepts any string is undecidable.
+3. it is undecidable to check whether two grammars accept the same language.
+4. it is undecidable whether the intersection of languages accepted by two CFGs is empty or not.
 
-另外，尽管有上面 2 这样的结论，但是 “检查文法是否什么字符串都不接受” 却是可判定的，将 CFG 转换成 Chomsky normal form 就可以轻松办到。
+Also, despite the conclusion in 2 above, "checking if the grammar accepts no strings" is decidable, and can be easily done by converting the CFG to Chomsky normal form.
 
-（聪明的同学可能会开始思考对正则语言来说上面这些问题的结论是怎样的……）
+(Smart students may start to think about what the conclusion of these questions is for regular languages ......)
 
-下面介绍一个著名的问题 [Post correspondence problem](https://en.wikipedia.org/wiki/Post_correspondence_problem) ，来说明有时候人类的直觉是很不靠谱的。
+Here is a famous problem [Post correspondence problem](https://en.wikipedia.org/wiki/Post_correspondence_problem) to illustrate that sometimes human intuition is very unreliable.
 
-给定相同长度的两个字符串列表 a[1], a[2], a[3], ..., a[n] 和 b[1], b[2], b[3], ..., b[n]，回答：是否存在一列下标 i[1], i[2], ..., i[k]，使得 a[i[1]] a[
-i[2]] ... a[i[k]] = b[i[1]] b[i[2]] ... b[i[k]]？
+Given two lists of strings of the same length a[1], a[2], a[3], ... , a[n] and b[1], b[2], b[3], ... , b[n], answer: does there exist a column of subscripts i[1], i[2], ... , i[k] such that a[i[1]] a[
+i[2]] ... a[i[k]] = b[i[1]] b[i[2]] ... b[i[k]]?
 
-帮助大家有一个感性认识，下面复读一下 Wikipedia 上的例子：
+To help you get a sense of this, here's a reread of the example from Wikipedia.
 
-| a₁    | a₂    | a₃    |
-| ----- | ----- | ----- |
-| a     | ab    | bba   |
+| a₁  | a₂  | a₃  |
+| --- | --- | --- |
+| a   | ab  | bba |
 
-| b₁    | b₂    | b₃    |
-| ----- | ----- | ----- |
-| baa   | aa    | bb    |
+| b₁  | b₂  | b₃  |
+| --- | --- | --- |
+| baa | aa  | bb  |
 
-对这组输入来说，这个问题是有解的，因为 a₃a₂a₃a₁ = b₃b₂b₃b₁。
+For this set of inputs, the problem is solvable because a₃a₂a₃a₁ = b₃b₂b₃b₁.
 
-尽管一时半会可能想不到高效的做法，但是直觉告诉我们，似乎可以去暴力枚举，然后一一比较……
+Although we may not think of an efficient approach for a while, our intuition tells us that it seems possible to go to the violent enumeration and compare them one by one ......
 
-**然而**
-，这个问题是不可能机械求解的！不可能写出一个程序来判定这个问题。PCP不可判定是怎么回事呢？PCP相信大家都很熟悉，但是PCP不可判定是怎么回事呢，下面就让小编带大家一起了解吧。PCP不可判定，其实就是停机问题不可判定，大家可能会很惊讶PCP怎么会不可判定呢？但事实就是这样，小编也感到非常惊讶。
+**However**
+, this problem is impossible to solve mechanically! It is impossible to write a program to determine this problem. what is going on with PCP undecidable? PCP believe that we are all familiar with it, but PCP undecidable is what is going on, let me take you through it. PCP undecidable, in fact, is the downtime problem undecidable, you may be surprised how PCP undecidable it? But that's the way it is, and I'm very surprised.
 
-## 在线解析
+## Online Analysis
 
-学到这里，虽说大家已经可以写 parser 了，但是这在工程实践上却还不够。比如说，IDE 为了提供准确的实时报错、自动补全、代码缩进，都需要在用户编辑代码时立即提供语法树。仅仅利用 lab2
-这种简单的离线解析器是完全不能满足使用的。在编辑代码时，大部分时间代码都是语法甚至词法不正确的，必须考虑到各种错误情形，并保证不会搞乱代码。此外，在提供自动缩进时，后方的错误不应该影响到前方代码的缩进。还有一个问题是，离线解析需要从头构建语法树，代价较高。受到这种“在线解析”需求的启发，涌现了不少很有实用价值的工作，比如：
+At this point, we can write parser, but it is not enough in engineering practice. For example, in order to provide accurate real-time error reporting, auto-completion, and code indentation, IDEs need to provide syntax trees as soon as the user edits the code. Simply using lab2
+simple offline parser is completely inadequate for this purpose. When editing code, most of the time the code is syntactically or even lexically incorrect, and various error scenarios must be taken into account and guaranteed not to mess up the code. In addition, when providing automatic indentation, errors in the back should not affect the indentation of the code in the front. Another problem is that offline parsing requires building the syntax tree from scratch, which is costly. Inspired by this need for "online parsing", a number of useful works have emerged, such as.
 
-1. [tree-sitter](https://github.com/tree-sitter/tree-sitter): incremental parser 框架，总是在内存中维护完整的语法树。
-2. [Auto-indentation with incomplete information](https://arxiv.org/ftp/arxiv/papers/2006/2006.03103.pdf): 基于 Operator
-   precedence parser 的用于代码缩进的框架，支持局部前向解析。尽管并不维护完整的语法树，但由于每次解析量很少，所以速度足够快。
+1. [tree-sitter](https://github.com/tree-sitter/tree-sitter): incremental parser framework that always maintains the complete syntax tree in memory. 2.
+2. [Auto-indentation with incomplete information](https://arxiv.org/ftp/arxiv/papers/2006/2006.03103.pdf): Operator-based
+   precedence parser-based framework for code indentation, supporting local forward parsing. Although it does not maintain a complete syntax tree, it is fast enough due to the small amount of parsing at a time.

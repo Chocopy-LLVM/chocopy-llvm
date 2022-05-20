@@ -1,4 +1,6 @@
 # ChocoPy PA
+[Online Doc](https://chocopy-llvm.github.io/chocopy-llvm)|[中文文档](https://chocopy-llvm.github.io/chocopy-llvm/#/zh-cn/)
+
 The design of the lightir and optimization refer to [USTC](https://github.com/mlzeng/CSC2020-USTC-FlammingMyCompiler)'s design and the spec of chocopy is from [UC Berkeley](https://inst.eecs.berkeley.edu/~cs164/sp19/index.html).
 
 ## PA1

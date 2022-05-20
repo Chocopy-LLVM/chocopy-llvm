@@ -45,12 +45,12 @@ Note: Experimenting in groups implies cooperation, but communication between gro
 
 The `DeclarationAnalyzer` check is a check that declares the scope environment, and variables in python have four scopes
 
-| scope | English Explanation | English Short Form |
-|----------------|---------------------------|------|
-| Local scope (within a function) | Local(function) | L |
-| External Nested Function Scopes | Enclosing function locals | E |
-| Global(module) | G |
-| Scope of python's built-in modules | Builtin | B |
+| scope                              | English Explanation       | English Short Form |
+| ---------------------------------- | ------------------------- | ------------------ |
+| Local scope (within a function)    | Local(function)           | L                  |
+| External Nested Function Scopes    | Enclosing function locals | E                  |
+| Global(module)                     | G                         |
+| Scope of python's built-in modules | Builtin                   | B                  |
 
 When accessing variables, first look for local variables, then variables inside the function that wraps around the function, then global variables, and finally variables in the built-in scope, i.e.: L -> E -> G -> B
 

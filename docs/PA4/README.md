@@ -147,19 +147,24 @@ The following are the available registers given by the Xuantie C910, most of the
 
 For CISC machines, the addressing is as follows. Note that the first four are base addressing and the last four are scale addressing
 
-| type | AT&T syntax format | operation value | name |
-| ------ | ------------ | -------- | ---- |
-| immediate| \$ $\operatorname{Imm}$ | $\operatorname{Imm}$ | immediate addressing |
- | immediate | \$ $\operatorname{Imm}$ | $\operatorname{Imm}$ | immediate addressing |
- |registers | $E_{a}$ | $R\left[E_{a}\right]$ | register addressing |
- |memory |$\operatorname{Imm}$$ |$M[\operatorname{Imm}]$$ absolute addressing |
- | memory |$\left(E_{a}\right)$$ | $M\left[R\left[E_{a}\right]\right]$$ | indirect addressing |
- | memory |$\operatorname{Imm}\left(E_{b}\right)$$ $M\left[\operatorname{Imm}+R\left[E_{b}\right]\right]$$ | (base address + offset) addressing
- | memory | $\left(E_{b}, E_{i}\right)$ | $M\left[R\left[E_{b}\right]+R\left[E_{i}\right]\right]$ |
+| type      | AT&T syntax format | operation value        | name                               |
+| --------- | ------------------ | ---------------------- | ---------------------------------- |
+| immediate | \$ Imm             | Imm                    | immediate addressing               |
+| immediate | \$ Imm             | Imm                    | immediate addressing               |
+| registers | Ea                 | R[Ea]                  | register addressing                |
+| memory    | Imm                | M[Imm]                 | absolute addressing                |
+| memory    | (Ea)               | M[R[Ea]]               | indirect addressing                |
+| memory    | Imm(Eb)            | M[Imm+R[Eb]]           | (base address + offset) addressing |
+| memory    | (Eb, Ei)           | M[R[Eb]+R[Ei]]         | variant addressing                 |
+| memory    | Imm(Eb, Ei)        | M[Imm+R[Eb]+R[Ei]]     | variant addressing                 |
+| memory    | (, Ei, s)          | M[R[Ei] * s]           | proportional variant addressing    |
+| memory    | Imm(, Ei, s)       | M[Imm+R[Ei] * s]       | proportional variant addressing    |
+| memory    | (Eb, Ei, s)        | M[R[Eb]+R[Ei] * s]     | proportional variant addressing    |
+| memory    | Imm(Eb, Ei, s)     | M[Imm+R[Eb]+R[Ei] * s] | proportional variant addressing    |
 
 For riscv only the first four types of addressing are available. They correspond to addi a0, a0, imm/add a0,a0,a1/j a0/[jal && auipc+jalr](https://stackoverflow.com/questions/59150608/offset-address-for-jal-and-jalr-instrctions-in-risc-v)
 
-Other addressing can be done with multiple instruction operands or [%hi() %lo()](https://stackoverflow.com/questions/62060724/address-offset-in-risc-v-load-instructions-hardcoded-or-not) to accomplish this. New (base address + offset) addressing has been added to the Xantra C910.
+Other addressing can be done with multiple instruction operands or [%hi() %lo()](https://stackoverflow.com/questions/62060724/address-offset-in-risc-v-load-instructions-hardcoded-or-not) to accomplish this. New (base address + offset) addressing has been added to the Xuantie C910.
 
 0.3.2.2 load/store
 
