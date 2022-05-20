@@ -1,6 +1,6 @@
 # cmake tool usage
 
-# # A brief introduction to the compilation system
+## A brief introduction to the compilation system
 
 For more details, please refer to this [ppt](https://www.victoryang00.cn/BuildSystem.pdf)
 
