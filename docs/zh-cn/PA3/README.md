@@ -64,7 +64,7 @@ GlobalVariable::create(fmt::format("const_{}", const_id), &*module, new Constant
 $$g_{1}, \ldots, g_{L}\text{ are the variables explicitly declared as global in }f\\
 y_{1}=e_{1}, \ldots, y_{k}=e_{k}\text{ are the local variables and nested functions defined in }f\\
 E_{f}=E\left[G\left(g_{1}\right) / g_{1}\right] \ldots\left[G\left(g_{L}\right) / g_{L}\right]\\ \hline
-v=\left(x_{1}, \ldots, x_{n}, y_{1}=e_{1}, \ldots, y_{k}=e_{k}, b_{\text {body }}, E_{f}\right)G, E, S \vdash \operatorname{def} f\left(x_{1}: T_{1}, \ldots, x_{n}: T_{n}\right) [ \rightarrow T_{0} ]^{?}: b: v, S,_{-}$$
+v=\left(x_{1}, \ldots, x_{n}, y_{1}=e_{1}, \ldots, y_{k}=e_{k}, b_{\text {body }}, E_{f}\right)G, E, S \vdash def f\left(x_{1}: T_{1}, \ldots, x_{n}: T_{n}\right) [ \rightarrow T_{0} ]^{?}: b: v, S,_{-}$$
 
 定义
 ```c++
@@ -158,7 +158,7 @@ Class 定义同时继承 `Type` 和 `Value`。初始化默认有 typetag 作为�
 ##### Class 定义
 先参考 Object Instantialization 定义。
 $$
-\operatorname{class}(T)=\left(a_{1}=e_{1}, \ldots, a_{m}=e_{m}\right) \quad m \geq 1 \\
+class(T)=\left(a_{1}=e_{1}, \ldots, a_{m}=e_{m}\right) \quad m \geq 1 \\
 l_{a 1}, \ldots, l_{a m}= newloc (S, m) \\
 v_{0}=T\left(a_{1}=l_{a i}, \ldots, a_{m}=l_{a m}\right) \\
 G, G, S \vdash e_{1}: v_{1}, S,_{-} \\
@@ -174,9 +174,8 @@ G, E, S_{1} \vdash e_{1}^{\prime}: v_{1}^{\prime}, S_{1},_- \\
 \vdots \\
 G, E, S_{1} \vdash e_{k}^{\prime}: v_{k}^{\prime}, S_{1},_- \\
 S_{2}=S_{1}\left[v_{0} / l_{x 0}\right]\left[v_{1}^{\prime} / l_{y 1}\right] \ldots\left[v_{k}^{\prime} / l_{y k}\right] \\
-G, E^{\prime}, S_{2} \vdash b_{b o d y}:-, S_{3},, \\
-\hline G, E, S \vdash T(): v_{0}, S_{3},{ }_{-}
-$$
+\frac{G, E^{\prime}, S_{2} \vdash b_{b o d y}:-, S_{3},, 
+}{G, E, S \vdash T(): v_{0}, S_{3},{ }_{-}}$$
 
 这个规则执行了以下操作，都需要在 `LightIR` 层生成。首先，通过为类$T$定义或继承的每个 Attribute 和 Method 分配位置，创建一个类$T$的新对象$v_{0}$。第二，使用全局环境对属性初始化器和方法定义进行评估；这一区别很重要，因为方法定义并没有捕捉到正在构建对象的环境$E$。第三，通过为$v_{0}$新分配的属性和方法的映射来修改当前的存储空间$S_{1}$，创建一个新的存储空间。最后，对象 $v_{0}$ 的 `__init__`.方法通过动态调度被调用。调用这个方法所需的步骤与一般的动态 Dispatch 相似，但例外的是 `__init__`.方法除了被调用的对象外不接受任何参数。
 
@@ -193,8 +192,8 @@ G, E^{\prime}, S_{n} \vdash e_{1}^{\prime}: v_{1}^{\prime}, S_{n},_-\\
 \vdots\\
 G, E^{\prime}, S_{n} \vdash e_{k}^{\prime}: v_{k}^{\prime}, S_{n},_-\\
 S_{n+1}=S_{n}\left[v_{1} / l_{x 1}\right] \ldots\left[v_{n} / l_{x n}\right]\left[v_{1}^{\prime} / l_{y 1}\right] \ldots\left[v_{k}^{\prime} / l_{y k}\right]\\
-G, E^{\prime}, S_{n+1} \vdash b_{b o d y}:_-, S_{n+2}, R \\
-R^{\prime}=\left\{\begin{array}{l}N o n e, \text { if } R \text { is } \\ R, \text { otherwise }\end{array} \quad\right. \\ \hline G, E, S_{0} \vdash f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},_-$$
+\frac{G, E^{\prime}, S_{n+1} \vdash b_{b o d y}:_-, S_{n+2}, R \\
+R^{\prime}=\left\{\begin{array}{l}N o n e, \text { if } R \text { is } \\ R, \text { otherwise }\end{array} \quad\right. }{ G, E, S_{0} \vdash f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},_-}$$
 
 首先，函数的值从当前存储空间中获取。其次，函数调用的参数按从左到右的顺序被评估。然后，为函数的形式参数、局部变量和嵌套函数分配新的位置。一个新的环境$E^{\prime}$为函数调用创建，它将形式参数、局部变量和嵌套函数的名称映射到它们相应的位置。存储器$S_{n+1}$将这些位置分别映射到它们相应的参数、初始值和函数值。最后，用这个新环境$E^{prime}$和初始状态$S_{n+1}$来评估函数的主体。函数调用表达式被评估为由函数主体返回的值，如果函数主体被完全评估而没有遇到返回语句，则为None值。
 
@@ -213,9 +212,8 @@ G, E^{\prime}, S_{n} \vdash e_{1}^{\prime}: v_{1}^{\prime}, S_{n},- \\
 G, E^{\prime}, S_{n} \vdash e_{k}^{\prime}: v_{k}^{\prime}, S_{n},- \\
 S_{n+1}=S_{n}\left[v_{0} / l_{x 0}\right] \ldots\left[v_{n} / l_{x n}\right]\left[v_{1}^{\prime} / l_{y 1}\right] \ldots\left[v_{k}^{\prime} / l_{y k}\right] \\
 G, E^{\prime}, S_{n+1} \vdash b_{\text {body }}:-, S_{n+2}, R \\
-R^{\prime}=\left\{\begin{array}{l}\text { None, if } R \text { is } \\
-R, \text { otherwise }\end{array}\right. \\
-\hline G, E, S \vdash e_{0} \cdot f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},-$$
+\frac{R^{\prime}=\left\{\begin{array}{l}\text { None, if } R \text { is } \\
+R, \text { otherwise }\end{array}\right. }{ G, E, S \vdash e_{0} \cdot f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},-}$$
 
 Dispatch 需要先求解 obj expression，object是其第一个被传的参数。
 ### 0.2 Light IR stdlib 调用
@@ -231,11 +229,11 @@ Dispatch 需要先求解 obj expression，object是其第一个被传的参数�
 
 为了便于大家进行实验，该框架自动完成了语法树到 C++ 上的抽象语法树的转换。 我们可以使用访问者模式来设计抽象语法树中的算法。
 
-<img src="../../PA3/lightwalker.png" alt="codegen" style="zoom:33%;" />
+![](../../PA3/lightwalker.png)
 
 IRBuilder 提供函数的生成，例如 `builder->create_clloca()` 即可生成一条语句。`set_insert_point()` 用于切换插入代码位置。插入后自动算出 CFG 和 Use-Def List.
 
-<img src="../../PA3/irbuilder.png" alt="codegen" style="zoom:33%;" />
+![](../../PA3/irbuilder.png)
 
 在 `include/ir-optimizer/chocopy_optimization.hpp` 中，我还定义了一个用于存储作用域的类Scope。它的作用是辅助我们转换 `SymbolTable` 到 `Scope` ，管理不同作用域中的变量。它提供了以下接口：
 

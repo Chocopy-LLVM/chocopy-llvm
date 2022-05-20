@@ -81,7 +81,7 @@ def P() -> int:
     return Q().value
 ```
 
-<img src="../../PA2/symbol_table.png" alt="symbol_table" style="zoom:33%;" />
+![](../../PA2/symbol_table.png)
 
 #### 0.1.1 全局变量检查
 
@@ -513,7 +513,7 @@ a: int = 1
 
 详见[common/structure.md](./docs/common/structure.md)
 
-<img src="../../PA2/visitor_graph.png" alt="visitor_image" style="zoom:33%;" />
+![](../../PA2/visitor_graph.png)
 
 #### 1.1.1 `SymbolTable`
 ```cpp

@@ -62,14 +62,15 @@ First, refer to the Function Definition definition.
 
 $$g_{1}, \ldots, g_{L}\text{ are the variables explicitly declared as global in }f\\
 y_{1}=e_{1}, \ldots, y_{k}=e_{k}\text{ are the local variables and nested functions defined in }f\\
-E_{f}=E\left[G\left(g_{1}\right) / g_{1}\right] \ldots\left[G\left(g_{L}\right) / g_{L}\right]\\ \hline
-v=\left(x_{1}, \ldots, x_{n}, y_{1}=e_{1}, \ldots, y_{k}=e_{k}, b_{\text {body }}, E_{f}\right)G, E, S \vdash \operatorname{def} f\left(x_{1}: T_{1}, \ldots, x_{n}: T_{n}\right) [ \rightarrow T_{0} ]^{?}: b: v, S,_{-}$$
+\frac{E_{f}=E\left[G\left(g_{1}\right) / g_{1}\right] \ldots\left[G\left(g_{L}\right) / g_{L}\right]}{
+v=\left(x_{1}, \ldots, x_{n}, y_{1}=e_{1}, \ldots, y_{k}=e_{k}, b_{\text {body }}, E_{f}\right)G, E, S \vdash def f\left(x_{1}: T_{1}, \ldots, x_{n}: T_{n}\right) [ \rightarrow T_{0} ]^{?}: b: v, S,_{-}}$$
 
 Definition
 ```c++
 auto func_type = FunctionType::get(string_to_type(return_type), tmp_func_params);
 auto function Function::create(func_type, name, module.get());
 ```
+
 Function can be defined to be called before main and only needs to initialize the `is_ctor` variable.
 ##### Nested Functions
 Although the nested function is defined above, i.e., variables captured by `E` should also be passed as arguments, the definition on `LightIR` is more like the definition of the `C++` lambda `[&]{}`, i.e., all references to variables are captured and passed uniformly through `$class.anon`, into the first argument.
@@ -159,7 +160,7 @@ Class definition inherits both `Type` and `Value`. Initialization defaults to ha
 ##### Class Definition
 Refer to the Object Instantialization definition first.
 $$
-\operatorname{class}(T)=\left(a_{1}=e_{1}, \ldots, a_{m}=e_{m}\right) \quad m \geq 1 \\
+class(T)=\left(a_{1}=e_{1}, \ldots, a_{m}=e_{m}\right) \quad m \geq 1 \\
 l_{a 1}, \ldots, l_{a m}= newloc (S, m) \\
 v_{0}=T\left(a_{1}=l_{a i}, \ldots, a_{m}=l_{a m}\right) \\
 G, G, S \vdash e_{1}: v_{1}, S,_{-} \\
@@ -175,9 +176,8 @@ G, E, S_{1} \vdash e_{1}^{\prime}: v_{1}^{\prime}, S_{1},_- \\
 \vdots \\
 G, E, S_{1} \vdash e_{k}^{\prime}: v_{k}^{\prime}, S_{1},_- \\
 S_{2}=S_{1}\left[v_{0} / l_{x 0}\right]\left[v_{1}^{\prime} / l_{y 1}\right] \ldots\left[v_{k}^{\prime} / l_{y k}\right] \\
-G, E^{\prime}, S_{2} \vdash b_{b o d y}:-, S_{3},, \\
-\hline G, E, S \vdash T(): v_{0}, S_{3},{ }_{-}
-$$
+\frac{G, E^{\prime}, S_{2} \vdash b_{b o d y}:-, S_{3},, 
+}{G, E, S \vdash T(): v_{0}, S_{3},{ }_{-}}$$
 
 This rule performs the following operations, all of which need to be generated at the `LightIR` level. First, a new object $$v_{0}$$ of class $$T$$ is created by assigning a location to each Attribute and Method defined or inherited by class $$T$$. Second, the Attribute initializer and Method definition are evaluated using the global environment; this distinction is important because the Method definition does not capture the environment $E$ in which the object is being built. Third, the current store $S_{1}$ is modified by creating a new store by mapping the newly allocated attributes and methods for $v_{0}$. Finally, the object $v_{0}$'s `__init__`. method is called via dynamic scheduling. The steps required to call this method are similar to a normal dynamic dispatch, with the exception that the `__init__`. method takes no arguments other than the object being called.
 
@@ -194,8 +194,8 @@ G, E^{\prime}, S_{n} \vdash e_{1}^{\prime}: v_{1}^{\prime}, S_{n},_-\\
 \vdots\\
 G, E^{\prime}, S_{n} \vdash e_{k}^{\prime}: v_{k}^{\prime}, S_{n},_-\\
 S_{n+1}=S_{n}\left[v_{1} / l_{x 1}\right] \ldots\left[v_{n} / l_{x n}\right]\left[v_{1}^{\prime} / l_{y 1}\right] \ldots\left[v_{k}^{\prime} / l_{y k}\right]\\
-G, E^{\prime}, S_{n+1} \vdash b_{b o d y}:_-, S_{n+2}, R \\
-R^{\prime}=\left\{\begin{array}{l}N o n e, \text { if } R \text { is } \\ R, \text { otherwise }\end{array} \quad\right. \\ \hline G, E, S_{0} \vdash f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},_-$$
+\frac{G, E^{\prime}, S_{n+1} \vdash b_{b o d y}:_-, S_{n+2}, R \\
+R^{\prime}=\left\{\begin{array}{l}N o n e, \text { if } R \text { is } \\ R, \text { otherwise }\end{array} \quad\right. }{ G, E, S_{0} \vdash f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},_-}$$
 
 First, the value of the function is fetched from the current storage space. Second, the arguments of the function call are evaluated in left-to-right order. Then, new locations are allocated for the function's formal arguments, local variables, and nested functions. A new environment $E^{\prime}$ is created for the function call, which maps the names of formal arguments, local variables and nested functions to their corresponding locations. The memory $S_{n+1}$ maps these locations to their corresponding arguments, initial values and function values, respectively. Finally, the body of the function is evaluated using this new environment $E^{prime}$ and the initial state $S_{n+1}$. The function call expression is evaluated to the value returned by the body of the function, or to a None value if the body of the function is fully evaluated and no return statement is encountered.
 
@@ -214,9 +214,8 @@ G, E^{\prime}, S_{n} \vdash e_{1}^{\prime}: v_{1}^{\prime}, S_{n},- \\
 G, E^{\prime}, S_{n} \vdash e_{k}^{\prime}: v_{k}^{\prime}, S_{n},- \\
 S_{n+1}=S_{n}\left[v_{0} / l_{x 0}\right] \ldots\left[v_{n} / l_{x n}\right]\left[v_{1}^{\prime} / l_{y 1}\right] \ldots\left[v_{k}^{\prime} / l_{y k}\right] \\
 G, E^{\prime}, S_{n+1} \vdash b_{\text {body }}:-, S_{n+2}, R \\
-R^{\prime}=\left\{\begin{array}{l}\text { None, if } R \text { is } \\
-R, \text { otherwise }\end{array}\right. \\
-\hline G, E, S \vdash e_{0} \cdot f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},-$$
+\frac{R^{\prime}=\left\{\begin{array}{l}\text { None, if } R \text { is } \\
+R, \text { otherwise }\end{array}\right. }{ G, E, S \vdash e_{0} \cdot f\left(e_{1}, \ldots, e_{n}\right): R^{\prime}, S_{n+2},-}$$
 Dispatch needs to solve for the obj expression first, with object being the first parameter passed.
 ### 0.2 Light IR stdlib calls
 This code is partially referenced in [src/cgen/stdlib](https://github.com/Chocopy-LLVM/chocopy-llvm/blob/main/src/cgen/stdlib) directory. To call the functions in stdlib, you only need `create_call`, and note that you need to pass parameters. Students can also customize the functions that need to be called repeatedly in stdlib.
@@ -231,11 +230,11 @@ This experiment uses LightIR, written in C++, to generate LLVM IR.
 
 To facilitate your experiments, the framework automatically completes the conversion of the syntax tree to an abstract syntax tree on C++. We can use the visitor pattern to design the algorithms in the abstract syntax tree.
 
-<img src="./lightwalker.png" alt="codegen" style="zoom:33%;" />
+![](./lightwalker.png)
 
 IRBuilder provides function generation, e.g. `builder->create_clloca()` to generate a statement. `set_insert_point()` is used to switch the insertion code position. CFG and Use-Def List are automatically calculated after insertion.
 
-<img src="./irbuilder.png" alt="codegen" style="zoom:33%;" />
+![](./irbuilder.png)
 
 In [chocopy_optimization.hpp](https://github.com/Chocopy-LLVM/chocopy-llvm/blob/main/include/ir-optimizer/chocopy_optimization.hpp), a class Scope is defined for storing scopes, which is used to assist us in converting `SymbolTable` to `Scope` and managing variables in different scopes. It provides the following interface.
 
@@ -326,7 +325,7 @@ USING **pascal**
   # If there is inconsistency, it will be reported exactly which file and which part is inconsistent, and there is a detailed output.
   ```
 
-  **Please note that the ``testcase`` provided by the teaching assistant does not cover the whole test situation, and you will only get a basic score for completing this part, so please design your own ``testcase`` to test. **
+  **Please note that the ``testcase`` provided by the teaching assistant does not cover the whole test situation, and you will only get a basic score for completing this part, so please design your own ``testcase`` to test.**
 
 ### 1.5 Scoring
 

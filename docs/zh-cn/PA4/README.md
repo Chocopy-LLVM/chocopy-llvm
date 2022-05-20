@@ -196,7 +196,7 @@ Interface Graph图中的每个节点代表某个变量的活跃期或生存期�
 
 详见[common/structure.md](./docs/common/structure.md)
 
-<img src="../../PA4/codegen.png" alt="codegen" style="zoom:33%;" />
+![](../../PA4/codegen.png)
 
 CFG 走一遍主 函数 `generateMOduleCode` 就可以获得 Assembly, 其他函数被主函数调用。遍历所有可编译单元，Class->Func->Var->Instruction.同时需要维护GOT来得到label的位置，其余的指令按类型emit。
 ### 1.2 主要工作

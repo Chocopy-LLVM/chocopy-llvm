@@ -24,6 +24,8 @@
     - [1.1 Code structure](#11-code-structure)
       - [1.1.1 ``SymbolTable``](#111-symboltable)
       - [1.1.2 `SymbolType` and `ValueType`](#112-symboltype-and-valuetype)
+    - [1.2 Bonus](#12-bonus)
+    - [1.3 Compile, run and verify](#13-compile-run-and-verify)
     - [1.4 WriteUp](#14-writeup)
       - [1.4.1 Compilation error](#141-compilation-error)
       - [1.4.2 Neat Code](#142-neat-code)
@@ -80,7 +82,7 @@ def P() -> int:
     return Q().value
 ```
 
-<img src="./symbol_table.png" alt="symbol_table" style="zoom:33%;" />
+![](./symbol_table.png)
 
 #### 0.1.1 Global Variable Check
 
@@ -511,7 +513,7 @@ This task may be much larger than the previous one. However, this task gives you
 
 See [common/structure.md](./docs/common/structure.md)
 
-<img src="./visitor_graph.png" alt="visitor_image" style="zoom:33%;" />
+![](./visitor_graph.png)
 
 #### 1.1.1 ``SymbolTable``
 ```cpp
@@ -551,7 +553,7 @@ public:
 ```
 `SymbolType` is a purely dummy class for marking all types, implementing `eq` and `neq`. `ValueType` and `FunctionDefType` both inherit from `SymbolType`.
 
-``cpp
+```cpp
 class ValueType : public SymbolType {
 public:
     ValueType() = default;
@@ -608,7 +610,9 @@ Report errors for all given cases if all given syntax derivations are made corre
   # If there is inconsistency, it will be reported exactly which file and which part is inconsistent, and there is a detailed output.
   ```
 
-  **Please note that the ``testcase`` provided by the teaching assistant does not cover the whole test situation, and you will only get a basic score for completing this part, so please design your own ``testcase`` to test. **Please design your own `testcase` to test.
+  **Please note that the ``testcase`` provided by the teaching assistant does not cover the whole test situation, and you will only get a basic score for completing this part, so please design your own ``testcase`` to test.**
+
+  **Please design your own `testcase` to test.**
 
 ### 1.4 WriteUp
 
