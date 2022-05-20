@@ -1,6 +1,6 @@
 # Programing Assignment III documentation
 
-<! -- TOC -->
+<!-- TOC -->
 
 - [Programing Assignment III documentation](#programing-assignment-iii-documentation)
 - [lab3-experiment documentation](#lab3-experiment-documentation)
@@ -24,7 +24,7 @@
     - [1.4 Compile, Run and Verify](#14-compile-run-and-verify)
     - [1.5 Scoring](#15-scoring)
 
-<! -- /TOC -->
+<!-- /TOC -->
 
 # lab3-experiment documentation
 
