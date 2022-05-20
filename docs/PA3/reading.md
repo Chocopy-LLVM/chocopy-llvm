@@ -1,71 +1,71 @@
-# 材料与代码阅读
+## Material and code reading
 
-## 前言
-阅读代码前请仔细阅读下面关于`LoopSearch`和`Mem2Reg`部分的说明，最后该部分需要在实验报告中写下**思考题**的答案。
+## Preface
+Before reading the code, please read carefully the following descriptions of the `LoopSearch` and `Mem2Reg` sections, and the final section requires answers to **thinking questions** in the lab report.
 
-`Control Flow Graph`(以下简称为`CFG`)是一种用有向图来描述程序执行过程的方式，它是对程序块之间的控制流建立的联系。其中，图中的节点表示基本块(`basic block`)，基本块中，除了最后一条指令，其余的指令都是顺序执行不会产生分支跳转；图中的边则表示可能的控制转移。
+The `Control Flow Graph` (hereafter referred to as `CFG`) is a way to describe the process of program execution in terms of a directed graph, which is a linkage established for the control flow between program blocks. Among them, the nodes in the graph represent the basic block (`basic block`), in which, except for the last instruction, the rest of the instructions are executed sequentially without branching jumps; the edges in the graph represent possible control transfers.
 
 
-通过对`CFG`的分析，可以找到代码的许多重要结构信息，比如循环。所以`CFG`对于代码优化有着重要的意义，而本次实验的优化Pass，都是建立在对`CFG`的分析与修改上的。在之前的实验中，同学们通过调用LightIR的接口(参考[LightIR介绍](../common/LightIR.md))完成了中间代码生成，同时也通过核心类建立和维护着中间代码的`CFG`，核心类中，`BasicBlock`就可以看作是`CFG`的基本块，类中的成员`pre_bbs_`与`succ_bbs_`就可以记下每个块的前驱后继，通过递归地访问每个块的上述两个成员，就可以遍历整个`CFG`。在本次代码阅读实验部分，同学们请仔细阅读样例代码，掌握如何去调用`LightIR`的接口来开发优化Pass。
+By analyzing the `CFG`, many important structural information of the code can be found, such as loops. So `CFG` has an important meaning for code optimization, and the optimization Pass of this experiment is all based on the analysis and modification of `CFG`. In the previous experiments, students called LightIR's interface by calling (refer to [Introduction to LightIR](./common/LightIR.md)) to complete the intermediate code generation, but also through the core class to build and maintain the intermediate code `CFG`, the core class, `BasicBlock` can be regarded as the basic block of `CFG`, the class members `pre_bbs_` and `succ_bbs_` can record the predecessor and successor of each block. By recursively accessing the above two members of each block, the entire `CFG` can be traversed. In this code reading lab section, students should read the sample code carefully to master how to call the `LightIR` interface to develop optimized Pass.
 
 ## LoopSearch
-#### 简介
-循环查找是属于一种**分析类Pass**，该类Pass是用来为之后的优化Pass获取`CFG`的必要信息，而不会对`CFG`本身造成改变；循环查找的主要目的就是为了找到程序当中的所有循环，以及这些循环的入口块（即循环的条件块）等信息。**该分析Pass也是后续的循环不变式外提优化的基础。**
-#### 代码阅读说明
-1. 代码相关的两个类分别是`LoopSearch`以及`LoopSearch`
-2. 循环查找会用到图强连通分量搜索算法--Tarjan algorithm，如果代码阅读时遇到问题可以自行查找相关资料辅助阅读。
-3. 为了方便阅读以及后续实验debug方便，该模块还设计了一个将找到的所有循环可视化的模块。使用该模块有以下几点需要注意：
-    * 确保环境中安装了Graphviz，如果没有可以使用命令安装：
+#### Introduction
+LoopSearch is a type of **Analysis Pass** that is used to obtain the necessary information about the `CFG` for the subsequent Optimization Pass without changing the `CFG` itself; the main purpose of LoopSearch is to find all the loops in the program and the entry blocks of these loops (i.e., the conditional blocks of the loops). ** This analysis of Pass is also the basis for the subsequent optimization of loop invariant outer lift. **
+#### Code Reading Instructions
+1. the two code related classes are `LoopSearch` and `LoopSearch`
+2. loop search will use the graph of strong connected component search algorithm - Tarjan algorithm, if you encounter problems when reading the code can find the relevant information to assist reading.
+3. In order to facilitate reading and subsequent experimental debug convenience, the module is also designed to visualize all the loops found module. The following points should be noted when using this module.
+    * Make sure that Graphviz is installed in your environment, if not you can install it using the command.
     ```bash
     sudo apt-get install graphviz
     ```
-    * 每个BasicBlock都需要命名，且命名要符合规范。
-    * 该接口是通过`LoopSearch`的构造函数中的dump参数来控制是否打印找到的循环，dump为true时会打印，否则将不打印，发布的代码中是**默认不打印的**：
+    * Each BasicBlock needs to be named, and the naming needs to conform to the specification.
+    * The interface is controlled by the dump parameter in the constructor of `LoopSearch` whether to print the loop found, it will be printed when dump is true, otherwise it will not be printed, the released code is **not printed by default**.
     ```cpp
     explicit LoopSearch(Module* m, bool dump=false) : Pass(m), dump(dump){}
     ```
-    * 该功能会在当前目录下输出png图片文件，文件有两种命名：
-        a. `function_name`.png：表示某个函数内所有的basic block连接。
-        b. `function_name`_`index`.png：表示在某函数中第`index`个循环。
-4. 重要的成员变量和函数说明（后续实验会用到，阅读代码需要着重理解）：
-    * `loop_set`：算法找到的所有循环的集合
-    * `func2loop`：记录函数与循环的对应关系
-    * `base2loop`：记录base块与循环的对应关系
-    * `loop2base`：记录base块与循环的对应关系
-    * `bb2base`：记录循环中的一个块到这个块所在循环（最内层循环）的入口的映射关系。
-    * `get_loop_base`：得到循环的入口块
-    * `get_inner_loop`：得到bb所在最低层次的loop 
-    * `get_parent_loop`：得到输入loop的外一层的循环，如果没有则返回空
-    * `get_loops_in_func`：得到某个函数内的所有循环
+    * This function outputs a png image file in the current directory. The file has two kinds of naming.
+        a. `function_name`.png: indicates all the basic block connections within a function.
+        b. `function_name`_`index`.png: indicates the `index` loop in a function.
+4. Important member variables and function descriptions (which will be used in subsequent experiments and need to be read with emphasis on understanding the code).
+    * `loop_set`: the set of all loops found by the algorithm
+    * `func2loop`: records the correspondence between functions and loops
+    * `base2loop`: records the correspondence between base blocks and loops
+    * `loop2base`: records the correspondence between base blocks and loops
+    * `bb2base`: records the mapping of a block in a loop to the entry of the loop (innermost loop) in which this block is located.
+    * `get_loop_base`: gets the entry block of the loop
+    * `get_inner_loop`: get the lowest level loop where bb is located 
+    * `get_parent_loop`: get the loop at the outer level of the input loop, or return null if there is none
+    * `get_loops_in_func`: get all the loops inside a function
 
 
-#### 思考题
-1. 循环的入口如何确定？循环的入口的数量可能超过1嘛？
+#### Thinking Questions
+1. How is the entry point of a loop determined? Is it possible to have more than 1 loop entry point?
 
-2. 简述一下算法怎么解决循环嵌套的情况。
+2. Briefly describe how the algorithm solves the case of nested loops.
 
 
 ## Mem2Reg
 
-#### 简介
+#### Introduction
 
-`Mem2Reg Pass`构造了LLVM IR 的SSA格式(静态单赋值格式)。关于SSA是什么，为什么要构建SSA格式，以及如何构建附件材料中均有提及，也可以通过自行搜索材料了解。
+The `Mem2Reg Pass` constructs the SSA format (static single assignment format) of LLVM IR. What SSA is, why it is constructed, and how it is constructed are mentioned in the attached material, or you can learn about it by searching the material yourself.
 
-#### 代码说明
+#### code description
 
-1. 代码相关在`src/ir-optimizer/chocopy_optimization.cpp` 以及`include/ir-optimizer/chocopy_optimization.hpp`
-2. 其中`Dominators`是生成支配树信息，被`Mem2Reg`调用。
-3. `Mem2Reg Pass`的执行流程与算法**伪代码详见附件**：(提示：注意了解其中的phi函数节点)
+1. the code is related in `src/ir-optimizer/chocopy_optimization.cpp` and `include/ir-optimizer/chocopy_optimization.hpp`.
+2. where `Dominators` is to generate domination tree information, called by `Mem2Reg`.
+3. The execution flow and algorithm of `Mem2Reg Pass` **Pseudo-code details can be found in the attachment**: (Hint: pay attention to understand the phi function node in it)
 
-#### 思考题：（描述清楚即可，不需要写很多字数）
+#### Thinking Questions: (Just describe clearly, you don't need to write a lot of words)
 
-1. 请简述支配边界的概念。
+1. Please briefly describe the concept of dominating boundaries.
 
-2. 请简述`phi`节点的概念，与其存在的意义。
+2. Please briefly describe the concept of `phi` node and the significance of its existence.
 
-3. 请描述`Mem2Reg Pass`执行前后的`ir`的变化, 简述一下。
+3. describe the change of `ir` before and after the execution of `Mem2Reg Pass`, briefly.
 
-   before `Mem2Reg`：
+   before `Mem2Reg`.
 
    ```c
    ; ModuleID = 'ChocoPy'
@@ -90,10 +90,10 @@
      %op6 = zext i1 %op5 to i32
      %op7 = icmp ne i32 %op6, 0
      br i1 %op7, label %label8, label %label10
-   label8:                                                ; preds = %label_entry
+   label8: ; preds = %label_entry
      %op9 = load i32, i32* %op2
      ret i32 %op9
-   label10:                                                ; preds = %label_entry
+   label10: ; preds = %label_entry
      %op11 = load i32, i32* %op3
      %op12 = load i32, i32* %op2
      %op13 = load i32, i32* %op2
@@ -120,7 +120,7 @@
      %op8 = zext i1 %op7 to i32
      %op9 = icmp ne i32 %op8, 0
      br i1 %op9, label %label10, label %label14
-   label10:                                                ; preds = %label_entry
+   label10: ; preds = %label_entry
      %op11 = load i32, i32* %op0
      store i32 %op11, i32* %op2
      %op12 = load i32, i32* %op1
@@ -128,7 +128,7 @@
      %op13 = load i32, i32* %op2
      store i32 %op13, i32* %op1
      br label %label14
-   label14:                                                ; preds = %label_entry, %label10
+   label14: ; preds = %label_entry, %label10
      %op15 = load i32, i32* %op0
      %op16 = load i32, i32* %op1
      %op17 = call i32 @gcd(i32 %op15, i32 %op16)
@@ -138,8 +138,7 @@
      ret void
    }
    ```
-   
-   After `Mem2Reg`：
+      After `Mem2Reg`：
 
    ```c
    ; ModuleID = 'ChocoPy'
@@ -188,6 +187,6 @@
    }
    ```
 
-4. 在放置phi节点的时候，算法是如何利用支配树的信息的？
+4. How does the algorithm use the information from the dominant tree when placing the phi nodes?
 
-5. 算法是如何选择`value`(变量最新的值)来替换`load`指令的？（描述数据结构与维护方法）
+5. How does the algorithm select `value` (the latest value of the variable) to replace the `load` instruction? (Describe the data structure and maintenance methods)

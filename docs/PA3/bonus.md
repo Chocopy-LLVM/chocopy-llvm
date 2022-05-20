@@ -1,62 +1,62 @@
-# Programing Assignment III Bonus 实验文档
+# Programing Assignment III Bonus lab file
 
-- [Programing Assignment III Bonus 实验文档](#programing-assignment-iii-bonus-实验文档)
-  - [0. 前言](#0-前言)
-    - [主要工作](#主要工作)
-      - [代码与材料阅读](#代码与材料阅读)
-      - [开发基本优化Pass](#开发基本优化pass)
-      - [Bonus：选做优化Pass](#bonus选做优化pass)
-      - [PAIII Bonus代码与实验报告提交](#paiii-bonus代码与实验报告提交)
-  - [1. 实验框架](#1-实验框架)
-  - [2. 运行与调试](#2-运行与调试)
-    - [运行 chocopy](#运行-chocopy)
-    - [自动测试](#自动测试)
+- [Programing Assignment III Bonus lab file](#programing-assignment-iii-bonus-lab-file)
+  - [0. Preface](#0-preface)
+    - [Main work](#main-work)
+      - [Code and Material Readings](#code-and-material-readings)
+      - [Develop basic optimization Passes](#develop-basic-optimization-passes)
+      - [Bonus: Optional Optimization Pass](#bonus-optional-optimization-pass)
+      - [PAIII Bonus Code and Lab Report Submission](#paiii-bonus-code-and-lab-report-submission)
+  - [1. Experimental framework](#1-experimental-framework)
+  - [2. Run and debug](#2-run-and-debug)
+    - [Run chocopy](#run-chocopy)
+    - [Automated testing](#automated-testing)
     - [logging](#logging)
-    - [建议](#建议)
-  - [3. 提交要求](#3-提交要求)
-    - [目录结构](#目录结构)
-    - [提交要求和评分标准](#提交要求和评分标准)
+    - [Suggestions](#suggestions)
+  - [3. Submission requirements](#3-submission-requirements)
+    - [Directory structure](#directory-structure)
+    - [Submission requirements and scoring criteria](#submission-requirements-and-scoring-criteria)
 
-## 0. 前言
+## 0. Preface
 
-本次实验是组队实验，请仔细阅读组队要求，并合理进行分工合作。
+This experiment is a team experiment, please read the team requirements carefully and divide the work reasonably.
 
-**Pass概念**：接受一个`module`作为参数，经过 PA III 大家可以知道，`module`是IR最上层的结构，而`Pass`则是遍历`module`内的结构，分析出信息(例如对活跃变量的分析 `Pass`)，或者是对`module`内的指令和bb做一些变换(例如本次实验中的常量传播和循环不变式外提 `Pass`)。
+**Pass concept**: accept a `module` as an argument, after PA III you can know that `module` is the uppermost structure of IR, and `Pass` traverses the structure within `module` and analyzes the information (e.g., analysis of active variables `Pass`), or does some transformations (e.g., constant propagation and loop-invariant outer lift `Pass` in this experiment).
 
-经过 PA III，相信大家已经掌握了 LightIR 的结构，并且对于 LLVM IR 也有了更深的理解。在本次实验中，我们要在理解SSA（静态单赋值）格式的基础上，实现三个简单的块内优化Pass与分析Pass：常量传播，循环不变式外提，活跃变量分析。
+After PA III, I believe you have mastered the structure of LightIR and have a better understanding of LLVM IR. In this experiment, we are going to implement three simple in-block optimization Pass and analysis Pass based on the understanding of SSA (static single assignment) format: constant propagation, cyclic invariant outpropagation, and active variable analysis.
 
-值得一提的是`LightIR`中的[LightIR核心类介绍.md](../common/LightIR.md)中的User类中`operands_`成员也就是操作数列表，以及Value类的`use_list_`成员，这两个链表描述了指令间的数据依赖关系，请注意查看。
+It is worth mentioning the LightIR Core Class Introduction in [LightIR](../common/LightIR.md) in the User class for the `operands_` member which is the operand list, and the `use_list_` member of the Value class, these two chains describe the data dependencies between instructions, please take note of them.
 
-### 主要工作
+### Main work
 
-#### 代码与材料阅读
-具体要求与说明参考：[reading.md](./reading.md)
+#### Code and Material Readings
+For specific requirements and instructions refer to: [reading.md](./reading.md)
 
-1. 阅读 `Compiler_USTC.pdf` 中优化部分，尤其是静态单赋值和活跃变量部分。
-2. 阅读`Mem2Reg`与`LoopSearch`两个优化Pass的代码，能够描述优化的基本流程，并且回答思考题。
-3. 通过阅读代码，掌握如何开发基于LightIR的优化Pass
+1. read the optimization section in `Compiler_USTC.pdf`, especially the static single assignment and active variables section.
+2. read the code of `Mem2Reg` and `LoopSearch`, describe the basic flow of optimization, and answer the reflection questions.
+3. Read the code and learn how to develop LightIR-based optimization Pass
 
-#### 开发基本优化Pass
+#### Develop basic optimization Passes
 
-1. **常量传播**
-   能够实现在编译优化阶段，能够计算出结果的变量，就直接替换为常量；补充以下几点需要注意的地方：
-    a. 只需要考虑过程内的常量传播，可以不用考虑数组，**全局变量只需要考虑块内的常量传播**，这里举个例子来说明常量传播：
+1. **Constant Propagation**
+   Be able to implement the direct replacement of variables that can calculate the result in the compilation and optimization phase with constants; add the following points to be noted.
+    a. Only the propagation of constants within the process needs to be considered, and arrays can be disregarded. **Global variables only need to be considered for the propagation of constants within the block**, here is an example to illustrate the propagation of constants.
     ```cpp
-    %a = 1 + 1；
+    %a = 1 + 1.
     %b = %a + %c;
     ```
-    那么首先我们可以将`%a=1+1`折叠成`%a=2`，然后我们发现`%b=%a+%c`这条指令用到了`%a`，那么我们就可以将`%b=%a+%c`中的`%a`直接替换成常量2，代码转化为：
+    So first we can collapse `%a = 1 + 1` into `%a = 2`, then we find that the instruction `%b = %a + %c` uses `%a`, then we can replace `%a` in `%b = %a + %c` directly with the constant 2, and the code translates to
     ```cpp
     %a = 2;
     %b = 2 + %c;
     ```
-    当然本次实验还需要额外做一步：将`%a=2`这条无用语句删掉，因为`%a`是常量，并且已经传播给了使用它的地方，那么这条赋值语句就可以删掉了（由于我们的IR是SSA形式，所以不用担心%a被重新赋值）：
+    Of course this experiment requires an extra step: the useless statement `%a = 2` is deleted because `%a` is a constant and has been propagated to where it is used, so this assignment statement can be deleted (since our IR is in SSA form, we don't have to worry about %a being reassigned): ``
     ```cpp
     %b=2+%c;
     ```
-    b. 整形浮点型都需要考虑，
-    d. 对于`a=1/0`的情形，可以不考虑，即可以做处理也可以不处理。
-    c. 做到删除无用的分支将条件跳转变换为强制性跳转，比如下面的语句中，else部分就可以删除
+    b. Both integer floating-point types need to be considered.
+    d. For the case of `a=1/0`, it can be disregarded, i.e., you can do the processing or not.
+    c. Do remove the useless branch to change the conditional jump to mandatory jump, for example, the following statement, the else part can be removed
    
     ```cpp
     int a;
@@ -64,10 +64,10 @@
     if(a){...}
     else{...}
     ```
-    同时对于分支嵌套的情况都能够删除掉无用的分支，这一步之后对于可能出现的无法到达的块都需要进行删除，而至于只含有跳转指令的冗余块在本次实验中不要求实现。
+    Also for the case of branch nesting are able to delete the useless branches, after this step for the possible unreachable blocks are required to be deleted, and as for the redundant blocks containing only jump instructions are not required to be implemented in this experiment.
    
-2. **循环不变式外提**
-    要能够实现将与循环无关的表达式提取到循环的外面。不用考虑数组，与全局变量。举个例子：
+2. **Loop-invariant outer lift**
+    To be able to implement the extraction of expressions that are not related to the loop to the outside of the loop. No need to consider arrays, with global variables. As an example.
     
     ```cpp
     while(i<10){
@@ -78,7 +78,7 @@
       i=i+1;
     }
     ```
-    那么表达式`a=i+1`与内部循环无关，可以提到j循环之外：
+    Then the expression `a=i+1` is irrelevant to the inner loop and can be referred to outside the j-loop as follows.
     ```cpp
     while(i<10){
       a=i+1;
@@ -88,186 +88,186 @@
       i=i+1;
     }
     ```
-    下面给出一些循环外提的tips：
-    a. 思考如何判断语句与循环无关，且外提没有副作用
-    b. 循环的条件块（就是在LoopSearch中找到的Base块）最多只有两个前驱，思考下，不变式应该外提到哪一个前驱。
+    The following are some tips for loop outer lifting.
+    a. Think about how to determine the statement is not related to the loop and there are no side effects of the outer lift
+    b. The conditional block of the loop (that is, the Base block found in LoopSearch) has at most two precursors, so think about which precursor the invariant should be referred to externally.
     
-3. **活跃变量分析**
+3. **active variable analysis**
 
-   能够实现分析bb块的入口和出口的活跃变量，参考资料见附件(紫书9.2.4节)，在`ActiveVars.hpp`中定义了两个成员`live_in`, `live_out`，你需要将`pair<bb, IN[bb]>`插入`live_in`的map 结构中，将`pair<bb, OUT[bb]>`插入`live_out` 的map 结构中，并调用ActiveVars类中的print()方法输出bb活跃变量情况到json文件，助教会根据你输出的json文件进行批改。(为了保证输出变量名字的一致性，请不要对指令，bb等进行命名操作)
+   The active variables that enable the analysis of the entry and exit of bb blocks, see the annex for reference (section 9.2.4 of the Purple Book), are defined in `ActiveVars.hpp` with two members `live_in`, `live_out`, you need to insert `pair<bb, IN[bb]>` into the map structure of `live_in` and ` pair<bb, OUT[bb]>` into the map structure of `live_out`, and call the print() method in the ActiveVars class to output the bb active variable case to a json file, and the helper will approve the json file based on your output. (To ensure the consistency of output variable names, please do not perform naming operations on instructions, bb, etc.)
    
-   **提示**：材料中没有phi节点的设计，因此数据流方程：$OUT[B] =\cup_{s是B的后继}IN[S]$ 的定义蕴含着S入口处活跃的变量在它所有前驱的出口处都是活跃的，由于`phi`指令的特殊性，例如`%0 = phi [%op1, %bb1], [%op2, %bb2]`如果使用如上数据流方程，则默认此`phi`指令同时产生了`op1`与`op2`的活跃性，而事实上只有控制流从`%bb1`传过来才有`%op1`的活跃性，从`%bb2`传过来才有`%op2`的活跃性。因此对此数据流方程需要做一些修改。
+   **Hint**: There is no phi node design in the material, so the data flow equation: $OUT[B] = \cup_{s is a successor of B}IN[S]$ is defined to imply that a variable active at the entrance of S is active at the exit of all its predecessors, due to the special nature of the `phi` instruction, e.g. `%0 = phi [%op1, %bb1], [%op2, % bb2]` If you use the data flow equation as above, by default this `phi` instruction produces both `op1` and `op2` active, while in fact only the control flow coming from `%bb1` has `%op1` active and coming from `%bb2` has `%op2` active. So some modifications need to be made to this data flow equation.
    
 4. ...
 
 
-#### Bonus：选做优化Pass
-以下优化可以参考[毕业设计](https://github.com/alicemare/learn_compiler)，不做强制要求，可以自由发挥，但是需要在报告中说明达到的效果，并在线下验收时展示，选做Pass 在`2022/06/11`之前都可以联系助教验收，然后由助教统一安排线下验收。
-1. 标记式死代码删除(支持过程间分析)
-3. 函数内联
-4. 块间公共子表达式删除
-5. 尾递归消除
-6. 多线程
-7. 向量化
-   - 参考 clang `clang -O3 -mllvm -riscv-v-vector-bits-min=256 -save-temps -Wno-unused-command-line-argument --target=riscv64-unknown-elf -march=rv32gcv0p10 -menable-experimental-extensions -mabi=lp32d` 的运行结果对 `vectorize.py` 和 `vectorize1.py` 进行优化。
-   - 参考 [PPT](https://riscv.org/wp-content/uploads/2018/12/RISC-V-Vector-Performance-Analysis-Guy-Lemieux.pdf), [PPT](https://llvm.org/devmtg/2019-04/slides/TechTalk-Kruppe-Espasa-RISC-V_Vectors_and_LLVM.pdf) 和 [Blog](https://gms.tf/riscv-vector.html)
-8. 访存优化
-9.  ...
+#### Bonus: Optional Optimization Pass
+The following optimization can be referred to [graduation design](https://github.com/alicemare/learn_compiler), no mandatory requirements, free to play, but need to explain in the report to achieve the effect, and offline acceptance to show, optional to do Pass until `2022/06/11` can contact the teaching assistant to accept Then the teaching assistant will arrange offline acceptance.
+1. tokenized dead code removal (inter-process analysis supported)
+3. function inlining
+4. inter-block public sub-expression removal
+5. tail recursion elimination
+6. multi-threading
+7. vectorization
+   - Reference clang `clang -O3 -mllvm -riscv-v-vector-bits-min=256 -save-temps -Wno-unused-command-line-argument --target=riscv64-unknown-elf -march= The results of running rv32gcv0p10 -menable-experimental-extensions -mabi=lp32d` are optimized for `vectorize.py` and `vectorize1.py`.
+   - References [PPT](https://riscv.org/wp-content/uploads/2018/12/RISC-V-Vector-Performance-Analysis-Guy-Lemieux.pdf), [PPT](https://llvm.org/devmtg/2019-04/slides/TechTalk-Kruppe-Espasa-RISC-V_Vectors_and_LLVM.pdf) and [Blog](https://gms.tf/riscv-vector.html)
+8. access optimization
+9. ...
 
-#### PAIII Bonus代码与实验报告提交
-1. 基本优化Pass的代码都写在`src/optimization/`目录下面，头文件放入`include/optimization/`当中，最后只会在这两个目录下验收代码文件。
-2. 对于选做的优化Pass，需要发邮件给助教，统一线下验收。
-3. 需要在 `README.md` 撰写实验报告，且由队长说明成员贡献比率。其中，包括代码阅读部分的报告，解释你们的基本优化Pass的设计，遇到的困难和解决方案。
+#### PAIII Bonus Code and Lab Report Submission
+1. The code of the basic optimization pass is written in the `src/optimization/` directory, and the header files are placed in `include/optimization/`, and only the code files will be accepted in these two directories.
+2. For the optional Optimization Pass, you need to send an email to the teaching assistant to unify the offline acceptance. 3.
+3. you need to write a lab report in `README.md`, and the team leader should indicate the contribution ratio of the members. This includes a report on the code reading part, explaining the design of your basic optimization Pass, the difficulties encountered and the solutions.
 
 
-注意：组队实验意味着合作，但是小组间的交流是受限的，且严格**禁止**代码的共享。除此之外，如果小组和其它组进行了交流，必须在 `README.md`  中记录下来交流的小组和你们之间交流内容。
+Note: Team experiments imply collaboration, but communication between groups is limited and sharing of code is strictly **prohibited**. In addition, if the group communicates with other groups, you must document in `README.md` the group that communicated and what you communicated with each other.
 
-## 1. 实验框架
+## 1. Experimental framework
 
-本次实验使用了由C++编写的 LightIR 来在IR层面完成优化化简，为了便于大家进行实验，助教对之前的`ChocoPy`增加了选项，用来选择是否开启某种优化；另外，若想要另外单独去进行某个优化Pass的调试，可以利用助教给出的PassManager来进行Pass的注册和运行。
+This experiment uses LightIR written in C++ to simplify the optimization at the IR level. In order to facilitate the experiment, the assistant professor has added an option to the previous `ChocoPy` to choose whether to enable a certain optimization; in addition, if you want to debug a certain optimized Pass separately, you can use the PassManager given by the assistant professor to Pass registration and operation.
 
-在`include/ir-optimizer/chocopy_optimization.hpp`中，定义了一个用于管理Pass的类`PassManager`。它的作用是注册与运行Pass。它提供了以下接口：
+In `include/ir-optimizer/chocopy_optimization.hpp`, a class `PassManager` is defined for managing Pass. Its role is to register and run Pass. it provides the following interfaces.
 ```cpp
 PassManager pm(module.get())
-pm.add_Pass<Mem2Reg>(emit)  //注册Pass，emit为true时打印优化后的IR
-pm.run()  //按照注册的顺序运行Pass的run()函数
+pm.add_Pass<Mem2Reg>(exit) //register Pass, print optimized IR when exit is true
+pm.run() //Run the run() function of Pass in the order of registration
 ```
-基本Pass开发：
+Basic Pass development.
 
-每一个Pass有一个cpp文件和对应的hpp文件，可以在hpp里定义辅助类或者成员变量使用，在cpp里的run()函数实现你的Pass。
+Each Pass has a cpp file and a corresponding hpp file. You can define auxiliary classes or member variables to use in hpp, and implement your Pass in the run() function in cpp.
 
-## 2. 运行与调试
+## 2. Run and debug
 
-### 运行 chocopy
+### Run chocopy
 ```sh
 mkdir build && cd build
-cmake ..
+cmake ...
 make ir-optimizer
 ```
-编译后会产生 `ir-optimizer` 程序，它能将.py文件输出为LLVM IR，也可以利用clang将IR编译成二进制。程序逻辑写在`chocopy_lightir.cpp`中。
+The compilation will produce the `ir-optimizer` program, which outputs the .py file as an LLVM IR, and can also compile the IR into binary using clang. The program logic is written in `chocopy_lightir.cpp`.
 
-它通过`[-pass [pass_name]]`开关来控制优化Pass的使用，当需要对 `.py` 文件测试时，可以这样使用：
+It controls the use of optimized Pass via the `[-pass [pass_name]]` switch, which can be used when a test of a `.py` file is needed, as follows
 ```bash
 ./ir-optimizer [-pass Mem2reg] [-pass ConstPropagation] [-pass ActiveVars] [-pass LoopInvariant] <input-file>
 ```
-### 自动测试
-助教贴心地为大家准备了自动测试脚本，它在 `tests/bonus.py`，使用方法如下：
-* 有三个可用的选项：`--ConstPropagation`/`-C`，`--LoopInvHoist`/`-L`，`--ActiveVars/-A'`分别表示用来评测常量传播Pass以及循环不变式外提Pass，以及活跃变量分析Pass。
+### Automated testing
+The helper has kindly prepared an automated test script for you, which is in `tests/bonus.py` and is used as follows.
+* There are three available options: `-ConstPropagation`/`-C`, `-LoopInvHoist`/`-L`, and `-ActiveVars/-A'` which indicate that they are used to evaluate constant propagation Pass as well as loop invariant outer lift Pass, and active variable analysis Pass, respectively.
 
-* 脚本中会使用`taskset`将程序与CPU核心进行绑定，以此来提高时间测试的稳定性；当然如果虚拟机中没有该命令则通过下面的命令来安装：
+* The script uses ``taskset`` to bind the program to the CPU core to improve the stability of the time test; of course, if the command is not available in the virtual machine, it is installed with the following command.
   ```bash
   sudo apt install schedtool
   ```
   
-* 评测脚本会对样例进行编译和执行，然后对生成的可执行文件首先检查结果的正确性，每个样例的正确结果会放在.out文件中，结果正确的情况下才会去进一步评测运行时间。另外，在每类样例目录下中的`baseline`目录中还提供了相应testcase的`.ll`文件来作为baseline，基本Pass的优化效果得分也是要根据baseline的时间来进行计算。
+* The evaluation script will compile and execute the samples, and then check the correctness of the results in the resulting executable file first, and the correct results of each sample will be placed in the .out file. In addition, the `.ll` file of the corresponding testcase is provided as a baseline in the `baseline` directory under each category of samples, and the optimization score of basic Pass is also calculated based on the time of the baseline.
 
-* 如果显示执行时间的表格中出现了`None`则表示该样例有错误。
+* If `None` appears in the table showing the execution time, it means that the sample has errors.
 
-* 每个样例会运行三次取平均时间（时间单位是s）并且保留两位小数输出，当然每个样例的运行次数也可以自行更改脚本中`repeated_time`变量。
+* Each sample is averaged three times (in s) and output with two decimal places, but the number of times each sample is run can be changed by changing the `repeated_time` variable in the script.
 
-* 活跃变量Pass测试将与答案json文件脚本对比，得分计算规则见下面评分标准
+* The active variable Pass test will be compared with the answer json file script, and the rules for calculating the score are given in the following scoring criteria
 ```sh
-# 在 tests/lab5 目录下运行：
-./lab5_test.py -L
+# In the tests/pa3 directory run.
+./bonus.py -L
 ```
-如果完全正确，它会输出：
+If it is exactly right, it will output.
 ```
 ========== LoopInvHoist ==========
 Compiling  
 100%|███████████████| 8/8 [00:00<00:00, 12.16it/s]
 Evalution 
-100%|███████████████| 8/8 [00:49<00:00,  6.14s/it]
-Compiling  -loop-inv-hoist
+100%|███████████████| 8/8 [00:49<00:00, 6.14s/it]
+Compiling -loop-inv-hoist
 100%|███████████████| 8/8 [00:00<00:00, 11.85it/s]
 Evalution 
-100%|███████████████| 8/8 [00:10<00:00,  1.25s/it]
+100%|███████████████| 8/8 [00:10<00:00, 1.25s/it]
 Compiling baseline files
 100%|███████████████| 8/8 [00:00<00:00, 13.63it/s]
 Evalution 
-100%|███████████████| 8/8 [00:07<00:00,  1.09it/s]
-testcase         before optimization     after optimization      baseline
-testcase-1              0.63                    0.36              0.36
-testcase-2              0.46                    0.38              0.37
-testcase-3              0.62                    0.36              0.36
-testcase-4              0.40                    0.39              0.39
-testcase-5              4.96                    0.38              0.38
-testcase-6              1.03                    0.08              0.08
-testcase-7              2.11                    0.24              0.24
-testcase-8              1.98                    0.25              0.25
+100%|███████████████| 8/8 [00:07<00:00, 1.09it/s]
+testcase before optimization after optimization baseline
+testcase-1 0.63 0.36 0.36
+testcase-2 0.46 0.38 0.37
+test case-3 0.62 0.36 0.36
+testcase-4 0.40 0.39 0.39
+test case-5 4.96 0.38 0.38
+test case-6 1.03 0.08 0.08
+testcase-7 2.11 0.24 0.24
+testcase-8 1.98 0.25 0.25
 ```
-如果要增加样例，直接在样例目录中添加文件即可，命名参考目录下的其他文件。
+If you want to add samples, just add files directly to the samples directory, naming the other files in the reference directory.
 
 
 ### logging
 
-[logging](../common/logging.md) 是帮助大家打印调试信息的工具，如有需求可以阅读文档后进行使用
+[logging](../common/logging.md) is a tool to help you print debugging information, you can read the documentation and use it if you need to
 
-### 建议
+### Suggestions
 
-1. 比较你们编写的编译器产生的 IR 和 clang 产生的IR来找出可能的问题或发现新的思路
-2. 使用 logging 工具来打印调试信息
-2. 使用 GDB 等软件进行单步调试来检查错误的原因
-3. 合理分工
+1. compare the IR generated by the compiler you wrote with the IR generated by clang to find possible problems or discover new ideas
+2. use logging tools to print debugging information
+2. use software such as GDB for single-step debugging to check the cause of errors
+3. rational division of labor
 
-## 3. 提交要求
+## 3. Submission requirements
 
-### 目录结构
+### Directory structure
 
 
-### 提交要求和评分标准
+### Submission requirements and scoring criteria
 
-- 提交时间
+- Submission time
 
-  本次实验分阶段验收：
+  This experiment is accepted in phases.
 
-  **阶段一**：验收代码阅读报告及相关思考题 
+  **Phase I**: Acceptance of code reading report and related reflection questions 
 
-  **阶段二**：验收lab5要求提交的代码
+  **Phase II**: Acceptance of the code required by lab5
 
-* 提交要求  
-  本实验是组队实验，我们将收取**队长**实验仓库中的内容
+* Submission requirements  
+  This experiment is a group experiment, we will collect the content in the **Captain** experiment repository
   
-  * 实验部分:
-    * 需要填补 
+  * Experiment section :
+    * Need to fill 
     
-      `./include/ir-optimizer/chocopy_optimization.hpp`，`./src/ir-optimizer/chocopy_optimization.cpp`
+      `./include/ir-optimizer/chocopy_optimization.hpp`, `./src/ir-optimizer/chocopy_optimization.cpp`
 
-    * 需要在 `README.md` 目录下撰写实验报告，且由队长说明成员贡献比率
+    * The experiment report should be written in the `README.md` directory, and the team leader should indicate the contribution rate of the members.
     
-    * 本次实验需要更新
+    * This experiment needs to be updated
     
       `./include/ir-optimizer/chocopy_optimizer.hpp`
 
-    * **选做Pass**在`2022/06/11`之前都可以联系助教验收，然后由助教统一安排线下验收，该部分由学生现场演示，**不需要**撰写实验报告。
-* 评分标准: 最终评分按照组队规则，实验完成分组成如下：
-  * 阶段一 代码阅读
+    * **Optional Pass** can contact the teaching assistant for acceptance until `2022/06/11`, and then the teaching assistant will arrange offline acceptance, and the part will be demonstrated by the students on site, **no need to **write the experiment report.
+* Scoring criteria: The final scoring is in accordance with the team rules, and the experiment completion score consists of the following.
+  * Stage 1 Code Reading
     
-    * README.md (5 分)
-  * 阶段二 优化Pass开发
-    * **基本Pass (55 分)**
-      * README.md (10 分)
+    * README.md (5 points)
+  * Phase II Optimization Pass Development
+    * **Basic Pass (55 points)**
+      * README.md (10 points)
       
-      * 常量传播 (15 分)
+      * Constant Propagation (15 points)
         ```
-        对于每一个testcase: 
-        (before_optimization-after_optimization)/(before_optimization-baseline) > 0.8 得满分
-        (before_optimization-after_optimization)/(before_optimization-baseline) > 0.5 得85%分数
-        (before_optimization-after_optimization)/(before_optimization-baseline) > 0.2 得60%分数
+        For each testcase: 
+        (before_optimization-after_optimization)/(before_optimization-baseline) > 0.8 scores full points
+        (before_optimization-after_optimization)/(before_optimization-baseline) > 0.5 for a score of 85%
+        (before_optimization-after_optimization)/(before_optimization-baseline) > 0.2 for a score of 60%
         ```
-        **注**：`before_optimization`以助教
+        **Note**: `before_optimization` to help teach
 
-        若编译出错或者运行出错将不得分，此外评测时所用的`testcase`与发布的不完全一致，最终的评分会映射到15分的总分区间。
+        No score will be given if there is a compile error or run error, in addition the `testcase` used in the evaluation is not exactly the same as the published one, the final score will be mapped to a total score range of 15 points.
         
-      * 循环不变式外提 (15 分)
-        评分参考常量传播。
+      * Cyclic invariant outpropagation (15 points)
+        Scoring reference constant propagation.
         
-      * 活跃变量 (15 分)
+      * Active variable (15 points)
       
-        活跃变量的一个bb的入口处活跃变量或者出口处活跃变量的非空集合算一个分析结果，每个分析结果同分，对于每个分析结果`result`评分采取以下公式，（正确分析结果列表是`answer`）
+        The non-empty set of active variables at the entrance or active variables at the exit of a bb of active variables counts as one analysis result, each with the same score, and for each analysis result `result` scoring takes the following formula, (the correct list of analysis results is `answer`)
         $$
         score = \frac{(answer\cap result).size()-(result-answer\cap result).size()}{answer.size()}
         $$
-        例如：
+        Example.
       
         ```json
         "live_in":{
@@ -275,20 +275,20 @@ testcase-8              1.98                    0.25              0.25
             "label8": ["%arg0","%arg1","%op5","%op6","%op8",]
           //...
         }
-        // 算一个分析结果，如果正确答案是如下结果，
+        // Count the result of an analysis if the correct answer is the following
         "live_in":{
             //...
             "label8": ["%arg0","%arg1","%op5","%op6","%op7",]
           //...
         }
-        // 则相比较于答案，缺少了op7，多分析了op8则此条分析结果得分为(4-1)/5=0.6
+        // then compared to the answer, the lack of op7, more analysis of op8 then this analysis results in a score of (4-1)/5 = 0.6
         ```
       
-    * **选做Pass**
-      助教会综合大家的实现完成度和难度给分（是队伍里面的每个人都能有哦）。
+    * **Optional Pass**
+      The assistant teacher will integrate everyone's implementation completion and difficulty to give points (is everyone inside the team can have oh).
     
-  * 禁止执行恶意代码，违者本次实验0分处理
+  * Prohibit the implementation of malicious code, violators of this experiment 0 points to deal with
 
-* 关于抄袭和雷同
-  经过助教和老师判定属于实验抄袭或雷同情况，所有参与方一律零分，不接受任何解释和反驳。如有任何问题，欢迎提issue进行批判指正。
+* About plagiarism and similarity
+  After the teaching assistant and teacher determine that the experiment is plagiarized or similar, all participants will receive zero points, and will not accept any explanation or rebuttal. If you have any questions, please feel free to issue a critique and correction.
 

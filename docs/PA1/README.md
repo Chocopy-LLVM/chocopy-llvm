@@ -1,39 +1,39 @@
-# Programing Assignment I 文档
+# Programing Assignment I Documentation
 
 <!-- TOC -->
 
-- [Programing Assignment I 文档](#programing-assignment-i-文档)
-  - [0. 基础知识](#0-基础知识)
-    - [0.1 Python3词法](#01-python3词法)
-    - [0.2 FLEX简单使用](#02-flex简单使用)
-  - [0.4 ChocoPy 语法](#04-chocopy-语法)
-      - [ChocoPy 语法](#chocopy-语法)
-    - [0.4 BISON简单使用](#04-bison简单使用)
-      - [思考题](#思考题)
-    - [0.5 Bison 和 Flex 的关系](#05-bison-和-flex-的关系)
-  - [1. 实验要求](#1-实验要求)
-    - [主要工作](#主要工作)
-    - [提示](#提示)
-    - [1.1 目录结构](#11-目录结构)
+- [Programing Assignment I Documentation](#programing-assignment-i-documentation)
+  - [0. Basic knowledge](#0-basic-knowledge)
+    - [0.1 Python3 lexicography](#01-python3-lexicography)
+    - [0.2 Simple use of FLEX](#02-simple-use-of-flex)
+  - [0.4 ChocoPy Syntax](#04-chocopy-syntax)
+      - [ChocoPy Grammar](#chocopy-grammar)
+    - [0.4 BISON Simple Guidance](#04-bison-simple-guidance)
+      - [Thinking Questions](#thinking-questions)
+    - [0.5 The relationship between Bison and Flex](#05-the-relationship-between-bison-and-flex)
+  - [1. Experiment requirements](#1-experiment-requirements)
+    - [Main tasks](#main-tasks)
+    - [Hints](#hints)
+    - [1.1 Directory structure](#11-directory-structure)
     - [1.2 Bonus](#12-bonus)
-    - [1.2 编译、运行和验证](#12-编译运行和验证)
-    - [1.3 提供可用的测试用例](#13-提供可用的测试用例)
-    - [1.4 评分](#14-评分)
+    - [1.2 Compile, run and verify](#12-compile-run-and-verify)
+    - [1.3 Provide usable test cases](#13-provide-usable-test-cases)
+    - [1.4 Scoring](#14-scoring)
 
 <!-- /TOC -->
 
-## 0. 基础知识
+## 0. Basic knowledge
 
-在本次实验中我们讲重点用到`FLEX`，`BISON`和以`Python3.6`为基础改编的`Chocopy`语言。这里对其进行简单介绍。
+In this experiment we will focus on `FLEX`, `BISON` and the `Chocopy` language, which is based on `Python 3.6`. Here is a brief introduction to them.
 
-### 0.1 Python3词法
+### 0.1 Python3 lexicography
 
-`ChocoPy`是Python语言的一个子集，不包含`asyncio`，装饰器，`yield`及`raise`语意，该语言的语法在伯克利 [网站](https://chocopy.org/)
-有详细介绍，它可以很容易地被编译到RISC-V这样的目标上。该语言使用正式的语法、类型规则和操作语义进行了全面的规定。ChocoPy是由Rohan Padhye和Koushik Sen设计的，Paul
-Hilfinger也做出了很大贡献。你可以在 [这里](https://chocopy.org/chocopy_language_reference.pdf)
-找到这个语言的定义。伯克利提供的用java版本的文档在[这](./doc/berkeley)
+`ChocoPy` is a subset of the Python language that does not contain `asyncio`, decorators, `yield` and `raise` semantics. The syntax of the language is described in detail at Berkeley [website](https://chocopy.org/)
+The language's syntax is described in detail at Berkeley [website](), and it can be easily compiled to targets like RISC-V. The language is fully specified using formal syntax, type rules, and operational semantics.ChocoPy was designed by Rohan Padhye and Koushik Sen, with Paul
+Hilfinger also contributed significantly. You can find the definition of this language at [here](https://chocopy.org/chocopy_language_reference.pdf)
+to find the definition of this language. Berkeley provides documentation in java version at [here](./docs/berkeley)
 
-1. 关键字
+1. keywords
 
   ```
   False,None,True,and,as,assert,async,await,break,class,continue,
@@ -41,13 +41,13 @@ Hilfinger也做出了很大贡献。你可以在 [这里](https://chocopy.org/ch
   is,lambda,nonlocal,not,or,pass,raise,return,try,while,with,yield
   ```
 
-2. 专用符号
+2. Dedicated symbols
 
   ```
   + - * // % < > <= >= == != = ( ) [ ] , :  .  ->
   ```
 
-3. 标识符ID和整数NUM，通过下列正则表达式定义，最大 Int 为 $2^{31}−1$
+3. the identifier ID and the integer NUM, defined by the following regular expression, with a maximum Int of $2^{31}-1$
 
   ```
   letter = a|...|z|A|...|Z
@@ -56,7 +56,7 @@ Hilfinger也做出了很大贡献。你可以在 [这里](https://chocopy.org/ch
   INTEGER = digit+
   ```
 
-4. 注释用`#`表示
+4. Comments are indicated by `#`
 
   ```
   #
@@ -71,52 +71,51 @@ Hilfinger也做出了很大贡献。你可以在 [这里](https://chocopy.org/ch
 | "He\\"llo" |He\"llo |
 | "Hell\o" |(error: "o" not recognized) |
 
+- Note: `[`, `]` are separate tokens. `[1]` must not have spaces in between.
+    - `a[1]` should be recognized as four tokens: `a`, `[`, `1`, `]`
 
-- 注：`[`,  `]` 是分开的token。`[1]`中间不得有空格。
-    - `a[1]`应被识别为四个token: `a`, `[`, `1`, `]`
+### 0.2 Simple use of FLEX
 
-### 0.2 FLEX简单使用
-
-`FLEX`是一个生成词法分析器的工具。利用`FLEX`，我们只需提供词法的正则表达式，就可自动生成对应的C代码。整个流程如下图：
+`FLEX` is a tool for generating lexical parsers. With `FLEX`, we only need to provide the regular expressions for the lexicons, and the corresponding C code can be generated automatically. The whole process is illustrated as follows.
 
 ![](http://alumni.cs.ucr.edu/~lgao/teaching/Img/flex.jpg)
 
-首先，`FLEX`从输入文件`*.lex`或者`stdio`读取词法扫描器的规范，从而生成C代码源文件`lex.yy.c`。然后，编译`lex.yy.c`并与`-lfl`库链接，以生成可执行的`a.out`。最后，`a.out`
-分析其输入流，将其转换为一系列token。
+First, `FLEX` reads the lexical scanner specification from the input file `*.lex` or `stdio` to generate the C code source file `lex.yy.c`. Then, `lex.yy.c` is compiled and linked with the `-lfl` library to generate the executable `a.out`. Finally, `a.out`
+parses its input stream and converts it into a series of tokens.
 
-我们以一个简单的单词数量统计的程序wc.l为例:
+Let's take a simple program wc.l for word count as an example:
 
 ```c
 %{
-//在%{和%}中的代码会被原样照抄到生成的lex.yy.c文件的开头，您可以在这里书写声明与定义
+//The code in %{ and %} is copied as is to the beginning of the resulting lex.yy.c file, where you can write the declarations and definitions
 #include <string.h>
 int chars = 0;
 int words = 0;
 %}
 
 %%
- /*你可以在这里使用你熟悉的正则表达式来编写模式*/
- /*你可以用C代码来指定模式匹配时对应的动作*/
- /*yytext指针指向本次匹配的输入文本*/
- /*左部分（[a-zA-Z]+）为要匹配的正则表达式，
- 	右部分（{ chars += strlen(yytext);words++;}）为匹配到该正则表达式后执行的动作*/
+ /* You can use your familiar regular expressions to write patterns here */
+ /* You can use C code to specify the corresponding action when the pattern is matched */
+ /* The yytext pointer points to the input text for this match */
+ /* The left part ([a-zA-Z]+) is the regular expression to be matched, the
+ 	The right part ({ chars += strlen(yytext);words++;}) is the action to be performed when the regular expression is matched */
 [a-zA-Z]+ { chars += strlen(yytext);words++;}
 
 
 . {}
- /*对其他所有字符，不做处理，继续执行*/
+ /* For all other characters, continue without processing */
 
 %%
 
 int main(int argc, char **argv){
-    //yylex()是flex提供的词法分析例程，默认读取stdin      
+    //yylex() is a lexical analysis routine provided by flex, which reads stdin by default      
     yylex();                                                               
     printf("look, I find %d words of %d chars\n", words, chars);
     return 0;
 }
 ```
 
-使用Flex生成lex.yy.c
+Use Flex to generate lex.yy.c
 
 ```bash
 [TA@TA example]$ flex wc.l 
@@ -128,17 +127,17 @@ look, I find 2 words of 10 chars
 [TA@TA example]$ 
 ```
 
-*注: 在以stdin为输入时，需要按下ctrl+D以退出*
+*Note: When using stdin as input, you need to press ctrl+D to exit*
 
-至此，你已经成功使用Flex完成了一个简单的分析器！
+At this point, you have successfully completed a simple parser using Flex!
 
-## 0.4 ChocoPy 语法
+## 0.4 ChocoPy Syntax
 
-本小节将给出ChocoPy的语法，详情请参考[ChocoPy Language Reference](../chocopy_language_reference.pdf)。
+This subsection will give the syntax of ChocoPy, for details please refer to [ChocoPy Language Reference](./chocopy_language_reference.pdf).
 
-我们将 ChocoPy 的所有规则分为五类。
+We divide all the rules of ChocoPy into five categories.
 
-1. 字面量、关键字、运算符与标识符
+1. literals, keywords, operators and identifiers
     - `ID`
     - `type`
     - `bin_op`
@@ -154,12 +153,12 @@ look, I find 2 words of 10 chars
         - `less` <
         - `more` >
         - `is` is
-2. 声明
+2. Declarations
     - `declaration-list`
         - `var-declaration`
         - `fun-declaration`
         - `class-declarations`
-3. 语句
+3. Statement
     - `statement-list`
         - `simple-stmt`
             - `pass-stmt`
@@ -167,46 +166,46 @@ look, I find 2 words of 10 chars
         - `if-stmt`
         - `while-stmt`
         - `for-stmt`
-4. 表达式
+4. Expression
     - `not-expr`
     - `bin-expr`
     - `member-expr`
     - `index-expr`
     - `if-expr`
     - `literal`
-5. 其他
+5. Other
     - `params`
     - `param-list`
     - `block`
     - `args`
     - `arg-list`
 
-起始符号是 `program`。
+The start symbol is `program`。
 
-#### ChocoPy 语法
+#### ChocoPy Grammar
 
 ![img.png](img.png)
 
-### 0.4 BISON简单使用
+### 0.4 BISON Simple Guidance
 
-本次实验需要在已完成的 `flex` 词法分析器的基础上，进一步使用 `bison` 完成语法分析器。
+This experiment involves building on the completed `flex` lexical parser and using `bison` to complete the syntax parser.
 
-Tips：在未编译的代码文件中是无法看到关于协同工作部分的代码，建议先编译 1.3 给出的计算器样例代码，再阅读 `./[build_dir]/src/parser/` 中的 `chocopy.tab.c`, `lex.yy.c`
-与 `chocopy.tab.h` 文件
+Tips: You cannot see the co-working code in the uncompiled code file. It is recommended to compile the sample calculator code given in 1.3 first, and then read `./[build_dir]/src/parser/` for `chocopy.tab.c`, `lex.yy.c`, and `chocopy.tab.c`.
+and `chocopy.tab.h` files
 
-#### 思考题
+#### Thinking Questions
 
-本部分不算做实验分，出题的本意在于想要帮助同学们加深对实验细节的理解，欢迎有兴趣和余力的同学在报告中写下你的思考答案，或者在issue中分享出你的看法。
+This section does not count as an experiment, the intention of the questions is to help students deepen their understanding of the details of the experiment, you are welcome to write down your answers in the report or share your opinion in the issue.
 
-1. 在1.3样例代码中存在左递归文法，为什么 `bison` 可以处理？（提示：不用研究`bison`内部运作机制，在下面知识介绍中有提到 `bison` 的一种属性，请结合课内知识思考）
-2. 请在代码层面上简述下 `yylval` 是怎么完成协同工作的。（提示：无需研究原理，只分析维护了什么数据结构，该数据结构是怎么和`$1`、`$2`等联系起来？）
-3. 请尝试使用1.3样例代码运行除法运算除数为0的例子（测试case中有）看下是否可以通过，如果不，为什么我们在case中把该例子认为是合法的？（请从语法与语义上简单思考）
-4. 能否尝试修改下1.3计算器文法，使得它支持除数0规避功能。
+1. There is a left recursive grammar in the sample code of 1.3, why can `bison` handle it? (Hint: you don't need to study the inner workings of `bison`, there is a property of `bison` mentioned in the following introduction, please think about it in the context of the class)
+2. briefly explain at the code level how `yylval` can do collaborative work. (Hint: no need to study the principle, just analyze what data structure is maintained and how that data structure is related to `$1`, `$2`, etc.)
+3. please try to run the example of division operation with division 0 (in the test case) using the 1.3 sample code to see if it passes, and if not, why we consider the example as legitimate in the case? (Please think briefly about the syntax and semantics)
+4. Can you try to modify the 1.3 calculator grammar so that it supports division by 0 avoidance?
 
-Bison 是一款解析器生成器（parser generator），它可以将 LALR 文法转换成可编译的 C 代码，从而大大减轻程序员手动设计解析器的负担。Bison 是 GNU 对早期 Unix 的 Yacc
-工具的一个重新实现，所以文件扩展名为 `.y`。（Yacc 的意思是 Yet Another Compiler Compiler。）
+Bison is a parser generator that converts LALR grammars into compilable C code, thus greatly reducing the burden on programmers to design parsers manually.
+Bison is a GNU reimplementation of the earlier Unix tool Yacc, so the file extension is `.y`. (Yacc stands for Yet Another Compiler Compiler.)
 
-每个 Bison 文件由 `%%` 分成三部分。
+Each Bison file is divided into three parts by `%%`.
 
 ```c
 %{
@@ -264,42 +263,42 @@ int main(void)
 }
 ```
 
-另外有一些值得注意的点：
+Some additional points worth noting are
 
-1. Bison 传统上将 token 用大写单词表示，将 symbol 用小写字母表示。
-2. Bison 能且只能生成解析器源代码（一个 `.c` 文件），并且入口是 `yyparse`，所以为了让程序能跑起来，你需要手动提供 `main` 函数（但不一定要在 `.y` 文件中——你懂“链接”是什么，对吧？）。
-3. Bison 不能检测你的 action code 是否正确——它只能检测文法的部分错误，其他代码都是原样粘贴到 `.c` 文件中。
-4. Bison 需要你提供一个 `yylex` 来获取下一个 token。
-5. Bison 需要你提供一个 `yyerror` 来提供合适的报错机制。
-6. Bison 如果提供全局变量 `yydebug` 可以给出接收过程输出。
+1. Bison traditionally represents tokens as uppercase words and symbols as lowercase letters.
+2. Bison can and can only generate parser source code (a `.c` file) and the entry point is `yyparse`, so in order to get the program running you need to provide the `main` function manually (but not necessarily in the `.y` file - you know what "link " is, right?) .
+3. Bison can't detect if your action code is correct - it can only detect errors in the grammar part, the rest of the code is pasted into the `.c` file as is.
+4. Bison requires you to provide a `yylex` to get the next token.
+5. Bison requires you to provide a `yyerror` to provide a proper error reporting mechanism.
+6. Bison requires that you provide a global variable `yydebug` to give the output of the receiving process.
 
-顺便提一嘴，上面这个 `.y` 是可以工作的——尽管它只能接受两个字符串。把上面这段代码保存为 `reimu.y`，执行如下命令来构建这个程序：
+Incidentally, the above `.y` works - although it can only accept two strings. Save the above code as ``reimu.y`` and execute the following command to build the program.
 
 ```shell
 $ bison reimu.y
 $ gcc reimu.tab.c
 $ ./a.out
-R<-- 不要回车在这里按 Ctrl-D
+R<-- Don't enter press Ctrl-D here
 rule2
 $ ./a.out
-<-- 不要回车在这里按 Ctrl-D
+<-- Don't enter and press Ctrl-D here
 Hello!
 rule1
 $ ./a.out
-blablabla <-- 回车或者 Ctrl-D
+blablabla <-- Enter or Ctrl-D
 Hello!
-rule1     <-- 匹配到了 rule1
-syntax error <-- 发现了错误
+rule1 <-- Match to rule1
+syntax error <-- error found
 ```
 
-于是我们验证了上述代码的确识别了该文法定义的语言 `{ "", "R" }`。
+So we verified that the above code does recognize the grammar definition language `{ "", "R" }`.
 
-### 0.5 Bison 和 Flex 的关系
+### 0.5 The relationship between Bison and Flex
 
-聪明的你应该发现了，我们这里手写了一个 `yylex` 函数作为词法分析器。而 lab1 我们正好使用 flex 自动生成了一个词法分析器。如何让这两者协同工作呢？特别是，我们需要在这两者之间共享 token
-定义和一些数据，难道要手动维护吗？哈哈，当然不用！下面我们用一个四则运算计算器来简单介绍如何让 bison 和 flex 协同工作——重点是如何维护解析器状态、`YYSTYPE` 和头文件的生成。
+As you may have noticed, we have hand-written a `yylex` function here as a lexical parser. And lab1 we just happened to use flex to automatically generate a lexical parser. How do we get the two to work together? In particular, we need to share token
+definitions and some data between the two, do we have to maintain them manually? Haha, of course not! Here's a quick overview of how to make bison and flex work together, using a quadratic calculator - with a focus on maintaining parser state, `YYSTYPE`, and header file generation.
 
-首先，我们必须明白，整个工作流程中，bison 是占据主导地位的，而 flex 仅仅是一个辅助工具，仅用来生成 `yylex` 函数。因此，最好先写 `.y` 文件。
+First, it is important to understand that bison dominates the entire workflow, while flex is only a helper, used only to generate `yylex` functions. Therefore, it is better to write the `.y` file first.
 
 ```c
 /* calc.y */
@@ -382,7 +381,7 @@ void yyerror(const char *s)
 %option noyywrap
 
 %{
-/* 引入 calc.y 定义的 token */
+/* introduce token defined by calc.y */
 #include "calc.tab.h"
 %}
 
@@ -399,7 +398,7 @@ void yyerror(const char *s)
 %%
 ```
 
-最后，我们补充一个 `driver.c` 来提供 `main` 函数。
+Finally, we add a `driver.c` to provide the `main` function.
 
 ```c
 int yyparse();
@@ -411,13 +410,13 @@ int main()
 }
 ```
 
-使用如下命令构建并测试程序：
+Build and test the program using the following command.
 
 ```shell
 $ bison -d calc.y 
-   (生成 calc.tab.c 和 calc.tab.h。如果不给出 -d 参数，则不会生成 .h 文件。)
+   (generate calc.tab.c and calc.tab.h. If the -d argument is not given, no .h file will be generated.)
 $ flex calc.l
-   (生成 lex.yy.c)
+   (generates lex.yy.c)
 $ gcc lex.yy.c calc.tab.c driver.c -o calc
 $ ./calc
 1+1
@@ -428,10 +427,10 @@ $ ./calc
  = 3.000000
 ```
 
-如果你复制粘贴了上述程序，可能会觉得很神奇，并且有些地方看不懂。下面就详细讲解上面新出现的各种构造。
+If you copy and paste the above program, you may find it amazing and incomprehensible in some places. The following is a detailed explanation of the new constructs that appear above.
 
-* `YYSTYPE`: 在 bison 解析过程中，每个 symbol 最终都对应到一个语义值上。或者说，在 parse tree 上，每个节点都对应一个语义值，这个值的类型是 `YYSTYPE`。`YYSTYPE`
-  的具体内容是由 `%union` 构造指出的。上面的例子中，
+* `YYSTYPE`: During bison parsing, each symbol eventually corresponds to a semantic value. Or, on the parse tree, each node corresponds to a semantic value, which is of type `YYSTYPE`. The specific content of `YYSTYPE`
+  is specified by the `%union` construct. In the above example, the
 
   ```c
   %union {
@@ -440,7 +439,8 @@ $ ./calc
   }
   ```
 
-  会生成类似这样的代码
+  will generate code like this
+
 
   ```c
   typedef union YYSTYPE {
@@ -449,9 +449,9 @@ $ ./calc
   } YYSTYPE;
   ```
 
-  为什么使用 `union` 呢？因为不同节点可能需要不同类型的语义值。比如，上面的例子中，我们希望 `ADDOP` 的值是 `char` 类型，而 `NUMBER` 应该是 `double` 类型的。
+  Why use `union`? Because different nodes may need different types of semantic values. For example, in the above example, we want the value of `ADDOP` to be of type `char`, while `NUMBER` should be of type `double`.
 
-* `$$` 和 `$1`, `$2`, `$3`, ...：现在我们来看如何从已有的值推出当前节点归约后应有的值。以加法为例：
+* `$$` and `$1`, `$2`, `$3`, ... : Now let's see how to derive the value of the current node from the existing value. As an example of addition.
 
   ```c
   term : term ADDOP factor
@@ -463,58 +463,58 @@ $ ./calc
        }
   ```
 
-  其实很好理解。当前节点使用 `$$` 代表，而已解析的节点则是从左到右依次编号，称作 `$1`, `$2`, `$3`...
+  It is actually quite easy to understand. The current node is represented by `$$`, and the resolved nodes are numbered from left to right as `$1`, `$2`, `$3`...
 
-* `%type <>` 和 `%token <>`：注意，我们上面可没有写 `$1.num` 或者 `$2.op` 哦！那么 bison 是怎么知道应该用 `union` 的哪部分值的呢？其秘诀就在文件一开始的 `%type`
-  和 `%token` 上。
+* `%type <>` and `%token <>`: note that we didn't write `$1.num` or `$2.op` above! So how does bison know which part of `union` to use? The secret is in the `%type` and `%token` at the beginning of the file.
+  and `%token` at the beginning of the file.
 
-  例如，`term` 应该使用 `num` 部分，那么我们就写
+  For example, `term` should use the `num` part, so we write
 
   ```c
   %type <num> term
   ```
 
-  这样，以后用 `$` 去取某个值的时候，bison 就能自动生成类似 `stack[i].num` 这样的代码了。
+  That way, when you use `$` to fetch a value later, bison will automatically generate code like `stack[i].num`.
 
-  `%token<>` 见下一条。
+  `%token<>` See next entry.
 
-* `%token`：当我们用 `%token` 声明一个 token 时，这个 token 就会导出到 `.h` 中，可以在 C 代码中直接使用（注意 token 名千万不要和别的东西冲突！），供 flex
-  使用。`%token <op> ADDOP` 与之类似，但顺便也将 `ADDOP` 传递给 `%type`，这样一行代码相当于两行代码，岂不是很赚。
+* `%token`: When we declare a token with `%token`, the token is exported to `.h` and can be used directly in C code (note that token names should not conflict with anything else!) for use by flex
+  for use in flex. `%token <op> ADDOP` is similar, but also passes `ADDOP` to `%type`, so one line of code is equivalent to two lines of code, which is very profitable.
 
-* `yylval`：这时候我们可以打开 `.h` 文件，看看里面有什么。除了 token 定义，最末尾还有一个 `extern YYSTYPE yylval;` 。这个变量我们上面已经使用了，通过这个变量，我们就可以在 lexer **
-  里面**设置某个 token 的值。
+* `yylval`: At this point we can open the `.h` file and see what's in it. In addition to the token definition, there is an `extern YYSTYPE yylval;` at the end. This variable, which we have used above, allows us to set the value of a token in lexer **
+  inside ** to set the value of a token.
 
-呼……说了这么多，现在回头看看上面的代码，应该可以完全看懂了吧！这时候你可能才意识到为什么 flex 生成的分析器入口是 `yylex`，因为这个函数就是 bison 专门让程序员自己填的，作为一种扩展机制。另外，bison（或者说
-yacc）生成的变量和函数名通常都带有 `yy` 前缀，希望在这里说还不太晚……
+Hoo ...... said all that, now look back at the code above, you should be able to read it completely! At this point you probably realized why the flex-generated parser entry is `yylex`, because this function is what bison specifically lets programmers fill in themselves as an extension mechanism. Also, bison (or
+yacc)-generated variable and function names are usually prefixed with `yy`, so hopefully it's not too late to say that here ......
 
-最后还得提一下，尽管上面所讲已经足够应付很大一部分解析需求了，但是 bison 还有一些高级功能，比如自动处理运算符的优先级和结合性（于是我们就不需要手动把 `expr` 拆成 `factor`, `term`
-了）。这部分功能，就留给同学们自己去探索吧！
+Finally, it should be mentioned that although the above is sufficient for a large part of the parsing needs, bison has some advanced features, such as automatic handling of operator precedence and union (so we don't need to manually split `expr` into `factor`, `term`
+). We'll leave this part to the students to explore on their own!
 
-## 1. 实验要求
+## 1. Experiment requirements
 
-本实验的输出遵循的是类[lsp](https://github.com/MaskRay/ccls/blob/master/src/lsp.hh)
-protocol，如你们在web上测试的情况可知，这种json的传输协议很适合作为前后端现实的交互接口，VSCode等IDE也使用相关protocol进行前端高亮。
+The output of this experiment follows the class [lsp](https://github.com/MaskRay/ccls/blob/master/src/lsp.hh)
+protocol, as you can see from your tests on the web, this json transfer protocol is very suitable as a realistic interaction interface between the front and back ends, and IDEs such as VSCode also use the relevant protocol for front-end highlighting.
 
-本次实验需要各位同学根据`ChocoPy`的词法和语法补全[chocopy.l](./src/parser/chocopy.l)以及[chocopy.y](./src/parser/chocopy.l)
-文件，完成完整的语法分析器，能够输出识别出的`token`，`type` ,`line_start(刚出现的行数)`，`pos_start(该行开始位置)`，`line_end(结束的行数)`, `pos_end(结束的位置,不包含)`
-。如：
+This experiment requires you to complete [chocopy.l] according to `ChocoPy` lexical and syntactic complements (./src/parser/chocopy.l) and [chocopy.y](./src/parser/chocopy.l)
+file, complete the complete syntax parser, able to output the identified `token`, `type` ,`line_start(the number of lines just appeared)`, `pos_start(the position where the line starts)`, `line_end(the number of lines ending)`, `pos_end(the position where it ends, not included)` .
+. For example.
 
-### 主要工作
+### Main tasks
 
-1. 了解 `bison` 基础知识和理解 ChocoPy 语法（重在了解如何将文法产生式转换为 `bison` 语句）
-2. 阅读 `./src/parser/chocopy_parse.cpp`，对应头文件 `./include/parser/chocopy_parse.hpp`（重在理解分析树如何生成）
-3. 了解 `bison` 与 `flex` 之间是如何协同工作，看懂pass_node函数并改写 Lab1 代码（提示：了解 `yylval` 是如何工作，在代码层面上如何将值传给`$1`、`$2`等）
-4. 补全 `src/parser/chocopy.y` 文件和 `chocopy.l` 文件
+1. learn `bison` basics and understand ChocoPy syntax (focus on how to convert grammar generators into `bison` statements)
+2. read `./src/parser/chocopy_parse.cpp`, corresponding to the header file `./include/parser/chocopy_parse.hpp` (focus on understanding how the parse tree is generated)
+3. understand how `bison` and `flex` work together, understand the pass_node function and rewrite the Lab1 code (hint: understand how `yylval` works and how to pass values to `$1`, `$2`, etc. at the code level)
+4. complete the `src/parser/chocopy.y` file and the `chocopy.l` file
 
-### 提示
+### Hints
 
-文本输入：
+Text input.
 
 ```c
  a: int = 1
 ```
 
-则识别结果应为：
+Then the recognition result should be
 
 ```shell
 a      IDNET     1       1       1      2
@@ -524,7 +524,7 @@ int     INT      1       3       1      6
 1      IDENT     1       7       1      8
 ```
 
-对语法的抽象语法树输出文件如下，注意location是对子节点树的开始结束取并集，除了PassStmt。
+The output file of the abstract syntax tree for the grammar is as follows, note that location is the beginning of the end of the sub-node tree taken and set, except for PassStmt.
 
 ```json
 {
@@ -547,74 +547,74 @@ int     INT      1       3       1      6
 }
 ```
 
-如果有词法错误，对应的errors为`CompilerError`且`syntax=true`。对语法接收的errors体现为`Error`
-，检测程序不会检查错误信息与个数，所以不需要考虑错误的贪心信息，可以找到一个不可接收的程序直接报错返回。
+If there is a lexical error, the corresponding error is `CompilerError` and `syntax=true`. The errors received for syntax are reflected as `Error`
+The detection procedure does not check the error information and the number of errors, so there is no need to consider the greedy information of the error, you can find a non-receivable program directly report an error to return.
 
-**具体的需识别token参考[chocopy.y](./src/parser/chocopy.y)，需要实现的抽象语法树参考[chocopy_parse.hpp](./include/parser/chocopy_parse.hpp)**
+** The specific token to be identified refers to [chocopy.y](./src/parser/chocopy.y), and the abstract syntax tree to be implemented refer to [chocopy_parse.hpp](./include/parser/chocopy_parse.hpp)**
 
-**特别说明：对于部分token，我们只需要进行过滤，即只需被识别，但是不应该被输出到分析结果中。因为这些token对程序运行不起到任何作用。**
+**Special note: For some of the tokens, we only need to filter them, i.e. they only need to be recognized, but should not be output to the parsing results. Because these tokens do not play any role in program operation. **
 
-> 注意，你所需修改的文件应仅有[chocopy.l](./src/parser/chocopy.l)和[chocopy.y](./src/parser/chocopy.y)，如果发现其他bug，请开分支只commit你认为的bug并提交PR。关于`FLEX`和`BISON`用法上文已经进行简短的介绍，更高阶的用法请参考百度、谷歌和官方说明。
+> Note that the only file you need to modify should be [chocopy.l](./src/parser/chocopy.l) and [chocopy.y](./If you find other bugs, please open a branch and just commit the bug you think you have and file a PR. `FLEX` and `BISON` usage has been briefly introduced above, for more advanced usage please refer to Baidu, Google and the official instructions.
 
-### 1.1 目录结构
+### 1.1 Directory structure
 
-详见[common/structure.md](./doc/common/structure.md)
+See [common/structure.md](./docs/common/structure.md)
 
 ### 1.2 Bonus
 
-在正确接收所有case的情况下没有Bison任何conflict。[20pts]
+No Bison any conflict in case all cases are received correctly.[20pts]
 
-### 1.2 编译、运行和验证
+### 1.2 Compile, run and verify
 
- 首先fork本repo，提交即会触发评分系统，禁止提交死循环程序拥塞CI，违者一次扣 [1pts]。
+ First fork this repo, submit that will trigger the scoring system, prohibit the submission of dead-loop program congestion CI, violators once deducted [1pts].
 
-* 编译
+* Compile
 
-  若编译成功，则将在 `./[build_dir]/` 下生成 `parser` 命令。
+  If the compilation is successful, it will be added to `./[build_dir]/` under the `parser` command.
 
-* 运行
+* Run
 
-  本次实验的 `parser` 命令使用 shell 的输入重定向功能，即程序本身使用标准输入输出（stdin 和 stdout），但在 shell 运行命令时可以使用 `<` `>` 和 `>>` 灵活地自定义输出和输入从哪里来。
+  The ``parser` command for this experiment uses the shell's input redirection feature, which means that the program itself uses standard input and output (stdin and stdout), but you can use ``<` `>` and ``>>` to flexibly customize where the output and input comes from when the shell runs the command.
 
   ```shell
   $ cd chocopy
-  $ ./build/parser               # 交互式使用（不进行输入重定向）
-  <在这里输入 ChocoPy代码，如果遇到了错误，将程序将报错并退出。>
-  <输入完成后按 ^D 结束输入，此时程序将输出解析json。>
-  $ ./build/parser < test.py # 重定向标准输入
-  <此时程序从 test.py 文件中读取输入，因此不需要输入任何内容。>
-  <如果遇到了错误，将程序将报错并输出错误json；否则，将输出解析json。>
-  $ ./build/parser test.py  # 不使用重定向，直接从 test.py 中读入
+  $ ./build/parser # Use interactively (no input redirection)
+  < Enter ChocoPy code here, if you encounter an error, the program will report an error and exit. >
+  < Press ^D to end input when done, the program will then output parsed json. >
+  $ ./build/parser < test.py # redirect standard input
+  < At this point the program reads the input from the test.py file, so no input is needed. >
+  < If an error is encountered, the program will report the error and output the error json; otherwise, it will output the parsed json. >
+  $ ./build/parser test.py # Read directly from test.py without redirection
   $ ./build/parser < test.py > out
-  <此时程序从 test.py 文件中读取输入，因此不需要输入任何内容。>
+  < At this point the program reads input from the test.py file, so no input is needed. >
   ```
 
-  通过灵活使用重定向，可以比较方便地完成各种各样的需求，请同学们务必掌握这个 shell 功能。
+  By using redirects flexibly, you can accomplish a variety of needs relatively easily, so make sure you master this shell feature.
 
-* 验证
+* Verification
 
-  本次试验测试案例较多，为此我们将这些测试分为两类：
+  There are many test cases in this experiment, so we divide them into two categories.
 
-    1. sample: 这部分测试均比较简单且单纯，适合开发时调试。
-    2. fuzz: 由fuzzer生成的正确的python文件，此项不予开源。
-    3. student: 这部分由同学提供。
+    1. sample: This part of the test is relatively simple and pure, suitable for debugging during development.
+    2. fuzz: The correct python file generated by fuzzer, which is not open source.
+    3. student: This part is provided by students.
 
-  我们使用python中的 `json.load()` 命令进行验证。将自己的生成结果和助教提供的 `xxx.ast` 进行比较。
+  We use the `json.load()` command in python to verify. Compare your own generated results with the `xxx.ast` provided by the teaching assistant.
 
   ```shell
   $ python3 ./duipai.py --pa 1
-  # 如果结果完全正确，则全 PASS，且有分数提示，一个正确的case 1 pts，此项评分按比例算入总评。选择chocopy的同学会在project部分分数上*1.2计入总评。
-  # 如果有不一致，则会汇报具体哪个文件哪部分不一致，且有详细输出。
+  # If the results are exactly correct, then all PASS and a score is indicated, a correct case 1 pts, and this score is prorated into the overall rating. Students who choose chocopy will get *1.2 on the project part of the score to count towards the overall rating.
+  # If there is inconsistency, it will be reported exactly which file and which part is inconsistent, and there is a detailed output.
   ```
 
-  **请注意助教提供的`testcase`并不能涵盖全部的测试情况，完成此部分仅能拿到基础分，请自行设计自己的`testcase`进行测试。**
-### 1.3 提供可用的测试用例
-对于每个学生，你需要在资源库的根目录下创建一个名为 `tests/pa1/student/` 的文件夹，并放置20个有意义的 `*.py` 测试案例，其中10个将通过所有的编译，另外10个将不通过编译，但测试你代码的错误报告系统。请注意，你的测试案例将被用来评估所有4个项目中其他人的代码，所以要有耐心，并对你的同学狠一点。你的最终成绩将在所有学生都提交了测试案例后重新计算。这一部分占项目部分的 [6 pts] ，但你可以降低其他学生的成绩。
+  **Please note that the ``testcase`` provided by the teaching assistant does not cover the whole test situation, and you will only get a basic score for completing this part, so please design your own ``testcase`` to test. **
+### 1.3 Provide usable test cases
+For each student, you need to create a folder named `tests/pa1/student/` in the root of the repository and place 20 meaningful `*.py` test cases, 10 of which will pass all compilations and the other 10 will not pass compilations but test the error reporting system of your code. Please note that your test cases will be used to evaluate the code of others in all 4 projects, so be patient and be tough on your fellow students. Your final grade will be recalculated after all students have submitted their test cases. This section accounts for [6 pts] of the project section, but you can lower the grades of other students.
 
-### 1.4 评分
+### 1.4 Scoring
 
-1. 基本测试样例[22*2pts]
-2. Fuzzer 测试[16pts]
-3. Student 测试[20pts]
-4. 提供TestCase[10pts]
-5. 报告[10pts]
+1. Basic Test Sample [22*2pts]
+2. Fuzzer test [16pts]
+3. Student test [20pts]
+4. Provide TestCase [10pts]
+5. Report [10pts]

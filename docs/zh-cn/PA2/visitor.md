@@ -1,17 +1,17 @@
-### 1.1 Understanding the Visitor Pattern
+### 1.1 了解Visitor Pattern
 
-Visitor Pattern is a design pattern that is widely used in LLVM project source code. When traversing some data structure (like a tree), if we need to do some extra specific operations on each node, Visitor Pattern is a good way to think about it.  
-Visitor Pattern is a design pattern created to solve the problem of coupling **stable data structures** and **variable operations**.
-The Visitor Pattern is a design pattern created to solve the problem of coupling **stable data structures** and **variable operations**. The solution is to add an interface inside the visited class to provide an external reception for visitors. The key is to have a method inside the data base class to accept visitors and pass its own reference to the visitor. Here is an application example to help understand the visitor pattern:
-You are a guest at a friend's house and you are the visitor; the friend accepts your visit, you go through the friend's description, and then make a judgment about the friend's description, which is the Visitor Pattern.  
-For more information about the meaning, patterns and characteristics of Visitor Pattern, students with ladders can refer to [Wikipedia](https://en.wikipedia.org/wiki/Visitor_pattern#C++_example).  
-The following example clearly shows how the Visitor Pattern works. This is a C++ program written by an assistant teacher to compute the result of the expression `4 * 2 - 2 / 4 + 5`.  
-One of the more important principles is the support for the function overloading feature in C++. In the code `treeVisitor.visit(node)`, depending on the specific type of the `node` object, the compiler will overload the function `visit(AddSubNode& node)`
-, `visit(NumberNode& node)`, `visit(MulDivNode& node)`
-Of the three, choose the corresponding implementation to call. You need to understand how the tree is traversed in this example below. Please find it in [report.md](./Reports/lab3/report.md) **answer question 2**.
+Visitor Pattern(访问者模式)是一种在LLVM项目源码中被广泛使用的设计模式。在遍历某个数据结构（比如树）时，如果我们需要对每个节点做一些额外的特定操作，Visitor Pattern就是个不错的思路。  
+Visitor Pattern是为了解决**稳定的数据结构**和**易变的操作耦合问题**
+而产生的一种设计模式。解决方法就是在被访问的类里面加一个对外提供接待访问者的接口，其关键在于在数据基础类里面有一个方法接受访问者，将自身引用传入访问者。这里举一个应用实例来帮助理解访问者模式:
+您在朋友家做客，您是访问者；朋友接受您的访问，您通过朋友的描述，然后对朋友的描述做出一个判断，这就是访问者模式。  
+有关 Visitor Pattern 的含义、模式和特点，有梯子的同学可参考[维基百科](https://en.wikipedia.org/wiki/Visitor_pattern#C++_example) 。  
+下面的例子可以清晰地展示Visitor Pattern的运作方式。这是助教编写的计算表达式 `4 * 2 - 2 / 4 + 5` 结果的C++程序。  
+其中较为重要的一点原则在于，C++中对函数重载特性的支持。在代码`treeVisitor.visit(node)`中，根据`node`对象具体类型的不同，编译器会在`visit(AddSubNode& node)`
+、`visit(NumberNode& node)`、`visit(MulDivNode& node)`
+三者中，选择对应的实现进行调用。你需要理解下面这个例子中tree是如何被遍历的。请在[report.md](./Reports/lab3/report.md)中**回答问题2**。
 
-<details
-  <summary>Example:Simple expression calculation - visitor.cpp</summary>
+<details>
+  <summary>例子:简单的表达式计算 - visitor.cpp</summary>
 
 ``` c++
 #include <iostream>

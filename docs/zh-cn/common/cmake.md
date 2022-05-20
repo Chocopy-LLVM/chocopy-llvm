@@ -1,17 +1,17 @@
-# cmake tool usage
+# cmake 工具使用
 
-# # A brief introduction to the compilation system
+## 编译系统的简单介绍
 
-For more details, please refer to this [ppt](https://www.victoryang00.cn/BuildSystem.pdf)
+详情可以参考这个[ppt](https://www.victoryang00.cn/BuildSystem.pdf)
 
-## A brief introduction to CMake
+## CMake 的简单介绍
 
-CMake is a simple cross-platform compilation system that automatically recognizes the input operating system and compiler and generates platform-ready compiled files. For example, Windows can specify `Visual Studio 16`, `Ninja` or `msys2` with `-G`, MacOS
-`-XCode` can be specified with `-G`. CMake also supports different languages such as `C++`, `Fortran`, `Cuda`, etc.
+CMake 是一个简易地跨平台编译系统，能自动识别输入的操作系统及编译器并生成平台可用的编译文件。如 Windows 通过 `-G` 可以指定 `Visual Studio 16`， `Ninja` 或者 `msys2`， MacOS
+通过 `-G` 可以指定 `XCode`。同时CMake还支持不同语言，如`C++`,`Fortran`,`Cuda`等。
 
-CMake is compiled with `add_excutable()` to generate executables and `add_library()` to generate libraries. The compilation options for the current file can be specified with `set(CMAKE_CXX_FLAGS)`.
+CMake 通过 `add_excutable()` 指定编译生成可执行文件， `add_library()` 指定编译生成库。通过 `set(CMAKE_CXX_FLAGS)` 可以指定当前文件的编译选项。
 
-CMake itself is a language that can simply write a [Quick Sort](https://zhuanlan.zhihu.com/p/121079042), or do string substitution and copy filenames, but generally all changeable files have scopes within subfolders.
+CMake 本身是一个语言，可以简单的写一个 [Quick Sort](https://zhuanlan.zhihu.com/p/121079042) ，也可以做字符串替换，拷贝文件名，但一般所有的可改变文件的作用域在子文件夹内。
 
 ```cmake
 cmake_minimum_required(VERSION 3.11)
@@ -19,7 +19,7 @@ cmake_minimum_required(VERSION 3.11)
 project(CMakeHeap)
 
 function(heap_adjust heap_ index n)
-    set(heap__ "${${heap_}}}")
+    set(heap__ "${${heap_}}")
     list(APPEND heap__ 0)
     math(EXPR n2 "${n} / 2 - 1")
     while (index LESS_EQUAL n2)
@@ -54,7 +54,7 @@ function(heap_adjust heap_ index n)
 endfunction()
 
 function(heap_make heap_)
-    set(heap__ "${${heap_}}}")
+    set(heap__ "${${heap_}}")
     list(LENGTH heap__ n)
     math(EXPR i "${n} / 2 - 1")
     while (i GREATER_EQUAL 0)
@@ -65,7 +65,7 @@ function(heap_make heap_)
 endfunction()
 
 function(heap_sort heap_)
-    set(heap__ "${${heap_}}}")
+    set(heap__ "${${heap_}}")
     list(LENGTH heap__ n)
     list(APPEND heap__ 0)
     math(EXPR i "${n} - 1")
@@ -94,10 +94,10 @@ heap_sort(heap)
 message("Output: ${heap}")
 ```
 
-For different compilers, CMake implements many functions internally, you need to find the corresponding `FMT-Config.cmake` with `find_library()`, for example `FLEX` and `BISON`.
-can be done with `ADD_FLEX_BISON_DEPENDENCY()` and `flex_target()` `bison_target()`. `LLVM` provides many macros such as `${LLVM_DEFINITIONS_LIST}`.
+对于不同的编译器，CMake 内部会实现很多可用的函数，需要通过 `find_library()` 找到其对应的`FMT-Config.cmake`，比如 `FLEX` 和 `BISON`
+可以通过 `ADD_FLEX_BISON_DEPENDENCY()` 及 `flex_target()` `bison_target()` 完成。 `LLVM` 则会提供很多宏如 `${LLVM_DEFINITIONS_LIST}`.
 
-When considering different architectures and operating systems, you can use `if($ENV{CLION_IDE_WSL})` or `elseif (MSVC)` to know and define your own C++-aware macros and compiler/compiler options.
+考虑不同体系结构及操作系统的问题时，可以通过 `if($ENV{CLION_IDE_WSL})` 或者 `elseif (MSVC)` 来知道并自行定义 C++ 可知的宏及编译器/编译选项。
 
-For a multi-directory CMake build system, simply create CMakeList.txt in each folder, add `add_subdirectory()` to CMakeList.txt in the upper directory, have `${PROJECT_CURRENT_DIR}`
-to access the current directory, `${PROJECT_SOURCE_DIR}` to access the root code directory, and `${PROJECT_BINARY_DIR}` to access the build directory `[build_dir]`.
+对于多目录 CMake 构建系统，仅需在每个文件夹中创建 CMakeList.txt，在上层目录的 CMakeList.txt 中添加 `add_subdirectory()` 即可，有 `${PROJECT_CURRENT_DIR}`
+来访问当前目录，同时 `${PROJECT_SOURCE_DIR}` 用于访问根源码目录， `${PROJECT_BINARY_DIR}` 用于访问构建所在目录 `[build_dir]`。

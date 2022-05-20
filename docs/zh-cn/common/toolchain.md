@@ -1,18 +1,18 @@
-# Compiler toolchain introduction
+# 编译器工具链介绍
 
 ## GNU
 
-The general compiler is divided into three stages: cc1,as,ld.
+一般编译器分为三个stage: cc1,as,ld.
 
-- Preprocessor: cc1
-- Compiler: cc1 → output assembly code (* .s)
-- Assembler: as → output target file (* .o)
-- Linker: ld ([collect2](https://gcc.gnu.org/onlinedocs/gccint/Collect2.html) ) → output execution object file (a.out, etc.) Prior to gcc version 2, the preprocessor was a command called cpp
-  command. cpp is the result file of a preproduction without the output file .i stick extension as a procedure. Starting with gcc version 3, the compiler cc1 is also used as a preprocessor.
+- 预处理器：cc1
+- 编译器：cc1 →输出汇编代码 (* .s)
+- 汇编程序：as → 输出目标文件 (* .o)
+- 链接器：ld ([collect2](https://gcc.gnu.org/onlinedocs/gccint/Collect2.html) )→输出执行对象文件（a.out等） 在gcc版本 2 之前，预处理器是一个名为 cpp
+  的命令。cpp 是预生产没有输出文件 .i 棒的扩展名作为过程的结果文件。从 gcc版本 3 开始，编译器cc1也用作预处理器。
 
-The linker ld is called from collect2. When actually deleting /usr/bin/ld and running collect2, you will get an error like ld not found.
+从 collect2 调用链接器 ld。当实际删除 /usr/bin/ld 并运行 collect2 时，会收到类似 ld not found 的错误。
 
-With the -v option put in by gcc, gcc can see how the processing is done.
+gcc放了-v 选项，gcc就可以看到处理的过程了。
 
 ```bash
 root@node2:~/Downloads# gcc ./a.c -v
@@ -22,7 +22,7 @@ COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/10/lto-wrapper
 OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa:hsa
 OFFLOAD_TARGET_DEFAULT=1
 Target: x86_64-linux-gnu
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu 10.3.0-1ubuntu1~20.04' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-10-S4I5Pr/gcc-10-10.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-10-S4I5Pr/gcc-10-10.3.0/debian/tmp-gcn/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-mutex
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 10.3.0-1ubuntu1~20.04' --with-bugurl=file:///usr/share/docs/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-10-S4I5Pr/gcc-10-10.3.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-10-S4I5Pr/gcc-10-10.3.0/debian/tmp-gcn/usr,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-mutex
 Thread model: posix
 Supported LTO compression algorithms: zlib zstd
 gcc version 10.3.0 (Ubuntu 10.3.0-1ubuntu1~20.04)
@@ -59,14 +59,14 @@ COLLECT_GCC_OPTIONS='-v' '-mtune=generic' '-march=x86-64'
 
 ### riscv-gnu-toolchain
 
-The LLVM linker is only fully implemented on linux, so for cross-platform testing of this compiler, LLVM is still used to compile `.ll` files, with the gcc linker backend. For more information about the riscv linker's dark
-side, see [MaskRay](https://zhuanlan.zhihu.com/p/357112171) for details
+LLVM的链接器只在linux上有完整实现，所以为了本编译器的跨平台测试，仍然使用LLVM编译`.ll`文件，gcc链接器后端。有关riscv链接器的dark
+side，详见[MaskRay](https://zhuanlan.zhihu.com/p/357112171)
 
 ## LLVM
 
-LLVM also has a corresponding set of toolchains. For GCC, you can build a complete C/C++ cross-compiler from Binutils and GCC source code using only the host C++ compiler (usually GCC).
-project's source code alone (so you must use GCC headers and libraries as is). This is because CMake requires a full C/C++ compiler (which generates a.out), in addition to building Clang's runtime library, compiler-rt, on top of Clang itself. if you use
-GCC build even one library, that library will depend on GCC headers, so all other libraries must use the same GCC build.
+LLVM也有对应的一套工具链。对于 GCC，可以仅使用宿主 C++ 编译器（通常是 GCC）从 Binutils 和 GCC 源代码构建完整的 C/C++ 交叉编译器。Clang 依赖于 GCC，并且您无法仅使用 LLVM
+项目的源代码构建完整的交叉编译器（因此您必须按原样使用 GCC 头文件和库）。这是因为CMake需要一个完整的C/C++编译器（可以生成a.out），除此之外，还需要在Clang本身上构建Clang的运行时库compiler-rt。如果使用
+GCC 构建甚至一个库，该库将依赖于 GCC 头文件，因此所有其他库都必须使用相同的 GCC 构建。
 
 ```bash
 Apple clang version 13.0.0 (clang-1300.0.29.30)
@@ -88,7 +88,7 @@ End of search list.
 "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -no_deduplicate -dynamic -arch x86_64 -platform_version macos 12.0.0 12.1 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -o a.out -L/usr/local/lib /var/folders/1x/tx5s6n452zv5qkyx4n3xz58c0000gn/T/a-d764d3.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/lib/darwin/libclang_rt.osx.a
 ```
 
-ABI compatibility needs to be considered between different compilers. In contrast
+在不同的编译器之间需要考虑ABI兼容的问题。 相比之下
 
 ```c++
 $A$prototype:
@@ -106,7 +106,7 @@ $A$prototype:
 
 ## Venus
 
-In the architecture class, Venus was used to do the simulation, and the ecall used followed the rules of spim, with the following call convention
+在体系结构课上使用的是Venus做模拟，使用的ecall遵循spim的规则，其call convention如下
 
 | ID (`a0`) | Name            | Description                                                                                                                                                                                                                                                                                                                                                                                     |
 |-----------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -126,7 +126,7 @@ In the architecture class, Venus was used to do the simulation, and the ecall us
 | 34        | printHex        | prints hex in `a1`                                                                                                                                                                                                                                                                                                                                                                              |
 | 0x3CC     | vlib            | Please check out the [vlib page](Venus's-optimized-clib) to see what functions you can use!                                                                                                                                                                                                                                                                                                     |
 
-Here's how to use it
+以下是使用方法
 
 ```asm
 li a0, 1    # syscall number for printing integer
@@ -134,8 +134,8 @@ li a1, 1024 # the integer we're printing
 ecall       # issue system call
 ```
 
-`a0` is the syscall parameter, which determines which system call it is, and `a1` is the parameter of the system call. Since there are only a few system calls, the `li` instruction can be used to construct the arguments, and there is only one register to pass parameters to. There are many system calls under linux, and their call
-convention is as follows, which can support up to 6 arguments to be passed, and any more can only be put on the stack.
+`a0`为syscall参数，决定是哪个系统调用，`a1`为系统调用的参数。由于只有几个系统调用，所以可以用`li`指令来构造参数，且只有一个寄存器传参。 linux下的系统调用很多，其call
+convention如下，可以最多支持6个参数传递，再多就只能放栈上了。
 
 ```asm
       Arch/ABI    Instruction           System  Ret  Ret  Error    Notes
@@ -170,11 +170,11 @@ convention is as follows, which can support up to 6 arguments to be passed, and 
 
 ## spike
 
-[spike](https://github.com/riscv-software-src/riscv-isa-sim) is a complete user state CPU emulator, supporting both Machine Mode/Hypervisor Mode/User
-Mode emulation, which allocates user state stack space by definition at boot time itself. System calls and instruction crashes are recorded and told to the user by openocd emulation jtag. proxy
-kernel is the simplest soft kernel, comes with bootloader, you can boot a minimal linux to run any riscv elf file after bootloader, but the supported syscall is limited.
+[spike](https://github.com/riscv-software-src/riscv-isa-sim) 是完整的用户态CPU模拟器，同时支持Machine Mode/Hypervisor Mode/User
+Mode的模拟，在启动的时候会自己通过定义分配用户态栈空间。系统调用、指令crash都会被记录，并通过openocd模拟jtag方式告诉用户。proxy
+kernel是一个最简单的软核心，自带bootloader，可以通过bootloader后启动一个最小linux跑任意riscv elf文件，但是支持的syscall有限。
 
-The debugging and compilation methods are as follows, please see the official website for details.
+调试和编译方法如下，详细介绍请见官网。
 
 ```bash
 riscv64-unknown-elf-gcc -march=rv32imac -mabi=ilp32 -g -Og -T spike.lds -nostartfiles -o [file] ./[file].c
@@ -190,8 +190,8 @@ riscv64-unknown-elf-gdb [file]
 
 ## qemu
 
-qemu is the eternal god of the simulation session. Before qemu came out, we need to debug the OS by really debugging on the institutional CPU and peripherals, and need to view the hardware error codes in real time. qemu completely simulates the state of the hardware, and the hardware vendor will give the first step to support the new hardware when it comes out.
+qemu是模拟届的永远的神，在qemu出来以前，我们需要通过真的在体制好的CPU及外设上进行调试操作系统，且需要实时查看硬件错误码，而qemu完整的模拟了硬件的状态，新硬件出来时，硬件厂商会给予第一步支持。
 
 ### qemu-user-static
 
-User-state emulation of qemu, with an internal linux handler.
+用户态模拟qemu，内部自带一个linux handler。

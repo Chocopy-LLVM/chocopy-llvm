@@ -1,7 +1,6 @@
 <br>
 
-<span style="font-size:0.9em">文档由 
-[victoryang00](https://github.com/victoryang00) 撰写, 采用 [CC 
-BY-NC-SA 4.0 
-协议](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布.<span>
+<span style="font-size:0.9em">The doc is written by 
+[victoryang00](https://github.com/victoryang00), published by [CC 
+BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/).<span>
 

@@ -1,20 +1,20 @@
-# logging 工具使用
+# logging tool usage
 
-## 介绍
+## Introduction
 
-为了方便同学们在之后的实验中 debug，为大家从GLOG那抄写了一个C++简单实用的分级日志工具，不过由于编译器限制暂时还没有`std::source_location`。该工具将日志输出信息从低到高分成四种等级：`DEBUG`，`INFO`，`WARNING`，`ERROR`。通过设定环境变量`LOGV`的值，来选择输出哪些等级的日志。`LOGV`的取值是**0～3**,分别对应到上述的4种级别(`0:DEBUG`,`1:INFO`,`2:WARNING`,`3:ERROR`)。此外输出中还会包含打印该日志的代码所在位置。
+In order to facilitate students to debug in later experiments, we have copied a simple and practical C++ hierarchical logging tool from GLOG, but due to compiler limitations there is no `std::source_location` for now. The tool divides the log output information into four levels from low to high: `DEBUG`, `INFO`, `WARNING`, and `ERROR`. You can choose which level of log output by setting the value of the environment variable `LOGV`. The values of `LOGV` are **0 to 3**, corresponding to the four levels mentioned above (`0:DEBUG`, `1:INFO`, `2:WARNING`, `3:ERROR`). In addition the output will contain the location of the code to print this log.
 
-## 使用
+## Usage
 
-项目编译好之后，可以在`build`目录下运行`test_logging`，该文件的源代码在`tests/test_logging.cpp`。用法如下：
+After the project is compiled, you can run `test_logging` in the `build` directory, the source code of the file is in `tests/test_logging.cpp`. Use it as follows.
 
 ```cpp
 #include <chocopy_logging.hpp>
-// 引入头文件
+// Introduce the header file
 int main(){
-    LOG(DEBUG) << "This is DEBUG log item.";
-    // 使用关键字LOG，括号中填入要输出的日志等级
-    // 紧接着就是<<以及日志的具体信息，就跟使用std::cout一样
+    LOG(DEBUG) << "This is DEBUG log item;
+    // Use the keyword LOG and fill in the brackets with the log level to be output
+    // followed by << and the specific information about the log, just like with std::cout
     LOG(INFO) << "This is INFO log item";
     LOG(WARNING) << "This is WARNING log item";
     LOG(ERROR) << "This is ERROR log item";
@@ -22,38 +22,38 @@ int main(){
 }
 ```
 
-接着在运行该程序的时候，设定环境变量`LOGV=0`，那么程序就会输出级别**大于等于0**日志信息：
+Next, when you run the program, set the environment variable `LOGV=0`, then the program will output the level **greater than or equal to 0** log message.
 
 ```bash
 user@user:${ProjectDir}/build$ LOGV=0 ./test_logging
-[DEBUG] (test_logging.cpp:5L  main)This is DEBUG log item.
-[INFO] (test_logging.cpp:6L  main)This is INFO log item
-[WARNING] (test_logging.cpp:7L  main)This is WARNING log item
-[ERROR] (test_logging.cpp:8L  main)This is ERROR log item
+[DEBUG] (test_logging.cpp:5L main)This is DEBUG log item.
+[INFO] (test_logging.cpp:6L main)This is INFO log item
+[WARNING] (test_logging.cpp:7L main)This is WARNING log item
+[ERROR] (test_logging.cpp:8L main)This is ERROR log item
 ```
 
-输出中除了包含日志级别和用户想打印的信息，在圆括号中还包含了打印该信息代码的具体位置（包括文件名称、所在行、所在函数名称），可以很方便地定位到出问题的地方。
+In addition to the log level and the information the user wants to print, the output also contains in parentheses the exact location of the code that printed the information (including the name of the file, the line, and the name of the function), making it easy to locate the problem.
 
-假如我们觉得程序已经没有问题了，不想看那么多的DEBUG信息，那么我们就可以设定环境变量`LOGV=1`，选择只看**级别大于等于1**的日志信息：
+If we feel that the program has no more problems and we don't want to see so many DEBUG messages, then we can set the environment variable `LOGV=1` and choose to see only log messages with **level greater than or equal to 1**: ```bash
 
 ```bash
 user@user:${ProjectDir}/build$ LOGV=0 ./test_logging
-[INFO] (test_logging.cpp:6L  main)This is INFO log item
-[WARNING] (test_logging.cpp:7L  main)This is WARNING log item
-[ERROR] (test_logging.cpp:8L  main)This is ERROR log item
+[INFO] (test_logging.cpp:6L main)This is INFO log item
+[WARNING] (test_logging.cpp:7L main)This is WARNING log item
+[ERROR] (test_logging.cpp:8L main)This is ERROR log item
 ```
 
-当然`LOGV`值越大，日志的信息将更加简略。如果没有设定`LOGV`的环境变量，将默认不输出任何信息。
+Of course the larger the `LOGV` value, the more abbreviated the log information will be. If the `LOGV` environment variable is not set, no information will be output by default.
 
-这里再附带一个小技巧，如果日志内容多，在终端观看体验较差，可以输入以下命令将日志输出到文件中：
+Here's another tip, if the logs are very voluminous and the viewing experience in the terminal is poor, you can output the logs to a file by entering the following command.
 
 ```
 user@user:${ProjectDir}/build$ LOGV=0 ./test_logging > log
 ```
 
-然后就可以输出到文件名为log的文件中啦～
+Then you can output to a file with the file name log ~
 
-## 已知Bug
+## Known bugs
 
-1. 在 M1 上用 gcc-11 编译的 fmt::format 库中使用双重指针会 Seg Fault。[solved by `-D_GLIBCXX_USE_CXX11_ABI=0`]
-2. 在 Windows Powershell 中可能无法现实颜色，可以去除颜色标识或尝试用 `$env:TERM=xterm`。
+1. Using double pointers in the fmt::format library compiled with gcc-11 on M1 will Seg Fault.[solved by `-D_GLIBCXX_USE_CXX11_ABI=0`]
+2. You may not get realistic colors in Windows Powershell, you can remove the color flag or try `$env:TERM=xterm`.

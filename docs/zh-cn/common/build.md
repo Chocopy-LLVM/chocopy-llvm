@@ -1,9 +1,9 @@
-# How do I compile?
+# 如何编译？
 
-If there are any compilation problems that you can't solve, please solve them yourself. The environment is an introductory course for computer students, and really OH can provide answers.
+如果有任何解决不了的编译问题，请自行解决，环境是计算机学生的入门课，实在不行OH可以提供解答。
 
-## Compile LLVM with `--target=riscv64-unknown-linux-gnu` compiler
-windows can refer to [Windows](https://www.emdalo.com/posts/risc-v-gnu-compiler-toolchain-howto-compile-on-windows/) , the rest of the OS can refer to [*nix](http:/ /blog.kmckk.com/archives/5774305.html)
+## 编译LLVM的 `--target=riscv64-unknown-linux-gnu` 编译器
+windows 可以参考 [Windows](https://www.emdalo.com/posts/risc-v-gnu-compiler-toolchain-howto-compile-on-windows/) ，其余操作系统可以参考 [*nix](http://blog.kmckk.com/archives/5774305.html)
 
 ```bash
 set -x -e
@@ -144,10 +144,9 @@ make $PARA && make install
 cd $BUILD64
 ```
 
-## Compile qemu with rvv
+## 编译具有rvv的qemu
 
-Works on Linux only.
-
+仅能在Linux上使用。
 ```bash
 git clone https://github.com/sifive/qemu -b v5.2.0-rvv-rvb-zfh
 cd qemu
@@ -159,67 +158,66 @@ cd build
 
 ## Docker
 
-
-This method is common to all platforms and already has all compiled binaries internally.
+此方法全平台通用，在内部已经有所有编译好的二进制文件。
 
 `docker pull yangyw12345/cs131-grader`
 
-Can be developed in `VSCode`, need to install plugins in docker Install plugins `Docker`, `CMake`, `C/C++ Extension`, other configurations [reference](https://b23.tv/84juhvu).
+可以在 `VSCode` 中开发，需要在 docker 中安装插件安装插件 `Docker`、`CMake`、`C/C++ Extension`，其他配置[参考](https://b23.tv/84juhvu).
 
-! [img.png](img.png)
+![img.png](../../common/img.png)
 
 ## Windows
 
-**Note: Lab3 Bonus is not suitable for Windows, you can compile riscv-gnu-toolchains by yourself if forced to do so**
+**注意：Lab3 Bonus 不适合在Windows上做，如强制需要，可以自行编译riscv-gnu-toolchains**
 
-First you need to install `choco`, and `everything` is recommended for file search.
+首先需要安装`choco`，文件搜索建议使用`everything`。
 
-By `choco install msys2 winflexbison cmake`.
+通过`choco install msys2 winflexbison cmake`.
 
-Put `win_flex` and `pacman` in the windows environment variable
+将`win_flex`和`pacman`所在目录放入 windows 环境变量
 
 `pacman -Syuu mingw-w64-riscv64-unknown-elf-gcc`
 
-Put the directory where `riscv64-unknown-elf-g++` is located into the windows environment variable
+将`riscv64-unknown-elf-g++`所在目录放入 windows 环境变量
 
-LLVM is compiled in the same way as above.
+LLVM的编译方法与上文一样。
 
-You can choose `CLion` or `VSCode` or `VS`. lab4 spike may require the use of wsl.
+可以选择 `CLion` or `VSCode` or `VS`. lab4 spike 可能需要使用 wsl。
 
-``bash
+```bash
 mkdir build
 cd build
-cmake ... -DLLVM_DIR=/path/to/llvm-config.cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg-root]/scripts/buildsystems/vcpkg.cmake -DBISON_EXCUTABLE=/path/ to/win_bison.exe -DFLEX_EXCUTABLE=/path/to/win_flex.exe
+cmake .. -DLLVM_DIR=/path/to/llvm-config.cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg-root]/scripts/buildsystems/vcpkg.cmake -DBISON_EXCUTABLE=/path/to/win_bison.exe -DFLEX_EXCUTABLE=/path/to/win_flex.exe
 ```
 
 ## MacOS
 
-Suggested use ``CLion``
+建议使用 `CLion`
 
 ```bash
 brew tap riscv/riscv
 cd $(brew --prefix)/Library/Taps/riscv/homebrew-riscv
-git remote-set-url origin https://github.com/victoryang00/homebrew-riscv.git 
+git remote set-url origin https://github.com/victoryang00/homebrew-riscv.git 
 git pull
 brew install riscv-tools fmt cJSON
 mkdir build
 cd build
-cmake ... -DLLVM_DIR=/path/to/llvm-config.cmake 
+cmake .. -DLLVM_DIR=/path/to/llvm-config.cmake 
 ```
 
 ## Ubuntu or WSL
 
-``CLion`` is recommended
+建议使用 `CLion`
 
 ```bash
 apt install flex bison g++-riscv64-unknow-elf-gnu libfmt-dev libcjson-dev llvm-dev
 mkdir build
 cd build
-cmake ... -DLLVM_DIR=/path/to/llvm-config.cmake 
+cmake .. -DLLVM_DIR=/path/to/llvm-config.cmake 
 ```
 
-## CLion's environment variable configuration
-1. It is possible that {fmt} will appear as [segfault]() on a particular compiler, in which case we need to compile {fmt} ourselves, and in the CLion CMake interface, we need to configure
-! [img_2.png](img_2.png)
-2. Lab3/4 involves the clang back-end compiler to verify your generated code, you need to put the generated clang in the environment variable, and you can add LOGV here.
-! [img_1.png](img_1.png)
+## CLion的环境变量配置
+1. 可能 {fmt} 在特定编译器上会出现 [segfault]()， 此时需要自行编译 {fmt}，在CLion CMake 界面中，我们需要配置
+![img_2.png](../../common/img_2.png)
+2. Lab3/4 涉及到 clang 后端编译器对你生成代码的验证，需要把生成的clang放在环境变量中，同时可以在这里添加 LOGV。
+![img_1.png](../../common/img_1.png)

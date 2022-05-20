@@ -1,19 +1,16 @@
 # ChocoPy PA
-lightir的设计和优化参考了[USTC](https://github.com/mlzeng/CSC2020-USTC-FlammingMyCompiler)的设计，chocopy的规格来自[UC Berkeley](https://inst.eecs.berkeley.edu/~cs164/sp19/index.html)。
+The design of the lightir and optimization refer to [USTC](https://github.com/mlzeng/CSC2020-USTC-FlammingMyCompiler)'s design and the spec of chocopy is from [UC Berkeley](https://inst.eecs.berkeley.edu/~cs164/sp19/index.html).
 
 ## PA1
-将python 3.6的前端代码编译成AST树。[从使用docker开始](./doc/common/build.md)，见[doc](./doc/PA1/README.md)。
+Compile the python 3.6 front-end code to AST tree. [Start from using docker](common/build.md) and see the [doc](PA1/README.md).
 
 ## PA2
-将python 3.6的前端代码编译为经过类型检查的AST树。参见 [doc](./doc/PA2/README.md)。
+Compile the python 3.6 front-end code to type-checked AST tree. See the [doc](PA2/README.md).
 
 ## PA3
-将经过类型检查的AST树编译为LightIR代码。参见[doc](./doc/PA3/README.md)。
+Compile type-checked AST tree to LightIR code. See the [doc](PA3/README.md).
 
-对于奖励项目，对LightIR代码做优化传递。 [开始学习lightIR的基础知识](./doc/common/lightir.md)，见[doc](./doc/PA3/README.md)。请注意，在PA发布后，[stdlib](./doc/common/stdlib.md)有了变化。
+For bonus project, do optimization pass on LightIR code.  [Start learning basics of lightIR](common/lightir.md) and see the [doc](PA3/README.md). Note that there have been changes on [stdlib](common/stdlib.md) after the publication of the PAs.
 
 ## PA4
-将LightIR代码编译为RiscV汇编。见[doc](./doc/PA4/README.md)。
-
-
-通过www.DeepL.com/Translator（免费版）翻译
+Compile the LightIR code to RiscV Assembly. See the [doc](PA4/README.md).

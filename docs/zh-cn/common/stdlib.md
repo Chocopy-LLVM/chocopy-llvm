@@ -3,17 +3,17 @@
 <!-- TOC -->
 
 - [ChocoPy stdlib](#chocopy-stdlib)
-  - [Assembler definition](#assembler-definition)
+  - [Assembler 定义](#assembler-定义)
     - [.equiv](#equiv)
     - [.word](#word)
     - [.align](#align)
     - [.string](#string)
     - [.space](#space)
-    - [Initialize global variable definitions](#initialize-global-variable-definitions)
-  - [Memory management](#memory-management)
-    - [init heap at program startup](#init-heap-at-program-startup)
+    - [初始化全局变量定义](#初始化全局变量定义)
+  - [内存管理](#内存管理)
+    - [程序启动时 init heap](#程序启动时-init-heap)
     - [alloc/alloc2](#allocalloc2)
-    - [IO](#io)
+  - [IO](#io)
     - [input](#input)
     - [print](#print)
   - [int/bool](#intbool)
@@ -28,7 +28,7 @@
     - [`object.__init__`](#object__init__)
   - [Error](#error)
   - [Bonus Part](#bonus-part)
-    - [Multi-threaded part](#multi-threaded-part)
+    - [多线程部分](#多线程部分)
       - [find](#find)
       - [wrap](#wrap)
       - [accstart](#accstart)
@@ -37,20 +37,20 @@
 
 <!-- /TOC -->
 
-Due to the need to design the intermediate layer Light IR, it cannot be defined in the ChocoPy source code, but is located in [stdlib](../../src/cgen/stdlib/). It needs to be abstracted to a function that can be called with a c calling convention pass-through. Since Berkeley's system abi on Venus is inconsistent, I designed an additional set of stdlib to run on qemu. at compile time, the riscv compiler will compile stdlib to the static link library first.
+由于需要设计中间层 Light IR，不能将其定义在 ChocoPy 源代码中，而位于[stdlib](../../src/cgen/stdlib/)。需要抽象成能用 c calling convention 传参调用的函数。由于伯克利的跑在 Venus 上系统 abi 不一致，所以我额外设计了一套跑在 qemu 上的 stdlib。在编译时，riscv 编译器会先编译 stdlib 到静态链接库。
 
-## Assembler definition
+## Assembler 定义
 ### .equiv 
-Since only RV32IMAC and Venus use `.equiv` for variable substitution, cgen will only output `.equiv` if the environment variable `EMIT` is present. 
+由于只有 RV32IMAC 和 Venus 才会使用 `.equiv` 做变量替换，当环境变量存在 `EMIT` 的时候 cgen 才会输出 `.equiv`。 
 ### .word
-The linker resolves itself to the address of the word label, usually storing int literal and pointer.
+链接器会自己 resolve 出 word label 的地址，一般存放 int literal 和 pointer。
 ### .align
-We have added support for specifying byte alignment in data segments. The supported syntax is .align $langle n\rangle$, which inserts zero-valued bytes as padding so that the next available address is a multiple of $2^{n}$.
+我们在数据段中增加了对指定字节对齐的支持。支持的语法是 .align $langle n\rangle$，它插入零值字节作为填充，使得下一个可用地址是 $2^{n}$ 的倍数。
 ### .string 
-is the equivalent of .ascii
+相当于 .ascii
 ### .space 
-The ascii equivalent of '\n'.
-### Initialize global variable definitions
+相当于 '\n' 的 ascii 码。
+### 初始化全局变量定义
 - const_0 bool false
 - const_1 bool true
 - const_2 string "Invalid argument"
@@ -61,74 +61,76 @@ The ascii equivalent of '\n'.
 - const_7 string "Division by zero"
 - const_8 string "Index out of bounds"
 
-## Memory management
-### init heap at program startup
-Default startup allocates `8192 << 16` memory, call `heap.init` in stdlib, i.e. 32MB. venus implements `ecall` when `a0` is 9, linux implements `ecall` when `a0` is 9, put registers in ``
+## 内存管理
+### 程序启动时 init heap
+默认启动分配 `8192 << 16` 内存，call stdlib 中的 `heap.init`，即 32MB。venus 实现为在 `a0` 为 9 时 `ecall`，linux 实现为把寄存器放入 ``
 ### alloc/alloc2
-Request memory from the OS via a system call and return the requested memory.
-### IO
+通过系统调用向操作系统申请内存，返回申请好的内存。
+## IO
 ### input
-`myscanf` reads stdin and determines if the input is int/bool/str, automatically calls the corresponding function to initialize the variable, and finally returns the respective prototype.
+`myscanf` 会读取 stdin，并判断输入是 int/bool/str，自动 call 对应的初始化变量的函数，最终返回各自的 prototype。
 
 ### print
 
-`myprintf` will output stdout, and determine the output int/bool/str type.
+`myprintf` 会输出 stdout，并判断输出 int/bool/str type。
 
 ## int/bool
 ### makeint/bool
-The function is defined as `%$int/bool$prototype_type* @makeint(i32)`, giving an i32 and returning a created int prototype. implementation requires alloc memory.
+函数定义为 `%$int/bool$prototype_type* @makeint(i32)`，给一个 i32，返回一个创建好的 int prototype。实现需要 alloc 内存。
 ## list
 
 ### conslist
-function defined as `%$.list$prototype_type* @conslist(i32, %$union.conslist, ...) `, `i32` is the number of elements, the second argument determines what type of list it is, and initializes the corresponding list. all lists are dynamically called conslist. For arrays without arguments or call intrinsic function, `conslist` is not needed to get prototype by default, thus improving performance.
+函数定义为 `%$.list$prototype_type* @conslist(i32, %$union.conslist, ...)`， `i32` 为元素个数，通过第二个参数判断是什么类型的 list，初始化对应 list。所有 list 都需动态 call conslist 来实现。对于没有穿参数或者 call intrinsic function 的数组会默认不需要 `conslist` 获得 prototype 从而提升性能。
 
 ### len
-function is defined as `i32 @$len(%$union.len*)`, can accept list or str types, reads `__len__` attributes and returns i32.
+函数定义为 `i32 @$len(%$union.len*)`，可以接受 list 或 str 类型，读取 `__len__` attributes，返回 i32。
 
 ## str
 
 ### makestr
-Function defined as `%$str$prototype_type* @makestr(%i8*)` which takes i8* and puts it inside `$str$prototype_type`.
+函数定义为 `%$str$prototype_type* @makestr(%i8*)` 输入 i8*，将其放入 `$str$prototype_type` 内。
 ### len
-Consistent with the list part.
+与 list 部分一致。
 
 ## class
 
 ### `object.__init__`
-is a placeholder.
+就是一个占位符。
 ## Error
 
-Will output an error message and call abort to exit the program, equivalent to `exit(-1)`.
-- Div except 0 error, output `const_7`
-- None except 0 error, output `const_6`.
-- OOB except 0 error, output `const_8`
+会输出错误信息，并 call abort 退出程序，相当于 `exit(-1)`。
+- Div 除0 error，输出 `const_7`
+- None 除0 error，输出 `const_6`
+- OOB 除0 error，输出 `const_8`
 
 ## Bonus Part
-### Multi-threaded part
-Specific procedure: find + wrap
+### 多线程部分
+具体过程：find + wrap
 
 #### find
 
-There are many conditions for find, in short, find the outermost loop of each innermost loop, then see if it can be `MultiThreading`ed
+find的条件很多，简而言之，找到每个最内循环的最外层循环，然后看能否`MultiThreading`化
 
-The conditions that this outer loop should satisfy are
+这个外层循环应该满足的条件是：
 
-* need a start-to-end incremental pattern
-* The branch instruction should be of the form `Br Lt i32 Const <Label1> <Label2>`.
-* There can be no other Phi instructions (fans, which limits to one loop variable)
-
-
-In the matrix assignment example, the br is based on the relationship between the magnitude of i and n
-
-Phi's four operands
-
-1. i, incremental variables
-2. BB1, the BB that increments i
-3. constant, 100, the loop boundary
-4. BB2, %entry
+* 需要一个start到end的递增模式
+* 分支指令应该是`Br Lt i32 Const <Label1> <Label2>`的形式
+* 不能有其他Phi指令（迷，这样就限制了只能有一个循环变量
 
 
-Accumulated values.
+
+以矩阵赋值的例子，br是根据 i 和 n 的大小关系
+
+Phi的四个操作数
+
+1. i、递增变量
+2. BB1、递增 i 的BB
+3. Constant、100，循环边界
+4. BB2、%entry
+
+
+
+累加值：
 
 ```c++
 auto accuVal = dynamic_cast<ConstantInt *>(accu->getOperand(1));
@@ -136,7 +138,7 @@ auto accuVal = dynamic_cast<ConstantInt *>(accu->getOperand(1));
 
 #### wrap
 
-Wrapping section: insert ACCstart before the conditional block of the loop, and insert ACCend before the update iteration variable
+包装部分：在循环的条件Block之前插入ACCstart，在更新迭代变量的之前插入ACCend
 
 ```c
 while (i<n){
@@ -144,22 +146,22 @@ while (i<n){
 }
 ```
 
-Before instrumentation
+插入多线程部分之前
 
-![](0.svg)
+![](../../common/0.svg)
 
-After instrumentation
+插入之后：
 
 ```llvm
-%37: thread id tid
-%38: size of problem n
+%37: 多线程号 tid
+%38: 问题规模 n
 %40: _l = (n*tid)/4 
 %43: _r = (n*(tid+1))/4
 %44: _r + start		右边界
-%48: (_l + step-1)/step * step + start iterable starting number
+%48: (_l + step-1)/step * step + start		迭代变量初始值
 ```
 
-![](1.svg)
+![](../../common/1.svg)
 ```llvm
 define @main()
 <label>entry:   level=0   preds=   succs=(%13)
@@ -190,7 +192,8 @@ define @main()
              ret i32 0 
 ```
 
-First know the system call convention
+
+首先知道system call的约定
 
 ```bash
 > man syscall 2
@@ -222,26 +225,26 @@ arm64         x0    x1    x2    x3    x4    x5    -
 riscv         a0    a1    a2    a3    a4    a5    -
 ```
 
-Then `man clone 2`
+然后man clone 2
 
 ```c
 int clone(int (*fn)(void *), void *stack, int flags, void *arg, ...
           /* pid_t *parent_tid, void *tls, pid_t *child_tid */ );
 ```
 
-Linux design for threads: threads are nothing more than processes that share virtual address space and file descriptor tables, and by definition share everything between threads except registers, stacks, and thread-local storage (TLS).
+Linux对线程的设计：线程只不过是共享虚拟地址空间和文件描述符表的进程，定义上线程之间共享除寄存器、栈、线程内本地存储（thread-local storage, TLS）之外的所有东西。
 
-The OS and underlying hardware naturally ensure that threads do not share registers, TLS is not required, and this project makes it possible to share stack space between threads, so there is almost no switching overhead
+操作系统和底层硬件天然地保证了线程不会共享寄存器，TLS 不是必须的，本项目又使得线程之间共享栈空间，所以几乎没有切换开销
 
-clone and fork both create child processes (threads), the difference is that clone can customize the content shared by the child and parent processes in more detail: virtual memory address space, file descriptor table, the table of signal handlers
+clone跟fork都是创建子进程（线程），区别在于clone能更详细的定制子进程和父进程共享的内容：如虚拟内存地址空间，文件描述符表，the table of signal handlers
 
-clone returns the tid of the created child process to the parent process, or -1 if it fails.
+clone对父进程返回所创建的子进程的tid，如果失败，返回-1
 
-The length of `clone_flags` is 8 bytes, after subtracting one byte of the signal code sent to the parent process, there are 7 bytes left to pass process copy information, i.e. 7*8=56 flags can be set at the same time, i.e. 24 kinds of process information can be copied at the same time. To set a certain flag bit, you only need to set the corresponding value with `clone_flags` or.
+`clone_flags`的长度为8个字节，减去发送给父进程的信号代码的一个字节后剩下了7个字节用于传递进程复制信息，即可以同时设置7*8=56个标志位，也就是可以同时控制24种进程信息的复制。要设置某个标志位时只需要将其对应的取值与`clone_flags`进行或运算即可：
 
-Why is clone_flags 273?
+为啥clone_flags是273
 
-The 32-bit binary of 273 is 000000000100010001, hexadecimal 0x0111
+273的32位二进制是0000000100010001，十六进制0x0111
 
 [linux 5.17 sched.h](https://elixir.bootlin.com/linux/v5.17/source/include/uapi/asm-generic/signal.h#L18)
 
@@ -269,9 +272,9 @@ p->pdeath_signal = 0;
 p->exit_state = 0;
 ```
 
-As for why the last two numbers are 17
+至于为啥最后两个数字是17
 
-Defined in [include/uapi/asm-generic/signal.h](https://elixir.bootlin.com/linux/v5.17/source/include/uapi/asm-generic/signal.h#L18) 32 semaphores
+定义在 [include/uapi/asm-generic/signal.h](https://elixir.bootlin.com/linux/v5.17/source/include/uapi/asm-generic/signal.h#L18) 32个信号量
 
 ```c
 #define SIGHUP		 1
@@ -295,13 +298,15 @@ Defined in [include/uapi/asm-generic/signal.h](https://elixir.bootlin.com/linux/
 //...
 ```
 
-Project default off multi-threaded optimization Pass
 
-Advantages compared to the classic framework OpenMP
 
-* Saves stack overhead: no need to split out the parallelized region into functions
-* Saving on switching contexts: no need to save contexts and maintain various information
-* Only thread-unique registers need to be maintained
+项目默认关闭多线程优化Pass
+
+与经典框架 OpenMP 对比的优点
+
+* 节约了栈开销：不需要将被并行化的区域拆分出来变成函数
+* 节约了切换上下文：不需要保存上下文和维护各种信息
+* 仅仅需要维护线程独有的寄存器
 #### accstart
 
 ```llvm
