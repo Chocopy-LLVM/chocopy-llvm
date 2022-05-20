@@ -3,7 +3,7 @@
 If there are any compilation problems that you can't solve, please solve them yourself. The environment is an introductory course for computer students, and really OH can provide answers.
 
 ## Compile LLVM with `--target=riscv64-unknown-linux-gnu` compiler
-windows can refer to [Windows](https://www.emdalo.com/posts/risc-v-gnu-compiler-toolchain-howto-compile-on-windows/) , the rest of the OS can refer to [*nix](http:/ /blog.kmckk.com/archives/5774305.html)
+windows can refer to [Windows](https://www.emdalo.com/posts/risc-v-gnu-compiler-toolchain-howto-compile-on-windows/) , the rest of the OS can refer to [*nix](http://blog.kmckk.com/archives/5774305.html)
 
 ```bash
 set -x -e
@@ -166,7 +166,7 @@ This method is common to all platforms and already has all compiled binaries int
 
 Can be developed in `VSCode`, need to install plugins in docker Install plugins `Docker`, `CMake`, `C/C++ Extension`, other configurations [reference](https://b23.tv/84juhvu).
 
-! [img.png](img.png)
+![img.png](img.png)
 
 ## Windows
 
@@ -220,6 +220,6 @@ cmake ... -DLLVM_DIR=/path/to/llvm-config.cmake
 
 ## CLion's environment variable configuration
 1. It is possible that {fmt} will appear as [segfault]() on a particular compiler, in which case we need to compile {fmt} ourselves, and in the CLion CMake interface, we need to configure
-! [img_2.png](img_2.png)
+![img_2.png](img_2.png)
 2. Lab3/4 involves the clang back-end compiler to verify your generated code, you need to put the generated clang in the environment variable, and you can add LOGV here.
-! [img_1.png](img_1.png)
+![img_1.png](img_1.png)

@@ -299,7 +299,7 @@ will consider the first termination instruction to be the end of the block and w
 
 ### Core class concept map
 
-! [c++](./c++.png)
+![c++](./c++.png)
 
 ### BasicBlock
 
