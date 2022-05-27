@@ -186,7 +186,7 @@ LLVM is compiled in the same way as above.
 
 You can choose `CLion` or `VSCode` or `VS`. lab4 spike may require the use of wsl.
 
-``bash
+```bash
 mkdir build
 cd build
 cmake ... -DLLVM_DIR=/path/to/llvm-config.cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg-root]/scripts/buildsystems/vcpkg.cmake -DBISON_EXCUTABLE=/path/ to/win_bison.exe -DFLEX_EXCUTABLE=/path/to/win_flex.exe
@@ -197,10 +197,7 @@ cmake ... -DLLVM_DIR=/path/to/llvm-config.cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg-ro
 Suggested use ``CLion``
 
 ```bash
-brew tap riscv/riscv
-cd $(brew --prefix)/Library/Taps/riscv/homebrew-riscv
-git remote-set-url origin https://github.com/victoryang00/homebrew-riscv.git 
-git pull
+brew tap victoryang00/riscv
 brew install riscv-tools fmt cJSON
 mkdir build
 cd build
