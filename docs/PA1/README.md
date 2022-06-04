@@ -574,7 +574,7 @@ No Bison any conflict in case all cases are received correctly.[20pts]
 
 * Run
 
-  The ``parser` command for this experiment uses the shell's input redirection feature, which means that the program itself uses standard input and output (stdin and stdout), but you can use ``<` `>` and ``>>` to flexibly customize where the output and input comes from when the shell runs the command.
+  The `parser` command for this experiment uses the shell's input redirection feature, which means that the program itself uses standard input and output (stdin and stdout), but you can use ``<` `>` and ``>>` to flexibly customize where the output and input comes from when the shell runs the command.
 
   ```shell
   $ cd chocopy
