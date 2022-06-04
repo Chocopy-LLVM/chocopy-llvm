@@ -6,6 +6,7 @@
 #define CHOCOPY_COMPILER_SYMBOLTABLE_HPP
 
 #include "SymbolType.hpp"
+#include <algorithm>
 #include <map>
 #include <string>
 #include <vector>

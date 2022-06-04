@@ -8,7 +8,9 @@
         "vector": "cpp",
         "*.tcc": "cpp",
         "variant": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "map": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
