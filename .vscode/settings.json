@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.fc": "fortran-modern",
+        "__locale": "cpp",
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "variant": "cpp",
+        "iosfwd": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}

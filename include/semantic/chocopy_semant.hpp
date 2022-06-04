@@ -154,14 +154,14 @@ public:
     void visit(parser::UnaryExpr &node) override;
     void visit(parser::VarDef &node) override;
     void visit(parser::WhileStmt &node) override;
-    void visit(parser::AssignStmt &) override;
     void visit(parser::VarAssignStmt &) override;
     void visit(parser::MemberAssignStmt &) override;
     void visit(parser::IndexAssignStmt &) override;
     void visit(parser::VarAssignExpr &) override;
     void visit(parser::IndexAssignExpr &) override;
-    void visit(parser::TypedVar &node) override{};
+    void visit(parser::MemberAssignExpr &) override;
     void visit(parser::Program &node) override;
+    void visit(parser::AssignStmt &) override;
 
     /** type checker attributes and their chocopy typing judgement analogues:
      * O : symbolTable
@@ -170,7 +170,6 @@ public:
      * R : expReturnType */
     TypeChecker(SymbolTable *globalSymbols, vector<parser::Err *> *errors0) {
         this->sym = globalSymbols;
-        this->globals = globalSymbols;
         this->errors = errors0;
         setup_num_to_class();
         debug_sym();
@@ -207,7 +206,6 @@ public:
                                          {"empty", "object"}, {"<None>", "object"}, {"<Empty>", "object"}};
 
     string get_common_type(SymbolType *first, SymbolType *second);
-    bool is_sub_type(SymbolType *first, SymbolType *second);
     void setup_num_to_class();
 
     /** linear-list-stored graph for the object graph
@@ -222,6 +220,11 @@ public:
 
     /** initialize the edge */
     void add_edge(const string &a, const string &b) {
+       /** map.count = 1 : element exist ; map.count = 0 : element do not exist
+        * Add edge from parent to child
+        * Head stores the edge's index
+        * Edge's message stores in parent
+        * Its number is the last child's position */
         if (!sym->head.count(a))
             sym->head[a] = -1;
         if (!sym->head.count(b))
@@ -258,15 +261,77 @@ public:
     void visit(parser::IfStmt &node) override;
     void visit(parser::FuncDef &node) override;
     void visit(parser::GlobalDecl &node) override;
-    void visit(parser::ListType &node) override;
     void visit(parser::NonlocalDecl &node) override;
     void visit(parser::TypedVar &node) override;
     void visit(parser::VarDef &varDef) override;
     void visit(parser::Program &program) override;
-    void visit(parser::ForStmt &s) override;
 
-    explicit DeclarationAnalyzer(vector<parser::Err *> *errors);
+    explicit DeclarationAnalyzer(vector<parser::Err *> *errors) : errors(errors){
+        auto *foo = new ClassDefType("none", "object");
+        FunctionDefType *bar;
+        auto *init = new FunctionDefType();
 
+        /** Setting up predefined classes and functions, they can not be abstract as class initializer because they have
+         * minor difference.
+         * no matter which class type, they should be appended with __init__ */
+        init->func_name = "__init__";
+        init->return_type = new ClassValueType("object");
+        init->params = new std::vector<SymbolType *>();
+        init->params->emplace_back(new ClassValueType("object"));
+        foo->current_scope = new SymbolTable();
+        foo->current_scope->tab->insert({"__init__", init});
+        sym->tab->insert({"object", foo});
+
+        foo = new ClassDefType("none", "str");
+        init = new FunctionDefType();
+        init->func_name = "__init__";
+        init->return_type = new ClassValueType("object");
+        init->params = new std::vector<SymbolType *>();
+        init->params->emplace_back(new ClassValueType("str"));
+        foo->current_scope = new SymbolTable();
+        foo->current_scope->tab->insert({"__init__", init});
+        sym->tab->insert({"str", foo});
+
+        foo = new ClassDefType("none", "int");
+        init = new FunctionDefType();
+        init->func_name = "__init__";
+        init->return_type = new ClassValueType("int");
+        init->params = new std::vector<SymbolType *>();
+        init->params->emplace_back(new ClassValueType("str"));
+        foo->current_scope = new SymbolTable();
+        foo->current_scope->tab->insert({"__init__", init});
+        sym->tab->insert({"int", foo});
+
+        foo = new ClassDefType("none", "bool");
+        init = new FunctionDefType();
+        init->func_name = "__init__";
+        init->return_type = new ClassValueType("bool");
+        init->params = new std::vector<SymbolType *>();
+        init->params->emplace_back(new ClassValueType("str"));
+        foo->current_scope = new SymbolTable();
+        foo->current_scope->tab->insert({"__init__", init});
+        sym->tab->insert({"bool", foo});
+
+        bar = new FunctionDefType();
+        bar->func_name = "len";
+        bar->return_type = new ClassValueType("int");
+        bar->params = new std::vector<SymbolType *>();
+        bar->params->emplace_back(new ClassValueType("object"));
+        sym->tab->insert({"len", bar});
+
+        bar = new FunctionDefType();
+        bar->func_name = "print";
+        bar->return_type = new ClassValueType("<None>");
+        bar->params = new std::vector<SymbolType *>();
+        bar->params->emplace_back(new ClassValueType("object"));
+        sym->tab->insert({"print", bar});
+
+        bar = new FunctionDefType();
+        bar->func_name = "input";
+        bar->return_type = new ClassValueType("str");
+        bar->params = new std::vector<SymbolType *>();
+        sym->tab->insert({"input", bar});
+    }
     SymbolTable *getGlobals() { return sym; }
 
     /** Collector for errors. */
@@ -284,10 +349,6 @@ private:
     SymbolType *passing_type = nullptr;
 
     void debug_sym();
-    vector<string> shadow_class_table;
-    vector<string> shadow_var_table;
-    bool check_shadow_again(const string &symbol);
-    bool check_var_again(const string &symbol);
 };
 
 } // namespace semantic

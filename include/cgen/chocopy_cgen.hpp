@@ -39,6 +39,8 @@ class RiscVBackEnd;
 const int op_reg_0 = 5;
 const int op_reg_1 = 6;
 const int op_reg_2 = 7;
+
+const string attribute = "rv32i2p0_m2p0_a2p0_c2p0";
 #ifdef LLVM
 class CodeGen : llvm::PassInfoMixin<CodeGen> {
 #else
@@ -62,15 +64,15 @@ public:
 #ifdef LLVM
     explicit CodeGen() : CodeGen(chocopy_m){};
 #endif
-    const string indent = fmt::format("{:<2}", " ");
     string generateModuleCode(map<Value *, int> register_mapping);
     string generateModuleCode(bool autoAlloc);
     string generateFunctionCode(Function *func);
     string generateFunctionEntryCode(Function *func);
     string generateFunctionExitCode(Function *func);
     string generateFunctionPostCode(Function *func);
-    string generateClassCode(Class *func) { return ""; };
-    string generateAttributeInfoCode(Class *func) { return ""; };
+    string generateHeaderCode();
+    string generateFooterCode();
+    string generateClassCode();
     string generateBasicBlockCode(BasicBlock *bb);
     string generateInstructionCode(Instruction *inst);
     string getLabelName(BasicBlock *bb);
@@ -90,7 +92,6 @@ public:
     string generateGOT();
     string generateGlobalVarsCode();
     string generateInitializerCode(Constant *init);
-    string generateErrorCode(const string &label, const string &msg);
     pair<int, bool> getConstIntVal(Value *val);
     int queryGOT(Value *val);
     string comment(const string &s);

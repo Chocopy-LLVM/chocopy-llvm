@@ -41,6 +41,10 @@ public:
                 abort();
             }
         }
+        Reg(const string &name) {
+            id = std::distance(reg_name.cbegin(), std::find_if(reg_name.cbegin(), reg_name.cend(),
+                                                               [&name](const string &s) { return s == name; }));
+        }
         bool is_reg() const override { return true; }
         bool is_constant() const override { return false; }
         bool has_shift() const override { return false; }
@@ -139,10 +143,11 @@ public:
         string_view get_name() const { return fmt::format("{}+{}", label, offset); }
     };
 
-    static string set_value(const Reg &target, const Constant &source) { return nullptr; };
+    static string set_value(const Reg &target, const Constant &source);
     static string get_address(const Reg &target, const Constant &source) { return nullptr; };
 
     static const int imm_8_max = 255;
+    static const int imm_16_max = 65535;
 
     /*** Factory methods */
     static string instConst(string (*inst)(const Reg &target, const Reg &op1, const Value &op2, string comment),

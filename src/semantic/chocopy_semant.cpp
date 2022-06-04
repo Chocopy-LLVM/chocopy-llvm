@@ -18,8 +18,6 @@ using std::set;
 bool is_lambda_pass = false;
 bool is_rvalue = false;
 vector<string> lambda_params;
-vector<string> conslist_table;
-vector<string> len_list_table;
 template <class Key, class T> set<string> key_to_set(const std::map<Key, T> &map, std::set<Key> &set) {
     set.clear();
     auto itr = map.begin();
@@ -101,7 +99,7 @@ void DeclarationAnalyzer::debug_sym() {
 }
 void DeclarationAnalyzer::visit(parser::VarDef &varDef) {
     if (dynamic_cast<parser::ClassType *>(varDef.var->type) &&
-        sym->get<SymbolType *>(((parser::ClassType *)varDef.var->type)->className) == nullptr &&
+        globals->get<SymbolType *>(((parser::ClassType *)varDef.var->type)->className) == nullptr &&
         !(((parser::ClassType *)varDef.var->type)->className == curr_class)) {
         errors->emplace_back(
             new SemanticError(varDef.var->type, fmt::format("Invalid type annotation; there is no class named: {}",
@@ -110,6 +108,15 @@ void DeclarationAnalyzer::visit(parser::VarDef &varDef) {
     this->passing_type = ValueType::annotate_to_val(varDef.var->type);
 }
 /* The Declaration check rules Your Code Here */
+
+void DeclarationAnalyzer::visit(parser::ClassDef &node) {}
+void DeclarationAnalyzer::visit(parser::ClassType &node) {}
+void DeclarationAnalyzer::visit(parser::IfStmt &node) {}
+void DeclarationAnalyzer::visit(parser::FuncDef &node) {}
+void DeclarationAnalyzer::visit(parser::GlobalDecl &node) {}
+void DeclarationAnalyzer::visit(parser::NonlocalDecl &node) {}
+void DeclarationAnalyzer::visit(parser::TypedVar &node) {}
+void DeclarationAnalyzer::visit(parser::Program &program) {}
 
 template <typename... Args> void TypeChecker::typeError(parser::Node *node, const string &message, Args... rest) {
     node->semError(rest...);
@@ -131,6 +138,35 @@ void TypeChecker::visit(parser::Program &program) {
     }
 }
 /* The Type check rules Your Code Here */
+
+void TypeChecker::visit(parser::BinaryExpr &node) {}
+void TypeChecker ::visit(parser::BoolLiteral &node) {}
+void TypeChecker::visit(parser::CallExpr &node) {}
+void TypeChecker ::visit(parser::ClassDef &node) {}
+void TypeChecker::visit(parser::ExprStmt &node) {}
+void TypeChecker ::visit(parser::ForStmt &node) {}
+void TypeChecker::visit(parser::FuncDef &node) {}
+void TypeChecker ::visit(parser::Ident &node) {}
+void TypeChecker ::visit(parser::IfExpr &node) {}
+void TypeChecker::visit(parser::IndexExpr &node) {}
+void TypeChecker::visit(parser::IntegerLiteral &node) {}
+void TypeChecker::visit(parser::ListExpr &node) {}
+void TypeChecker::visit(parser::MemberExpr &node) {}
+void TypeChecker::visit(parser::MethodCallExpr &node) {}
+void TypeChecker::visit(parser::NoneLiteral &node) {}
+void TypeChecker::visit(parser::ReturnStmt &node) {}
+void TypeChecker::visit(parser::StringLiteral &node) {}
+void TypeChecker::visit(parser::UnaryExpr &node) {}
+void TypeChecker::visit(parser::VarDef &node) {}
+void TypeChecker::visit(parser::WhileStmt &node) {}
+void TypeChecker::visit(parser::VarAssignStmt &node) {}
+void TypeChecker::visit(parser::VarAssignExpr &node) {}
+void TypeChecker::visit(parser::MemberAssignStmt &node) {}
+void TypeChecker::visit(parser::MemberAssignExpr &node) {}
+void TypeChecker::visit(parser::IndexAssignStmt &node) {}
+void TypeChecker::visit(parser::IndexAssignExpr &node) {}
+void TypeChecker::visit(parser::AssignStmt &node) {}
+void TypeChecker::visit(parser::IfStmt &node) {}
 
 void TypeChecker::debug_sym() {
     for (const auto &x : *sym->tab) {
@@ -176,12 +212,6 @@ void TypeChecker::debug_nested_func_sym(SymbolTable *func_sym, int tab) {
             LOG(INFO) << fmt::format("{:>{}} : [ {} ]", x.first, tab * 20, ((ClassValueType *)x.second)->get_name());
         }
     }
-}
-void TypeChecker::visit(parser::IfExpr &s) {
-    s.condition->accept(*this);
-    auto *condType = dynamic_cast<ValueType *>(this->passing_type);
-    s.thenExpr->accept(*this);
-    s.elseExpr->accept(*this);
 }
 /** Get the right type */
 string TypeChecker::get_common_type(SymbolType *first, SymbolType *second) {
@@ -239,10 +269,6 @@ void TypeChecker::setup_num_to_class() {
     sym->class_tag_["bool"] = 2;
     sym->class_tag_["str"] = 3;
 }
-/** Only takes care of non list */
-bool TypeChecker::is_sub_type(SymbolType *first, SymbolType *second) {
-    return get_common_type(first, second) == first->get_name();
-}
 ValueType *ValueType::annotate_to_val(parser::TypeAnnotation *annotation) {
     if (dynamic_cast<parser::ClassType *>(annotation)) {
         return new ClassValueType((parser::ClassType *)annotation);
@@ -263,6 +289,7 @@ ClassValueType::ClassValueType(parser::ClassType *classTypeAnnotation) : class_n
 cJSON *SemanticError::toJSON() {
     cJSON *d = parser::Err::toJSON();
     cJSON_AddStringToObject(d, "message", this->message.c_str());
+    cJSON_AddItemToObject(d, "loctaion", cJSON_CreateIntArray(this->get_location(), 4));
     return d;
 }
 string ValueType::get_name() { return ((ClassValueType *)this)->class_name; }
@@ -276,7 +303,7 @@ int main(int argc, char *argv[]) {
 
     auto *declarationAnalyzer = new semantic::DeclarationAnalyzer(error);
 
-    tree->accept(*declarationAnalyzer);
+    tree->accept(*declarationAnalyzer);  
     semantic::SymbolTable *globalScope = declarationAnalyzer->getGlobals();
     error = declarationAnalyzer->errors;
     if (!error->empty()) {
@@ -284,6 +311,8 @@ int main(int argc, char *argv[]) {
     } else {
         auto *typeChecker = new semantic::TypeChecker(globalScope, error);
         tree->accept(*typeChecker);
+        if (!error->empty())/*semantic error in type checker*/
+            tree->add_error(error);
     }
 
     cJSON *a = tree->toJSON();

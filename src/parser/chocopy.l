@@ -67,8 +67,8 @@ int LineNum = 1;
     stack_indent.push(0);
   }
 
+/* The Lexical rules Your Code Below */
 %}
-/* The Lexical rules Your Code Here */
 
 .   {
         LOG(ERROR) << "Error: Unrecognized token on line " << yylineno << ": " << yytext;

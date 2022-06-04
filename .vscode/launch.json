@@ -1,0 +1,55 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "ir-optimizer",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/ir-optimizer",
+            "args": [
+                "${workspaceFolder}/tests/pa3/pass/vectorize.py",
+                "-run"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "/opt/homebrew/bin/:/opt/homebrew/Cellar/riscv-rvv-llvm/bin/:/llvm/bin/:$PATH"
+                },
+                {
+                    "name": "LOGV",
+                    "value": "1"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "type": "venus",
+            "request": "launch",
+            "name": "debug current file venus",
+            "program": "${file}",
+            "stopOnEntry": true,
+            "openViews": []
+        },
+        {
+            "name": "riscv-debug",
+            "type": "cppdbg",
+            "request": "launch",
+            // Change to your qemu remote ip addres
+            "miDebuggerServerAddress": "192.168.1.9:1234",
+            "program": "${workspaceFolder}/tests/pa3/sample/stmt_for_list_nonlocal",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "logging": {
+                "engineLogging": false
+            },
+            // "miDebuggerPath": "/llvm/bin/riscv64-unknown-elf-gdb",
+            "miDebuggerPath": "/opt/homebrew/bin/riscv64-unknown-elf-gdb",
+            "MIMode": "gdb"
+        }
+    ]
+}

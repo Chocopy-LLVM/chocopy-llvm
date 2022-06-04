@@ -149,10 +149,10 @@ Type *LightWalker::string_to_type(const string &type_name) {
         if (res_num <= 3)
             return OBJ_T->at(res_num);
         else {
-            if (res_num<OBJ_T->size()) {
+            if (res_num < OBJ_T->size()) {
                 return ArrayType::get(OBJ_T->at(res_num));
-            }else {
-                return ArrayType::get(OBJ_T->at(res_num-1));
+            } else {
+                return ArrayType::get(OBJ_T->at(res_num - 1));
             }
         }
     } else
@@ -546,6 +546,36 @@ void LightWalker::visit(parser::Program &node) {
 }
 
 /* The Light IR Your Code Here */
+void LightWalker::visit(parser::BinaryExpr &) {};
+void LightWalker::visit(parser::BoolLiteral &) {};
+void LightWalker::visit(parser::CallExpr &) {};
+void LightWalker::visit(parser::ClassDef &) {};
+void LightWalker::visit(parser::ClassType &) {};
+void LightWalker::visit(parser::ExprStmt &) {};
+void LightWalker::visit(parser::ForStmt &) {};
+void LightWalker::visit(parser::FuncDef &) {};
+void LightWalker::visit(parser::GlobalDecl &) {};
+void LightWalker::visit(parser::Ident &) {};
+void LightWalker::visit(parser::IfExpr &) {};
+void LightWalker::visit(parser::IntegerLiteral &) {};
+void LightWalker::visit(parser::ListExpr &) {};
+void LightWalker::visit(parser::MemberExpr &) {};
+void LightWalker::visit(parser::IfStmt &node) {};
+void LightWalker::visit(parser::MethodCallExpr &) {};
+void LightWalker::visit(parser::NoneLiteral &) {};
+void LightWalker::visit(parser::NonlocalDecl &) {};
+void LightWalker::visit(parser::ReturnStmt &) {};
+void LightWalker::visit(parser::StringLiteral &) {};
+void LightWalker::visit(parser::UnaryExpr &) {};
+void LightWalker::visit(parser::VarDef &) {};
+void LightWalker::visit(parser::WhileStmt &) {};
+void LightWalker::visit(parser::VarAssignStmt &) {};
+void LightWalker::visit(parser::MemberAssignStmt &) {};
+void LightWalker::visit(parser::IndexAssignStmt &) {};
+void LightWalker::visit(parser::VarAssignExpr &) {};
+void LightWalker::visit(parser::MemberAssignExpr &) {};
+void LightWalker::visit(parser::IndexAssignExpr &) {};
+void LightWalker::visit(parser::IndexExpr &) {};
 
 Value *LightWalker::get_conslist(vector<Value *> &object_args, Value *called_initial_object) {
     is_conslist = dynamic_cast<ArrayType *>(tmp_value->get_type()) &&
@@ -743,7 +773,7 @@ int main(int argc, char *argv[]) {
             auto command_string_1 = "spike --isa=rv64imac /opt/homebrew/Cellar/riscv-pk/master/bin/pk " + target_path;
 #else
             auto command_string_1 =
-                "spike --isa=rv32gcv0p10 /opt/homebrew/Cellar/riscv-pk_32/master/bin/pk " + target_path;
+                "spike --isa=rv32gcv0p10 /opt/homebrew/Cellar/riscv-pk-32/master/bin/pk " + target_path;
 #endif
             int re_code_1 = std::system(command_string_1.c_str());
 #else

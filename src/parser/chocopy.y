@@ -43,27 +43,6 @@ std::vector<parser::Decl *>* combine(std::vector<parser::Decl *>* list, T *item)
     return list;
 }
 
-
-std::vector<parser::Stmt *>* combine(std::vector<parser::Stmt *>* list, parser::Stmt *item) {
-    list->push_back(item);
-    return list;
-}
-
-parser::ListExpr* combine(parser::ListExpr *list, parser::Expr *item) {
-    list->elements->push_back(item);
-    return list;
-}
-
-std::vector<parser::TypedVar *>* combine(std::vector<parser::TypedVar *>* list, parser::TypedVar *item) {
-    list->push_back(item);
-    return list;
-}
-
-std::vector<parser::IfStmt *>* combine(std::vector<parser::IfStmt *>* list, parser::IfStmt *item) {
-    list->push_back(item);
-    return list;
-}
-
 template<typename T>
 T* get_right (std::vector<T*> *item){
     return item->at(0);
@@ -211,6 +190,35 @@ T* get_right (std::vector<T*> *item){
 
 %%
 /* The grammar rules Your Code Here */
+program : ""{};
+stmt : ""{};
+type : ""{};
+expr_stmt : ""{};
+expr : ""{};
+func_def : ""{};
+elif_list : ""{};
+cexpr : ""{};
+declaration_list : ""{};
+optionalRet : ""{};
+nonlocal_decl : ""{};
+top_level_decl : ""{};
+assign_expr : ""{};
+binary_expr : ""{};
+class_helper : ""{};
+assign_stmt : ""{};
+index_expr : ""{};
+stmt_list : ""{};
+acc_options : ""{};
+block : ""{};
+member_expr : ""{};
+typed_var_list : ""{};
+list_expr : ""{};
+class_def : ""{};
+literal : ""{};
+global_decl : ""{};
+identifier : ""{};
+typed_var : ""{};
+var_def : ""{};
 
 %%
 

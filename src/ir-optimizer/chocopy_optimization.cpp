@@ -25,23 +25,23 @@ void PassManager::run(bool print_ir) {
         }
     }
 }
-
+/* The Optimization Your Code Here, Uncomment the below to register your Pass */
 PassManager::PassManager(Module *m) : m_(m) {
-    REGISTER_CLASS(Multithread, std::forward<Module *&>(m_));
-    REGISTER_CLASS(Vectorization, std::forward<Module *&>(m_));
-    REGISTER_CLASS(Mem2Reg, std::forward<Module *&>(m_));
-    REGISTER_CLASS(ConstPropagation, std::forward<Module *&>(m_));
-    REGISTER_CLASS(ActiveVars, std::forward<Module *&>(m_));
-    REGISTER_CLASS(LoopInvariant, std::forward<Module *&>(m_));
-    REGISTER_CLASS(LoopFind, std::forward<Module *&>(m_));
-    REGISTER_CLASS(Dominators, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(Multithread, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(Vectorization, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(Mem2Reg, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(ConstPropagation, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(ActiveVars, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(LoopInvariant, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(LoopFind, std::forward<Module *&>(m_));
+    // REGISTER_CLASS(Dominators, std::forward<Module *&>(m_));
 }
 
 void PassManager::add_pass(const string &name, bool print_ir) {
-    auto pass =reinterpret_cast<Pass *>(pass_factory.construct(name));
-    passes_.push_back(pass);
-    passes_.back()->setName(name);
-    passes_.back()->setPrintIR(print_ir);
+//     auto pass =reinterpret_cast<Pass *>(pass_factory.construct(name));
+//     passes_.push_back(pass);
+//     passes_.back()->setName(name);
+//     passes_.back()->setPrintIR(print_ir);
     LOG(DEBUG) << name;
 }
 
