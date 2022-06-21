@@ -7,3 +7,5 @@
   beq t0, t1, print_8                      # Go to print(str)
   li t1, 2                                 # Load type tag of `bool`
   beq t0, t1, print_9                      # Go to print(bool)
+  la a0, const_2                           # String representation: Invalid argument
+  j print_8                                # Go to: print(str)

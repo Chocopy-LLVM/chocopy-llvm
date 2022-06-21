@@ -4,9 +4,9 @@
   lui a0, %hi(char_int)                    # Load high bits for "%i"
   addi a0, a0, %lo(char_int)
   addi sp,sp,-16
-  sw ra, 0(sp)
+  sw ra, 12(sp)
   call myprintf                            # Call printf
-  lw ra, 0(sp)
+  lw ra, 12(sp)
   addi sp,sp,16
   jr ra
 char_int:

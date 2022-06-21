@@ -227,21 +227,25 @@ sw a2, -24(fp)
 sw a1, -28(fp)
 li a2, 4 # Word size in bytes
 mul a2, a1, a2 # Calculate number of bytes to allocate
+add a2, gp, a2 # Estimate where GP will move
+lui a3, 8192
+bgeu a2, a3, alloc2_15 # Go to OOM handler if too large
 lw t0, -28(fp) # Get size of object in words
 slli a0, t0, 2
 call sbrk
-lw a1, -4(fp)
-alloc2_16: # Copy-loop header
-lw t1, 0(a1) # Load next word from src
-sw t1, 0(a0) # Store next word to dest
-addi a1, a1, 4 # Increment src
-addi a0, a0, 4 # Increment dest
-addi t0, t0, -1 # Decrement counter
-bne t0, zero, alloc2_16 # Loop if more words left to copy
-alloc2_donw:
-lw t0, -28(fp) # Get size of object in words
-slli a1, t0,2
-sub a0, a0,a1
+lw a1, -4(fp) # a0 is the new object, a1 is the prototype
+lw a2, 4(a1) # object word size
+mv a3, a0
+memcpy_cond:
+blez a2, memcpy_end
+memcpy_loop:
+lw a4, 0(a1)
+sw a4, 0(a3)
+addi a2, a2, -1
+addi a1, a1, 4
+addi a3, a3, 4
+bnez a2, memcpy_loop
+memcpy_end:
 lw s1, -8(fp)
 lw a5, -12(fp)
 lw a4, -16(fp)
@@ -269,33 +273,22 @@ sw s2, -16(fp)
 sw s3, -20(fp)
 sw s4, -24(fp)
 sw s5, -28(fp)
-lw t0, 0(a0)
-sw t0, 4(fp)
-lw t1, 0(a1)
-sw t1, 0(fp)
-lw t2, 0(t0)
-beqz t2, concat_none
-lw t2, 0(t1)
-beqz t2, concat_none
-lw t0, 12(t0)
-lw t1, 12(t1)
+beqz a0, concat_none
+beqz a1, concat_none
+lw t0, 12(a0)
+lw t1, 12(a1)
+mv t4, a0
+mv t5, a1
 add s6, t0, t1
-li a1,6
+add a1, s6, 5
 la a0, $.list$prototype
 jal alloc2
 sw s6, 12(a0)
 mv s5, a0
-addi s3, s5, 16
-sw a0, -32(fp)
-slli a0, s6, 2
-sw ra, -36(fp)
-call sbrk
-lw ra, -36(fp)
-mv s3, a0
-lw s1, 4(fp)
-lw s2, 12(s1)
-addi s1, s1, 16
-lw s1, 0(s1)
+addi s3, s5, 20
+sw s3, 16(s5)
+lw s1, 16(t4)
+lw s2, 12(t4)
 concat_1:
 beqz s2, concat_2
 lw a0, 0(s1)
@@ -305,10 +298,8 @@ addi s1, s1, 4
 addi s3, s3, 4
 j concat_1
 concat_2:
-lw s1, 0(fp)
-lw s2, 12(s1)
-addi s1, s1, 16
-lw s1, 0(s1)
+lw s1, 16(t5)
+lw s2, 12(t5)
 concat_3:
 beqz s2, concat_4
 lw a0, 0(s1)
@@ -319,10 +310,6 @@ addi s3, s3, 4
 j concat_3
 concat_4:
 mv a0, s5
-lw s1, 12(a0)
-slli s1,s1,2
-sub s3,s3,s1
-sw s3,16(a0)
 lw s1, -12(fp)
 lw s2, -16(fp)
 lw s3, -20(fp)
@@ -331,8 +318,6 @@ lw s5, -28(fp)
 lw ra, -4(fp)
 lw fp, -8(fp)
 addi sp, sp, 40
-sw a0,20(a0)
-addi a0, a0, 20
 jr ra
 concat_none:
 j error.None
@@ -343,8 +328,8 @@ addi sp, sp, -60
 sw ra, 28(sp)
 sw fp, 24(sp)
 addi fp, sp, 60
-sw gp, -4(fp)
-sw s1, -8(fp)
+sw a7, -4(fp)
+sw a6, -8(fp)
 sw a5, -12(fp)
 sw a4, -16(fp)
 sw a3, -20(fp)
@@ -381,8 +366,8 @@ sw t2, 16(a0)
 conslist_done:
 sw a0, 20(a0)
 add a0, a0, 20
-lw gp, -4(fp)
-lw s1, -8(fp)
+lw a7, -4(fp)
+lw a6, -8(fp)
 lw a5, -12(fp)
 lw a4, -16(fp)
 lw a3, -20(fp)
@@ -480,16 +465,18 @@ jr ra
 makestr:
 # Init for multiple length string literal
 addi sp, sp, -8
-sw ra, 8(sp)
+sw ra, 4(sp)
 sw a0, 0(sp)
-sw a1, 4(sp)
 la a0, $str$prototype
-jal ra, alloc
+li a1, 6
+jal alloc2
 lw t0, 0(sp)
-lw t1, 4(sp)
-sw t0, 16(a0)
-sw t0, 12(a0)
-lw ra, 8(sp)
+li t1, 1
+sw t1, 12(a0)
+add t1, a0, 20
+sw t1, 16(a0)
+sb t0, 20(a0)
+lw ra, 4(sp)
 addi sp, sp, 8
 jr ra
 
@@ -523,6 +510,8 @@ li t1, 3 # Load type tag of `str`
 beq t0, t1, print_8 # Go to print(str)
 li t1, 2 # Load type tag of `bool`
 beq t0, t1, print_9 # Go to print(bool)
+la a0, const_2 # String representation: Invalid argument
+j print_8 # Go to: print(str)
 .globl print_10
 print_10:
 # Print False object in A0
@@ -533,9 +522,11 @@ print_11:
 # Print null-terminated string in A1
 lui a0, %hi(char_string) # Load high bits for "%s"
 addi a0, a0, %lo(char_string) # Load low bits for "%s"
-sw ra, 0(sp)
+addi sp, sp, -16
+sw ra, 12(sp)
 call myprintf # Call printf
-lw ra, 0(sp)
+lw ra, 12(sp)
+addi sp, sp, 16
 j print_5 # Go to return
 char_string:
 .asciz "%s\n"
@@ -559,9 +550,9 @@ lw a1, 12(a0) # Load attribute __int__
 lui a0, %hi(char_int) # Load high bits for "%i"
 addi a0, a0, %lo(char_int)
 addi sp,sp,-16
-sw ra, 0(sp)
+sw ra, 12(sp)
 call myprintf # Call printf
-lw ra, 0(sp)
+lw ra, 12(sp)
 addi sp,sp,16
 jr ra
 char_int:
@@ -585,38 +576,37 @@ j print_8 # Go to: print(str)
 .globl strcat
 strcat:
 # Function strcat
-addi sp, sp, -16
+addi sp, sp, -12
 sw ra, 8(sp)
 sw fp, 4(sp)
-sw a0, 12(sp)
-sw a1, 16(sp)
-addi fp, sp, 16
-lw t0, 0(fp)
-lw t1, -4(fp)
-lbu t0, 12(t0) #
-beqz t0, strcat_4
+sw a0, 4(fp)
+sw a1, 0(fp)
+addi fp, sp, 12
+#lw t0, 4(fp)
+#lw t1, 0(fp)
+add t0, a0, 0
+add t1, a1, 0
+add t4, a0, 0
+add t5, a1, 0
+lw t0, 12(t0)
+#beqz t0, strcat_4
 lw t1, 12(t1)
-beqz t1, strcat_5
+#beqz t1, strcat_5
 add t1, t0, t1
-sw t1, -16(fp)
+add t6, t1, 0
+sw t1, -12(fp)
 addi t1, t1, 4
 srli t1, t1, 2
-addi a1, t1, 4
+addi a1, t1, 5
 la a0, $str$prototype
 jal alloc2
-sw a0, 4(fp)
-lw t0, -16(fp)
-sw t0, 12(a0)
-addi t2, a0, 16
-lw a0, -16(fp)
-call sbrk
-lw ra, 8(sp)
-sw a0, 0(t2)
-lw t0, -4(fp)
+sw t6, 12(a0)
+add t2, a0, 20
+sw t2, 16(a0)
+#addi t2, a0, 16
+add t0, t4,0
 lbu t1, 12(t0)
-addi t0, t0, 16
-lw t0, 0(t0)
-lw t2, 0(t2)
+lw t0, 16(t0)
 strcat_1:
 beqz t1, strcat_2
 lbu t3, 0(t0)
@@ -626,10 +616,9 @@ addi t0, t0, 1
 addi t2, t2, 1
 j strcat_1
 strcat_2:
-lw t0, 0(fp)
+add t0, t5,0
 lw t1, 12(t0)
-addi t0, t0, 16
-lw t0, 0(t0)
+lw t0, 16(t0)
 strcat_3:
 beqz t1, strcat_6
 lbu t3, 0(t0)
@@ -639,17 +628,17 @@ addi t0, t0, 1
 addi t2, t2, 1
 j strcat_3
 strcat_4:
-lw a0, -4(fp)
-j strcat_7
-strcat_5:
 lw a0, 0(fp)
 j strcat_7
-strcat_6:
+strcat_5:
 lw a0, 4(fp)
+j strcat_7
+strcat_6:
+sb zero, 0(t2)
 strcat_7:
-lw ra, -8(fp)
-lw fp, -12(fp)
-addi sp, sp, 16
+lw ra, -4(fp)
+lw fp, -8(fp)
+addi sp, sp, 12
 jr ra
 .globl streql
 streql:
@@ -660,15 +649,15 @@ sw fp, 0(sp)
 addi fp, sp, 8
 lw t0, 12(a0)
 lw t1, 12(a1)
-lw a0, 16(a0)
-lw a1, 16(a1)
+lw t2, 16(a0)
+lw t3, 16(a1)
 bne t0, t1, streql_no
 streql_1:
-lbu t2, 0(a0)
-lbu t3, 0(a1)
-bne t2, t3, streql_no
-addi a0, a0, 1
-addi a1, a1, 1
+lbu t4, 0(t2)
+lbu t5, 0(t3)
+bne t4, t5, streql_no
+addi t2, t2, 1
+addi t3, t3, 1
 addi t0, t0, -1
 bgtz t0, streql_1
 li a0, 1
@@ -689,20 +678,20 @@ sw fp, 0(sp)
 addi fp, sp, 8
 lw t0, 12(a0)
 lw t1, 12(a1)
-lw a0, 16(a0)
-lw a1, 16(a1)
-bne t0, t1, strneql_yes
+lw t2, 16(a0)
+lw t3, 16(a1)
+bne t0, t1, strneql_no
 strneql_1:
-lbu t2, 0(a0)
-lbu t3, 0(a1)
-bne t2, t3, strneql_yes
-addi a0, a0, 1
-addi a1, a1, 1
+lbu t4, 0(t2)
+lbu t5, 0(t3)
+bne t4, t5, strneql_no
+addi t2, t2, 1
+addi t3, t3, 1
 addi t0, t0, -1
 bgtz t0, strneql_1
 xor a0, a0, a0
 j strneql_end
-strneql_yes:
+strneql_no:
 li a0, 1
 strneql_end:
 lw ra, -4(fp)

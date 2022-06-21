@@ -3,8 +3,8 @@
   sw ra, 28(sp)
   sw fp, 24(sp)
   addi fp, sp, 60
-  sw gp, -4(fp)
-  sw s1, -8(fp)
+  sw a7, -4(fp)
+  sw a6, -8(fp)
   sw a5, -12(fp)
   sw a4, -16(fp)
   sw a3, -20(fp)
@@ -41,8 +41,8 @@ conslist_2:
 conslist_done:
   sw a0, 20(a0)
   add a0, a0, 20
-  lw gp, -4(fp)
-  lw s1, -8(fp)
+  lw a7, -4(fp)
+  lw a6, -8(fp)
   lw a5, -12(fp)
   lw a4, -16(fp)
   lw a3, -20(fp)

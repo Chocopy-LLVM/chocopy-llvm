@@ -14,21 +14,25 @@
   sw a1, -28(fp)
   li a2, 4                                 # Word size in bytes
   mul a2, a1, a2                           # Calculate number of bytes to allocate
+  add a2, gp, a2                           # Estimate where GP will move
+  lui a3, 8192
+  bgeu a2, a3, alloc2_15                  # Go to OOM handler if too large
   lw t0, -28(fp)                           # Get size of object in words
   slli a0, t0, 2
   call sbrk
-  lw a1, -4(fp)
-alloc2_16:                                 # Copy-loop header
-  lw t1, 0(a1)                             # Load next word from src
-  sw t1, 0(a0)                             # Store next word to dest
-  addi a1, a1, 4                           # Increment src
-  addi a0, a0, 4                           # Increment dest
-  addi t0, t0, -1                          # Decrement counter
-  bne t0, zero, alloc2_16                  # Loop if more words left to copy
-alloc2_donw:
-  lw t0, -28(fp)                           # Get size of object in words
-  slli a1, t0,2
-  sub a0, a0,a1
+  lw a1, -4(fp) # a0 is the new object, a1 is the prototype
+  lw a2, 4(a1) # object word size
+  mv a3, a0
+memcpy_cond:
+  blez a2, memcpy_end
+memcpy_loop:
+  lw a4, 0(a1)
+  sw a4, 0(a3)
+  addi a2, a2, -1
+  addi a1, a1, 4
+  addi a3, a3, 4
+  bnez a2, memcpy_loop
+memcpy_end:
   lw s1, -8(fp)
   lw a5, -12(fp)
   lw a4, -16(fp)

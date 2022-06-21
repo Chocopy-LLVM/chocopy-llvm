@@ -135,54 +135,6 @@ for file in $(ls . | grep '\.s'); do
                 echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
             done
         fi
-    elif [[ $file == "strcat.s" ]]; then
-        if [[ ! $1 = "linux" ]]; then
-            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            cat $file | while read line; do
-                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
-            done
-        fi
-    elif [[ $file == "strcat_linux.s" ]]; then
-        if [[ $1 = "linux" ]]; then
-            echo '.globl strcat' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            echo 'strcat:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            cat $file | while read line; do
-                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
-            done
-        fi
-    elif [[ $file == "streql.s" ]]; then
-        if [[ ! $1 = "linux" ]]; then
-            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            cat $file | while read line; do
-                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
-            done
-        fi
-    elif [[ $file == "streql_linux.s" ]]; then
-        if [[ $1 = "linux" ]]; then
-            echo '.globl streql' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            echo 'streql:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            cat $file | while read line; do
-                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
-            done
-        fi
-    elif [[ $file == "strneql.s" ]]; then
-        if [[ ! $1 = "linux" ]]; then
-            echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            echo ''$file':' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            cat $file | while read line; do
-                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
-            done
-        fi
-    elif [[ $file == "strneql_linux.s" ]]; then
-        if [[ $1 = "linux" ]]; then
-            echo '.globl strneql' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            echo 'strneql:' | sed -r 's/\.s//g' >>chocopy_stdlib.S
-            cat $file | while read line; do
-                echo ''$(echo $line | sed -r 's/\\$//g')'' >>chocopy_stdlib.S
-            done
-        fi
     elif [[ $file == "print_11.s" ]]; then
         if [[ ! $1 = "linux" ]]; then
             echo '.globl '$file'' | sed -r 's/\.s//g' >>chocopy_stdlib.S
