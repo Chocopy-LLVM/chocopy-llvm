@@ -5,7 +5,6 @@
 #ifndef CHOCOPY_COMPILER_INSTGEN_HPP
 #define CHOCOPY_COMPILER_INSTGEN_HPP
 
-#include "RiscVBackEnd.hpp"
 #include <chocopy_logging.hpp>
 #include <string>
 #include <string_view>
@@ -28,7 +27,7 @@ public:
         virtual constexpr bool is_reg() const = 0;
         virtual constexpr bool is_constant() const = 0;
         virtual constexpr bool has_shift() const = 0;
-        virtual constexpr string_view get_name() const = 0;
+        virtual constexpr string get_name() const = 0;
     };
 
     class Reg : public Value {
@@ -49,7 +48,7 @@ public:
         bool is_constant() const override { return false; }
         bool has_shift() const override { return false; }
         int getID() const { return this->id; }
-        string_view get_name() const override { return reg_name[id]; }
+        string get_name() const override { return reg_name[id]; }
         constexpr bool operator<(const Reg &rhs) const { return this->id < rhs.id; }
         constexpr bool operator==(const Reg &rhs) const { return this->id == rhs.id; }
         constexpr bool operator!=(const Reg &rhs) const { return this->id != rhs.id; }
@@ -80,7 +79,7 @@ public:
         bool has_shift() const override { return true; }
         int getID() const { return this->id; }
         int getShift() const { return this->shift; }
-        string_view get_name() const override {
+        string get_name() const override {
             std::string shift_str;
             switch (this->_t) {
             case ShiftType::lsl:
@@ -117,8 +116,9 @@ public:
         Addr(string_view str) : str(str.begin(), str.end()), reg(Reg(0)), offset(0) {}
         Addr(const char *str) : str(str), reg(Reg(0)), offset(0) {}
         Reg getReg() const { return this->reg; }
+        void setReg(Reg reg) { this->reg = reg; }
         int getOffset() const { return this->offset; }
-        string_view get_name() const;
+        string get_name() const;
     };
 
     class Constant : public Value {
@@ -130,7 +130,7 @@ public:
         bool is_constant() const override { return true; }
         bool has_shift() const override { return false; }
         int getValue() const { return this->value; }
-        string_view get_name() const override { return fmt::format("#{}", this->value); }
+        string get_name() const override { return fmt::format("#{}", this->value); }
     };
 
     class Label {
@@ -140,7 +140,7 @@ public:
     public:
         explicit Label(string label, int offset) : label(move(label)), offset(offset) {}
         explicit Label(string label) : label(move(label)), offset(0) {}
-        string_view get_name() const { return fmt::format("{}+{}", label, offset); }
+        string get_name() const { return fmt::format("{}+{}", label, offset); }
     };
 
     static string set_value(const Reg &target, const Constant &source);
