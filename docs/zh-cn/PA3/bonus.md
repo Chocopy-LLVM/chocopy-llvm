@@ -30,11 +30,12 @@
 ### 主要工作
 
 #### 代码与材料阅读
-具体要求与说明参考：[reading.md](./reading.md)
+具体要求与说明参考：[reading.md](./reading.md) 和 [vectorization.md](./vectorization.md)
 
 1. 阅读 `Compiler_USTC.pdf` 中优化部分，尤其是静态单赋值和活跃变量部分。
 2. 阅读`Mem2Reg`与`LoopSearch`两个优化Pass的代码，能够描述优化的基本流程，并且回答思考题。
-3. 通过阅读代码，掌握如何开发基于LightIR的优化Pass
+3. 阅读`Vectorization`优化Pass的代码，理解其过程。
+4. 通过阅读代码，掌握如何开发基于LightIR的优化Pass
 
 #### 开发基本优化Pass
 

@@ -30,11 +30,12 @@ It is worth mentioning the LightIR Core Class Introduction in [LightIR](../commo
 ### Main work
 
 #### Code and Material Readings
-For specific requirements and instructions refer to: [reading.md](./reading.md)
+For specific requirements and instructions refer to: [reading.md](./reading.md) and [vectorization.md](./vectorization.md)
 
 1. read the optimization section in `Compiler_USTC.pdf`, especially the static single assignment and active variables section.
 2. read the code of `Mem2Reg` and `LoopSearch`, describe the basic flow of optimization, and answer the reflection questions.
-3. Read the code and learn how to develop LightIR-based optimization Pass
+3. read the code of `Vectorization`, especially the mapping from LLVM to RiscVBackEnd.
+4. Read the code and learn how to develop LightIR-based optimization Pass
 
 #### Develop basic optimization Passes
 
