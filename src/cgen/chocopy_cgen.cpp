@@ -17,7 +17,7 @@ using namespace lightir;
 namespace cgen {
 const std::regex to_replace("0A(\t|)");
 
-string_view InstGen::Addr::get_name() const {
+string InstGen::Addr::get_name() const {
     if (str.empty())
         return fmt::format("[{}, #{}]", reg.get_name(), std::to_string(this->offset));
     else
